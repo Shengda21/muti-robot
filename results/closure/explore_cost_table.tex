@@ -1,0 +1,11 @@
+\begin{table}[t]
+\centering
+\caption{Evaluator cost and the CPU saving of critical-path over nominal screening, $m=3$. $\rho$ is delay-evaluation CPU divided by schedule-building CPU without screening.}
+\label{tab:cost}
+\setlength{\tabcolsep}{3pt}\small
+\begin{tabular}{lrrr}\toprule
+Evaluator&$\rho$&Extra evals skipped&CPU saved (ms)\\\midrule
+Closed form, $D{=}3$&0.40&27.1\%&0.22 [-0.23, 0.68]\\
+Closed form, $D{=}12$&0.65&27.0\%&0.53 [0.16, 0.86]\\
+Grid replay, $32\times12$&8.43&27.0\%&13.42 [11.91, 15.00]\\
+\bottomrule\end{tabular}\end{table}

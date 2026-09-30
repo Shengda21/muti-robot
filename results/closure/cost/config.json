@@ -1,0 +1,1 @@
+{"m": [3], "scale": [1.0], "evaluators": [["closed", 3], ["closed", 12], ["grid", 32, 12]], "seeds": [6101, 6102, 6103, 6104, 6105, 6106, 6107, 6108, 6109, 6110], "mode": "cost", "methods": ["J_none", "J_nominal", "J_critical"]}

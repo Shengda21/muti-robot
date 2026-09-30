@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "counts": {
+    "tasks": 81,
+    "search_runs": 1701,
+    "compiled_proposals": 435456,
+    "paired_candidate_and_beam_steps_verified": 124416,
+    "pruned_candidates_verified": 94185,
+    "paired_pruning_runs": 486,
+    "matched_budget_endpoints": 1944
+  },
+  "pruned_by_method": {
+    "llm_risk_nominal": 44655,
+    "llm_risk_critical": 49530
+  },
+  "false_prunes": 0,
+  "trajectory_mismatches": 0,
+  "primary_scene_mean_crosscheck": -0.39703563978589307,
+  "statistics_unit": "30 equally weighted scenes; 3 search seeds averaged per task before within-scene task averaging",
+  "scope": "stored exact scores and full beams independently reconstructed; no new bootstrap or performance rerun"
+}

@@ -1,0 +1,5620 @@
+{
+  "task_id": "t212_n8",
+  "scene": "FloorPlan212",
+  "model": "qwen3-vl-8b-instruct",
+  "prompt": "Allocate these household transfers to three robots. Return JSON only.\nInstruction: Move CreditCard to Drawer; Newspaper to CoffeeTable; KeyChain to Drawer; Pen to CoffeeTable; Laptop to Drawer; Pencil to CoffeeTable; Pillow to Drawer; RemoteControl to CoffeeTable, and leave the destination containers closed.\nJobs: [{\"id\":\"j0\",\"object\":\"CreditCard\",\"destination\":\"Drawer\"},{\"id\":\"j1\",\"object\":\"Newspaper\",\"destination\":\"CoffeeTable\"},{\"id\":\"j2\",\"object\":\"KeyChain\",\"destination\":\"Drawer\"},{\"id\":\"j3\",\"object\":\"Pen\",\"destination\":\"CoffeeTable\"},{\"id\":\"j4\",\"object\":\"Laptop\",\"destination\":\"Drawer\"},{\"id\":\"j5\",\"object\":\"Pencil\",\"destination\":\"CoffeeTable\"},{\"id\":\"j6\",\"object\":\"Pillow\",\"destination\":\"Drawer\"},{\"id\":\"j7\",\"object\":\"RemoteControl\",\"destination\":\"CoffeeTable\"}]\nRobots 0,1,2 can each carry one object. Robots 0 and 2 can open/close containers. Each job is indivisible: one robot picks and places. A compiler adds required container actions. Provide 12 distinct allocations and job priority orders. Return {\"plans\":[...]} with each plan containing \"robots\" (one robot ID for every job, indexed by job ID), \"order\" (every job ID exactly once), \"opener\" (0 or 2), \"closer\" (0 or 2). Vary both assignments and order. No explanation.",
+  "configuration": {
+    "model": "qwen3-vl-8b-instruct",
+    "temperature": 0.7,
+    "seed": 20263058,
+    "max_tokens": 3200,
+    "response_format": {
+      "type": "json_schema",
+      "json_schema": {
+        "name": "plans",
+        "strict": true,
+        "schema": {
+          "type": "object",
+          "properties": {
+            "plans": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "robots": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer",
+                      "enum": [
+                        0,
+                        1,
+                        2
+                      ]
+                    },
+                    "minItems": 8,
+                    "maxItems": 8
+                  },
+                  "order": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "j0",
+                        "j1",
+                        "j2",
+                        "j3",
+                        "j4",
+                        "j5",
+                        "j6",
+                        "j7"
+                      ]
+                    },
+                    "minItems": 8,
+                    "maxItems": 8
+                  },
+                  "opener": {
+                    "type": "integer",
+                    "enum": [
+                      0,
+                      2
+                    ]
+                  },
+                  "closer": {
+                    "type": "integer",
+                    "enum": [
+                      0,
+                      2
+                    ]
+                  }
+                },
+                "required": [
+                  "robots",
+                  "order",
+                  "opener",
+                  "closer"
+                ],
+                "additionalProperties": false
+              },
+              "minItems": 12,
+              "maxItems": 12
+            }
+          },
+          "required": [
+            "plans"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  },
+  "candidates": [
+    {
+      "actions": [
+        {
+          "id": "open_0",
+          "robot": 0,
+          "skill": "OpenObject",
+          "target": "Drawer|+03.88|+00.77|+00.86",
+          "objects": [
+            "Drawer|+03.88|+00.77|+00.86"
+          ],
+          "duration": 13.0,
+          "deps": [],
+          "navigation_steps": 12,
+          "grid_start": [
+            0.75,
+            1.0
+          ],
+          "grid_end": [
+            3.5,
+            0.75
+          ]
+        },
+        {
+          "id": "j0_pick",
+          "robot": 0,
+          "skill": "PickupObject",
+          "target": "CreditCard|+01.41|+00.47|+00.65",
+          "objects": [
+            "CreditCard|+01.41|+00.47|+00.65"
+          ],
+          "duration": 10.0,
+          "deps": [],
+          "navigation_steps": 9,
+          "grid_start": [
+            3.5,
+            0.75
+          ],
+          "grid_end": [
+            1.5,
+            1.0
+          ],
+          "job": "j0"
+        },
+        {
+          "id": "j0_put",
+          "robot": 0,
+          "skill": "PutObject",
+          "target": "Drawer|+03.88|+00.77|+00.86",
+          "objects": [
+            "Drawer|+03.88|+00.77|+00.86",
+            "CreditCard|+01.41|+00.47|+00.65"
+          ],
+          "duration": 10.0,
+          "deps": [
+            "j0_pick",
+            "open_0"
+          ],
+          "navigation_steps": 9,
+          "grid_start": [
+            1.5,
+            1.0
+          ],
+          "grid_end": [
+            3.5,
+            0.75
+          ],
+          "job": "j0",
+          "carried_object": "CreditCard|+01.41|+00.47|+00.65"
+        },
+        {
+          "id": "j1_pick",
+          "robot": 1,
+          "skill": "PickupObject",
+          "target": "Newspaper|+02.15|+00.41|-00.72",
+          "objects": [
+            "Newspaper|+02.15|+00.41|-00.72"
+          ],
+          "duration": 4.0,
+          "deps": [],
+          "navigation_steps": 3,
+          "grid_start": [
+            2.5,
+            0.25
+          ],
+          "grid_end": [
+            2.25,
+            -0.25
+          ],
+          "job": "j1"
+        },
+        {
+          "id": "j1_put",
+          "robot": 1,
+          "skill": "PutObject",
+          "target": "CoffeeTable|+01.59|00.00|+00.45",
+          "objects": [
+            "CoffeeTable|+01.59|00.00|+00.45",
+            "Newspaper|+02.15|+00.41|-00.72"
+          ],
+          "duration": 11.0,
+          "deps": [
+            "j1_pick"
+          ],
+          "navigation_steps": 10,
+          "grid_start": [
+            2.25,
+            -0.25
+          ],
+          "grid_end": [
+            1.5,
+            1.0
+          ],
+          "job": "j1",
+          "carried_object": "Newspaper|+02.15|+00.41|-00.72"
+        },
+        {
+          "id": "j2_pick",
+          "robot": 2,
+          "skill": "PickupObject",
+          "target": "KeyChain|+01.50|+00.47|+00.53",
+          "objects": [
+            "KeyChain|+01.50|+00.47|+00.53"
+          ],
+          "duration": 12.0,
+          "deps": [],
+          "navigation_steps": 11,
+          "grid_start": [
+            -0.5,
+            0.25
+          ],
+          "grid_end": [
+            1.5,
+            1.0
+          ],
+          "job": "j2"
+        },
+        {
+          "id": "j2_put",
+          "robot": 2,
+          "skill": "PutObject",
+          "target": "Drawer|+03.88|+00.77|+00.86",
+          "objects": [
+            "Drawer|+03.88|+00.77|+00.86",
+            "KeyChain|+01.50|+00.47|+00.53"
+          ],
+          "duration": 10.0,
+          "deps": [
+            "j2_pick",
+            "open_0",
+            "j0_put"
+          ],
+          "navigation_steps": 9,
+          "grid_start": [
+            1.5,
+            1.0
+          ],
+          "grid_end": [
+            3.5,
+            0.75
+          ],
+          "job": "j2",
+          "carried_object": "KeyChain|+01.50|+00.47|+00.53"
+        },
+        {
+          "id": "j3_pick",
+          "robot": 0,
+          "skill": "PickupObject",
+          "target": "Pen|+03.93|+00.87|+01.04",
+          "objects": [
+            "Pen|+03.93|+00.87|+01.04"
+          ],
+          "duration": 2.0,
+          "deps": [],
+          "navigation_steps": 1,
+          "grid_start": [
+            3.5,
+            0.75
+          ],
+          "grid_end": [
+            3.5,
+            1.0
+          ],
+          "job": "j3"
+        },
+        {
+          "id": "j3_put",
+          "robot": 0,
+          "skill": "PutObject",
+          "target": "CoffeeTable|+01.59|00.00|+00.45",
+          "objects": [
+            "CoffeeTable|+01.59|00.00|+00.45",
+            "Pen|+03.93|+00.87|+01.04"
+          ],
+          "duration": 9.0,
+          "deps": [
+            "j3_pick",
+            "j1_put"
+          ],
+          "navigation_steps": 8,
+          "grid_start": [
+            3.5,
+            1.0
+          ],
+          "grid_end": [
+            1.5,
+            1.0
+          ],
+          "job": "j3",
+          "carried_object": "Pen|+03.93|+00.87|+01.04"
+        },
+        {
+          "id": "j4_pick",
+          "robot": 1,
+          "skill": "PickupObject",
+          "target": "Laptop|+01.80|+00.47|+00.50",
+          "objects": [
+            "Laptop|+01.80|+00.47|+00.50"
+          ],
+          "duration": 2.0,
+          "deps": [],
+          "navigation_steps": 1,
+          "grid_start": [
+            1.5,
+            1.0
+          ],
+          "grid_end": [
+            1.75,
+            1.0
+          ],
+          "job": "j4"
+        },
+        {
+          "id": "j4_put",
+          "robot": 1,
+          "skill": "PutObject",
+          "target": "Drawer|+03.88|+00.77|+00.86",
+          "objects": [
+            "Drawer|+03.88|+00.77|+00.86",
+            "Laptop|+01.80|+00.47|+00.50"
+          ],
+          "duration": 9.0,
+          "deps": [
+            "j4_pick",
+            "open_0",
+            "j2_put"
+          ],
+          "navigation_steps": 8,
+          "grid_start": [
+            1.75,
+            1.0
+          ],
+          "grid_end": [
+            3.5,
+            0.75
+          ],
+          "job": "j4",
+          "carried_object": "Laptop|+01.80|+00.47|+00.50"
+        },
+        {
+          "id": "j5_pick",
+          "robot": 2,
+          "skill": "PickupObject",
+          "target": "Pencil|+03.89|+00.87|+01.18",
+          "objects": [
+            "Pencil|+03.89|+00.87|+01.18"
+          ],
+          "duration": 5.0,
+          "deps": [],
+          "navigation_steps": 4,
+          "grid_start": [
+            3.5,
+            0.75
+          ],
+          "grid_end": [
+            3.75,
+            1.5
+          ],
+          "job": "j5"
+        },
+        {
+          "id": "j5_put",
+          "robot": 2,
+          "skill": "PutObject",
+          "target": "CoffeeTable|+01.59|00.00|+00.45",
+          "objects": [
+            "CoffeeTable|+01.59|00.00|+00.45",
+            "Pencil|+03.89|+00.87|+01.18"
+          ],
+          "duration": 12.0,
+          "deps": [
+            "j5_pick",
+            "j3_put"
+          ],
+          "navigation_steps": 11,
+          "grid_start": [
+            3.75,
+            1.5
+          ],
+          "grid_end": [
+            1.5,
+            1.0
+          ],
+          "job": "j5",
+          "carried_object": "Pencil|+03.89|+00.87|+01.18"
+        },
+        {
+          "id": "j6_pick",
+          "robot": 0,
+          "skill": "PickupObject",
+          "target": "Pillow|+00.65|+00.39|+01.71",
+          "objects": [
+            "Pillow|+00.65|+00.39|+01.71"
+          ],
+          "duration": 4.0,
+          "deps": [],
+          "navigation_steps": 3,
+          "grid_start": [
+            1.5,
+            1.0
+          ],
+          "grid_end": [
+            0.75,
+            1.0
+          ],
+          "job": "j6"
+        },
+        {
+          "id": "j6_put",
+          "robot": 0,
+          "skill": "PutObject",
+          "target": "Drawer|+03.88|+00.77|+00.86",
+          "objects": [
+            "Drawer|+03.88|+00.77|+00.86",
+            "Pillow|+00.65|+00.39|+01.71"
+          ],
+          "duration": 13.0,
+          "deps": [
+            "j6_pick",
+            "open_0",
+            "j4_put"
+          ],
+          "navigation_steps": 12,
+          "grid_start": [
+            0.75,
+            1.0
+          ],
+          "grid_end": [
+            3.5,
+            0.75
+          ],
+          "job": "j6",
+          "carried_object": "Pillow|+00.65|+00.39|+01.71"
+        },
+        {
+          "id": "j7_pick",
+          "robot": 1,
+          "skill": "PickupObject",
+          "target": "RemoteControl|+01.88|+00.33|+01.73",
+          "objects": [
+            "RemoteControl|+01.88|+00.33|+01.73"
+          ],
+          "duration": 8.0,
+          "deps": [],
+          "navigation_steps": 7,
+          "grid_start": [
+            3.5,
+            0.75
+          ],
+          "grid_end": [
+            2.0,
+            1.0
+          ],
+          "job": "j7"
+        },
+        {
+          "id": "j7_put",
+          "robot": 1,
+          "skill": "PutObject",
+          "target": "CoffeeTable|+01.59|00.00|+00.45",
+          "objects": [
+            "CoffeeTable|+01.59|00.00|+00.45",
+            "RemoteControl|+01.88|+00.33|+01.73"
+          ],
+          "duration": 3.0,
+          "deps": [
+            "j7_pick",
+            "j5_put"
+          ],
+          "navigation_steps": 2,
+          "grid_start": [
+            2.0,
+            1.0
+          ],
+          "grid_end": [
+            1.5,
+            1.0
+          ],
+          "job": "j7",
+          "carried_object": "RemoteControl|+01.88|+00.33|+01.73"
+        },
+        {
+          "id": "close_0",
+          "robot": 0,
+          "skill": "CloseObject",
+          "target": "Drawer|+03.88|+00.77|+00.86",
+          "objects": [
+            "Drawer|+03.88|+00.77|+00.86"
+          ],
+          "duration": 1.0,
+          "deps": [
+            "j0_put",
+            "j2_put",
+            "j4_put",
+            "j6_put"
+          ],
+          "navigation_steps": 0,
+          "grid_start": [
+            3.5,
+            0.75
+          ],
+          "grid_end": [
+            3.5,
+            0.75
+          ]
+        }
+      ],
+      "candidate": {
+        "robots": [
+          0,
+          1,
+          2,
+          0,
+          1,
+          2,
+          0,
+          1
+        ],
+        "order": [
+          "j0",
+          "j1",
+          "j2",
+          "j3",
+          "j4",
+          "j5",
+          "j6",
+          "j7"
+        ],
+        "opener": 0,
+        "closer": 0
+      },
+      "task_id": "t212_n8",
+      "robot_ids": [
+        0,
+        1,
+        2
+      ],
+      "cost_model": "static-grid-0.25m-plus-manipulation-v1"
+    },
+    {
+      "actions": [
+        {
+          "id": "open_0",
+          "robot": 0,
+          "skill": "OpenObject",
+          "target": "Drawer|+03.88|+00.77|+00.86",
+          "objects": [
+            "Drawer|+03.88|+00.77|+00.86"
+          ],
+          "duration": 13.0,
+          "deps": [],
+          "navigation_steps": 12,
+          "grid_start": [
+            0.75,
+            1.0
+          ],
+          "grid_end": [
+            3.5,
+            0.75
+          ]
+        },
+        {
+          "id": "j0_pick",
+          "robot": 0,
+          "skill": "PickupObject",
+          "target": "CreditCard|+01.41|+00.47|+00.65",
+          "objects": [
+            "CreditCard|+01.41|+00.47|+00.65"
+          ],
+          "duration": 10.0,
+          "deps": [],
+          "navigation_steps": 9,
+          "grid_start": [
+            3.5,
+            0.75
+          ],
+          "grid_end": [
+            1.5,
+            1.0
+          ],
+          "job": "j0"
+        },
+        {
+          "id": "j0_put",
+          "robot": 0,
+          "skill": "PutObject",
+          "target": "Drawer|+03.88|+00.77|+00.86",
+          "objects": [
+            "Drawer|+03.88|+00.77|+00.86",
+            "CreditCard|+01.41|+00.47|+00.65"
+          ],
+          "duration": 10.0,
+          "deps": [
+            "j0_pick",
+            "open_0"
+          ],
+          "navigation_steps": 9,
+          "grid_start": [
+            1.5,
+            1.0
+          ],
+          "grid_end": [
+            3.5,
+            0.75
+          ],
+          "job": "j0",
+          "carried_object": "CreditCard|+01.41|+00.47|+00.65"
+        },
+        {
+          "id": "j1_pick",
+          "robot": 1,
+          "skill": "PickupObject",
+          "target": "Newspaper|+02.15|+00.41|-00.72",
+          "objects": [
+            "Newspaper|+02.15|+00.41|-00.72"
+          ],
+          "duration": 4.0,
+          "deps": [],
+          "navigation_steps": 3,
+          "grid_start": [
+            2.5,
+            0.25
+          ],
+          "grid_end": [
+            2.25,
+            -0.25
+          ],
+          "job": "j1"
+        },
+        {
+          "id": "j1_put",
+          "robot": 1,
+          "skill": "PutObject",
+          "target": "CoffeeTable|+01.59|00.00|+00.45",
+          "objects": [
+            "CoffeeTable|+01.59|00.00|+00.45",
+            "Newspaper|+02.15|+00.41|-00.72"
+          ],
+          "duration": 11.0,
+          "deps": [
+            "j1_pick"
+          ],
+          "navigation_steps": 10,
+          "grid_start": [
+            2.25,
+            -0.25
+          ],
+          "grid_end": [
+            1.5,
+            1.0
+          ],
+          "job": "j1",
+          "carried_object": "Newspaper|+02.15|+00.41|-00.72"
+        },
+        {
+          "id": "j3_pick",
+          "robot": 0,
+          "skill": "PickupObject",
+          "target": "Pen|+03.93|+00.87|+01.04",
+          "objects": [
+            "Pen|+03.93|+00.87|+01.04"
+          ],
+          "duration": 2.0,
+          "deps": [],
+          "navigation_steps": 1,
+          "grid_start": [
+            3.5,
+            0.75
+          ],
+          "grid_end": [
+            3.5,
+            1.0
+          ],
+          "job": "j3"
+        },
+        {
+          "id": "j3_put",
+          "robot": 0,
+          "skill": "PutObject",
+          "target": "CoffeeTable|+01.59|00.00|+00.45",
+          "objects": [
+            "CoffeeTable|+01.59|00.00|+00.45",
+            "Pen|+03.93|+00.87|+01.04"
+          ],
+          "duration": 9.0,
+          "deps": [
+            "j3_pick",
+            "j1_put"
+          ],
+          "navigation_steps": 8,
+          "grid_start": [
+            3.5,
+            1.0
+          ],
+          "grid_end": [
+            1.5,
+            1.0
+          ],
+          "job": "j3",
+          "carried_object": "Pen|+03.93|+00.87|+01.04"
+        },
+        {
+          "id": "j2_pick",
+          "robot": 2,
+          "skill": "PickupObject",
+          "target": "KeyChain|+01.50|+00.47|+00.53",
+          "objects": [
+            "KeyChain|+01.50|+00.47|+00.53"
+          ],
+          "duration": 12.0,
+          "deps": [],
+          "navigation_steps": 11,
+          "grid_start": [
+            -0.5,
+            0.25
+          ],
+          "grid_end": [
+            1.5,
+            1.0
+          ],
+          "job": "j2"
+        },
+        {
+          "id": "j2_put",
+          "robot": 2,
+          "skill": "PutObject",
+          "target": "Drawer|+03.88|+00.77|+00.86",
+          "objects": [
+            "Drawer|+03.88|+00.77|+00.86",
+            "KeyChain|+01.50|+00.47|+00.53"
+          ],
+          "duration": 10.0,
+          "deps": [
+            "j2_pick",
+            "open_0",
+            "j0_put"
+          ],
+          "navigation_steps": 9,
+          "grid_start": [
+            1.5,
+            1.0
+          ],
+          "grid_end": [
+            3.5,
+            0.75
+          ],
+          "job": "j2",
+          "carried_object": "KeyChain|+01.50|+00.47|+00.53"
+        },
+        {
+          "id": "j4_pick",
+          "robot": 1,
+          "skill": "PickupObject",
+          "target": "Laptop|+01.80|+00.47|+00.50",
+          "objects": [
+            "Laptop|+01.80|+00.47|+00.50"
+          ],
+          "duration": 2.0,
+          "deps": [],
+          "navigation_steps": 1,
+          "grid_start": [
+            1.5,
+            1.0
+          ],
+          "grid_end": [
+            1.75,
+            1.0
+          ],
+          "job": "j4"
+        },
+        {
+          "id": "j4_put",
+          "robot": 1,
+          "skill": "PutObject",
+          "target": "Drawer|+03.88|+00.77|+00.86",
+          "objects": [
+            "Drawer|+03.88|+00.77|+00.86",
+            "Laptop|+01.80|+00.47|+00.50"
+          ],
+          "duration": 9.0,
+          "deps": [
+            "j4_pick",
+            "open_0",
+            "j2_put"
+          ],
+          "navigation_steps": 8,
+          "grid_start": [
+            1.75,
+            1.0
+          ],
+          "grid_end": [
+            3.5,
+            0.75
+          ],
+          "job": "j4",
+          "carried_object": "Laptop|+01.80|+00.47|+00.50"
+        },
+        {
+          "id": "j5_pick",
+          "robot": 2,
+          "skill": "PickupObject",
+          "target": "Pencil|+03.89|+00.87|+01.18",
+          "objects": [
+            "Pencil|+03.89|+00.87|+01.18"
+          ],
+          "duration": 5.0,
+          "deps": [],
+          "navigation_steps": 4,
+          "grid_start": [
+            3.5,
+            0.75
+          ],
+          "grid_end": [
+            3.75,
+            1.5
+          ],
+          "job": "j5"
+        },
+        {
+          "id": "j5_put",
+          "robot": 2,
+          "skill": "PutObject",
+          "target": "CoffeeTable|+01.59|00.00|+00.45",
+          "objects": [
+            "CoffeeTable|+01.59|00.00|+00.45",
+            "Pencil|+03.89|+00.87|+01.18"
+          ],
+          "duration": 12.0,
+          "deps": [
+            "j5_pick",
+            "j3_put"
+          ],
+          "navigation_steps": 11,
+          "grid_start": [
+            3.75,
+            1.5
+          ],
+          "grid_end": [
+            1.5,
+            1.0
+          ],
+          "job": "j5",
+          "carried_object": "Pencil|+03.89|+00.87|+01.18"
+        },
+        {
+          "id": "j6_pick",
+          "robot": 0,
+          "skill": "PickupObject",
+          "target": "Pillow|+00.65|+00.39|+01.71",
+          "objects": [
+            "Pillow|+00.65|+00.39|+01.71"
+          ],
+          "duration": 4.0,
+          "deps": [],
+          "navigation_steps": 3,
+          "grid_start": [
+            1.5,
+            1.0
+          ],
+          "grid_end": [
+            0.75,
+            1.0
+          ],
+          "job": "j6"
+        },
+        {
+          "id": "j6_put",
+          "robot": 0,
+          "skill": "PutObject",
+          "target": "Drawer|+03.88|+00.77|+00.86",
+          "objects": [
+            "Drawer|+03.88|+00.77|+00.86",
+            "Pillow|+00.65|+00.39|+01.71"
+          ],
+          "duration": 13.0,
+          "deps": [
+            "j6_pick",
+            "open_0",
+            "j4_put"
+          ],
+          "navigation_steps": 12,
+          "grid_start": [
+            0.75,
+            1.0
+          ],
+          "grid_end": [
+            3.5,
+            0.75
+          ],
+          "job": "j6",
+          "carried_object": "Pillow|+00.65|+00.39|+01.71"
+        },
+        {
+          "id": "j7_pick",
+          "robot": 1,
+          "skill": "PickupObject",
+          "target": "RemoteControl|+01.88|+00.33|+01.73",
+          "objects": [
+            "RemoteControl|+01.88|+00.33|+01.73"
+          ],
+          "duration": 8.0,
+          "deps": [],
+          "navigation_steps": 7,
+          "grid_start": [
+            3.5,
+            0.75
+          ],
+          "grid_end": [
+            2.0,
+            1.0
+          ],
+          "job": "j7"
+        },
+        {
+          "id": "j7_put",
+          "robot": 1,
+          "skill": "PutObject",
+          "target": "CoffeeTable|+01.59|00.00|+00.45",
+          "objects": [
+            "CoffeeTable|+01.59|00.00|+00.45",
+            "RemoteControl|+01.88|+00.33|+01.73"
+          ],
+          "duration": 3.0,
+          "deps": [
+            "j7_pick",
+            "j5_put"
+          ],
+          "navigation_steps": 2,
+          "grid_start": [
+            2.0,
+            1.0
+          ],
+          "grid_end": [
+            1.5,
+            1.0
+          ],
+          "job": "j7",
+          "carried_object": "RemoteControl|+01.88|+00.33|+01.73"
+        },
+        {
+          "id": "close_0",
+          "robot": 0,
+          "skill": "CloseObject",
+          "target": "Drawer|+03.88|+00.77|+00.86",
+          "objects": [
+            "Drawer|+03.88|+00.77|+00.86"
+          ],
+          "duration": 1.0,
+          "deps": [
+            "j0_put",
+            "j2_put",
+            "j4_put",
+            "j6_put"
+          ],
+          "navigation_steps": 0,
+          "grid_start": [
+            3.5,
+            0.75
+          ],
+          "grid_end": [
+            3.5,
+            0.75
+          ]
+        }
+      ],
+      "candidate": {
+        "robots": [
+          0,
+          1,
+          2,
+          0,
+          1,
+          2,
+          0,
+          1
+        ],
+        "order": [
+          "j0",
+          "j1",
+          "j3",
+          "j2",
+          "j4",
+          "j5",
+          "j6",
+          "j7"
+        ],
+        "opener": 0,
+        "closer": 0
+      },
+      "task_id": "t212_n8",
+      "robot_ids": [
+        0,
+        1,
+        2
+      ],
+      "cost_model": "static-grid-0.25m-plus-manipulation-v1"
+    },
+    {
+      "actions": [
+        {
+          "id": "open_0",
+          "robot": 0,
+          "skill": "OpenObject",
+          "target": "Drawer|+03.88|+00.77|+00.86",
+          "objects": [
+            "Drawer|+03.88|+00.77|+00.86"
+          ],
+          "duration": 13.0,
+          "deps": [],
+          "navigation_steps": 12,
+          "grid_start": [
+            0.75,
+            1.0
+          ],
+          "grid_end": [
+            3.5,
+            0.75
+          ]
+        },
+        {
+          "id": "j0_pick",
+          "robot": 0,
+          "skill": "PickupObject",
+          "target": "CreditCard|+01.41|+00.47|+00.65",
+          "objects": [
+            "CreditCard|+01.41|+00.47|+00.65"
+          ],
+          "duration": 10.0,
+          "deps": [],
+          "navigation_steps": 9,
+          "grid_start": [
+            3.5,
+            0.75
+          ],
+          "grid_end": [
+            1.5,
+            1.0
+          ],
+          "job": "j0"
+        },
+        {
+          "id": "j0_put",
+          "robot": 0,
+          "skill": "PutObject",
+          "target": "Drawer|+03.88|+00.77|+00.86",
+          "objects": [
+            "Drawer|+03.88|+00.77|+00.86",
+            "CreditCard|+01.41|+00.47|+00.65"
+          ],
+          "duration": 10.0,
+          "deps": [
+            "j0_pick",
+            "open_0"
+          ],
+          "navigation_steps": 9,
+          "grid_start": [
+            1.5,
+            1.0
+          ],
+          "grid_end": [
+            3.5,
+            0.75
+          ],
+          "job": "j0",
+          "carried_object": "CreditCard|+01.41|+00.47|+00.65"
+        },
+        {
+          "id": "j2_pick",
+          "robot": 2,
+          "skill": "PickupObject",
+          "target": "KeyChain|+01.50|+00.47|+00.53",
+          "objects": [
+            "KeyChain|+01.50|+00.47|+00.53"
+          ],
+          "duration": 12.0,
+          "deps": [],
+          "navigation_steps": 11,
+          "grid_start": [
+            -0.5,
+            0.25
+          ],
+          "grid_end": [
+            1.5,
+            1.0
+          ],
+          "job": "j2"
+        },
+        {
+          "id": "j2_put",
+          "robot": 2,
+          "skill": "PutObject",
+          "target": "Drawer|+03.88|+00.77|+00.86",
+          "objects": [
+            "Drawer|+03.88|+00.77|+00.86",
+            "KeyChain|+01.50|+00.47|+00.53"
+          ],
+          "duration": 10.0,
+          "deps": [
+            "j2_pick",
+            "open_0",
+            "j0_put"
+          ],
+          "navigation_steps": 9,
+          "grid_start": [
+            1.5,
+            1.0
+          ],
+          "grid_end": [
+            3.5,
+            0.75
+          ],
+          "job": "j2",
+          "carried_object": "KeyChain|+01.50|+00.47|+00.53"
+        },
+        {
+          "id": "j1_pick",
+          "robot": 1,
+          "skill": "PickupObject",
+          "target": "Newspaper|+02.15|+00.41|-00.72",
+          "objects": [
+            "Newspaper|+02.15|+00.41|-00.72"
+          ],
+          "duration": 4.0,
+          "deps": [],
+          "navigation_steps": 3,
+          "grid_start": [
+            2.5,
+            0.25
+          ],
+          "grid_end": [
+            2.25,
+            -0.25
+          ],
+          "job": "j1"
+        },
+        {
+          "id": "j1_put",
+          "robot": 1,
+          "skill": "PutObject",
+          "target": "CoffeeTable|+01.59|00.00|+00.45",
+          "objects": [
+            "CoffeeTable|+01.59|00.00|+00.45",
+            "Newspaper|+02.15|+00.41|-00.72"
+          ],
+          "duration": 11.0,
+          "deps": [
+            "j1_pick"
+          ],
+          "navigation_steps": 10,
+          "grid_start": [
+            2.25,
+            -0.25
+          ],
+          "grid_end": [
+            1.5,
+            1.0
+          ],
+          "job": "j1",
+          "carried_object": "Newspaper|+02.15|+00.41|-00.72"
+        },
+        {
+          "id": "j3_pick",
+          "robot": 0,
+          "skill": "PickupObject",
+          "target": "Pen|+03.93|+00.87|+01.04",
+          "objects": [
+            "Pen|+03.93|+00.87|+01.04"
+          ],
+          "duration": 2.0,
+          "deps": [],
+          "navigation_steps": 1,
+          "grid_start": [
+            3.5,
+            0.75
+          ],
+          "grid_end": [
+            3.5,
+            1.0
+          ],
+          "job": "j3"
+        },
+        {
+          "id": "j3_put",
+          "robot": 0,
+          "skill": "PutObject",
+          "target": "CoffeeTable|+01.59|00.00|+00.45",
+          "objects": [
+            "CoffeeTable|+01.59|00.00|+00.45",
+            "Pen|+03.93|+00.87|+01.04"
+          ],
+          "duration": 9.0,
+          "deps": [
+            "j3_pick",
+            "j1_put"
+          ],
+          "navigation_steps": 8,
+          "grid_start": [
+            3.5,
+            1.0
+          ],
+          "grid_end": [
+            1.5,
+            1.0
+          ],
+          "job": "j3",
+          "carried_object": "Pen|+03.93|+00.87|+01.04"
+        },
+        {
+          "id": "j4_pick",
+          "robot": 1,
+          "skill": "PickupObject",
+          "target": "Laptop|+01.80|+00.47|+00.50",
+          "objects": [
+            "Laptop|+01.80|+00.47|+00.50"
+          ],
+          "duration": 2.0,
+          "deps": [],
+          "navigation_steps": 1,
+          "grid_start": [
+            1.5,
+            1.0
+          ],
+          "grid_end": [
+            1.75,
+            1.0
+          ],
+          "job": "j4"
+        },
+        {
+          "id": "j4_put",
+          "robot": 1,
+          "skill": "PutObject",
+          "target": "Drawer|+03.88|+00.77|+00.86",
+          "objects": [
+            "Drawer|+03.88|+00.77|+00.86",
+            "Laptop|+01.80|+00.47|+00.50"
+          ],
+          "duration": 9.0,
+          "deps": [
+            "j4_pick",
+            "open_0",
+            "j2_put"
+          ],
+          "navigation_steps": 8,
+          "grid_start": [
+            1.75,
+            1.0
+          ],
+          "grid_end": [
+            3.5,
+            0.75
+          ],
+          "job": "j4",
+          "carried_object": "Laptop|+01.80|+00.47|+00.50"
+        },
+        {
+          "id": "j5_pick",
+          "robot": 2,
+          "skill": "PickupObject",
+          "target": "Pencil|+03.89|+00.87|+01.18",
+          "objects": [
+            "Pencil|+03.89|+00.87|+01.18"
+          ],
+          "duration": 5.0,
+          "deps": [],
+          "navigation_steps": 4,
+          "grid_start": [
+            3.5,
+            0.75
+          ],
+          "grid_end": [
+            3.75,
+            1.5
+          ],
+          "job": "j5"
+        },
+        {
+          "id": "j5_put",
+          "robot": 2,
+          "skill": "PutObject",
+          "target": "CoffeeTable|+01.59|00.00|+00.45",
+          "objects": [
+            "CoffeeTable|+01.59|00.00|+00.45",
+            "Pencil|+03.89|+00.87|+01.18"
+          ],
+          "duration": 12.0,
+          "deps": [
+            "j5_pick",
+            "j3_put"
+          ],
+          "navigation_steps": 11,
+          "grid_start": [
+            3.75,
+            1.5
+          ],
+          "grid_end": [
+            1.5,
+            1.0
+          ],
+          "job": "j5",
+          "carried_object": "Pencil|+03.89|+00.87|+01.18"
+        },
+        {
+          "id": "j6_pick",
+          "robot": 0,
+          "skill": "PickupObject",
+          "target": "Pillow|+00.65|+00.39|+01.71",
+          "objects": [
+            "Pillow|+00.65|+00.39|+01.71"
+          ],
+          "duration": 4.0,
+          "deps": [],
+          "navigation_steps": 3,
+          "grid_start": [
+            1.5,
+            1.0
+          ],
+          "grid_end": [
+            0.75,
+            1.0
+          ],
+          "job": "j6"
+        },
+        {
+          "id": "j6_put",
+          "robot": 0,
+          "skill": "PutObject",
+          "target": "Drawer|+03.88|+00.77|+00.86",
+          "objects": [
+            "Drawer|+03.88|+00.77|+00.86",
+            "Pillow|+00.65|+00.39|+01.71"
+          ],
+          "duration": 13.0,
+          "deps": [
+            "j6_pick",
+            "open_0",
+            "j4_put"
+          ],
+          "navigation_steps": 12,
+          "grid_start": [
+            0.75,
+            1.0
+          ],
+          "grid_end": [
+            3.5,
+            0.75
+          ],
+          "job": "j6",
+          "carried_object": "Pillow|+00.65|+00.39|+01.71"
+        },
+        {
+          "id": "j7_pick",
+          "robot": 1,
+          "skill": "PickupObject",
+          "target": "RemoteControl|+01.88|+00.33|+01.73",
+          "objects": [
+            "RemoteControl|+01.88|+00.33|+01.73"
+          ],
+          "duration": 8.0,
+          "deps": [],
+          "navigation_steps": 7,
+          "grid_start": [
+            3.5,
+            0.75
+          ],
+          "grid_end": [
+            2.0,
+            1.0
+          ],
+          "job": "j7"
+        },
+        {
+          "id": "j7_put",
+          "robot": 1,
+          "skill": "PutObject",
+          "target": "CoffeeTable|+01.59|00.00|+00.45",
+          "objects": [
+            "CoffeeTable|+01.59|00.00|+00.45",
+            "RemoteControl|+01.88|+00.33|+01.73"
+          ],
+          "duration": 3.0,
+          "deps": [
+            "j7_pick",
+            "j5_put"
+          ],
+          "navigation_steps": 2,
+          "grid_start": [
+            2.0,
+            1.0
+          ],
+          "grid_end": [
+            1.5,
+            1.0
+          ],
+          "job": "j7",
+          "carried_object": "RemoteControl|+01.88|+00.33|+01.73"
+        },
+        {
+          "id": "close_0",
+          "robot": 0,
+          "skill": "CloseObject",
+          "target": "Drawer|+03.88|+00.77|+00.86",
+          "objects": [
+            "Drawer|+03.88|+00.77|+00.86"
+          ],
+          "duration": 1.0,
+          "deps": [
+            "j0_put",
+            "j2_put",
+            "j4_put",
+            "j6_put"
+          ],
+          "navigation_steps": 0,
+          "grid_start": [
+            3.5,
+            0.75
+          ],
+          "grid_end": [
+            3.5,
+            0.75
+          ]
+        }
+      ],
+      "candidate": {
+        "robots": [
+          0,
+          1,
+          2,
+          0,
+          1,
+          2,
+          0,
+          1
+        ],
+        "order": [
+          "j0",
+          "j2",
+          "j1",
+          "j3",
+          "j4",
+          "j5",
+          "j6",
+          "j7"
+        ],
+        "opener": 0,
+        "closer": 0
+      },
+      "task_id": "t212_n8",
+      "robot_ids": [
+        0,
+        1,
+        2
+      ],
+      "cost_model": "static-grid-0.25m-plus-manipulation-v1"
+    },
+    {
+      "actions": [
+        {
+          "id": "open_0",
+          "robot": 0,
+          "skill": "OpenObject",
+          "target": "Drawer|+03.88|+00.77|+00.86",
+          "objects": [
+            "Drawer|+03.88|+00.77|+00.86"
+          ],
+          "duration": 13.0,
+          "deps": [],
+          "navigation_steps": 12,
+          "grid_start": [
+            0.75,
+            1.0
+          ],
+          "grid_end": [
+            3.5,
+            0.75
+          ]
+        },
+        {
+          "id": "j1_pick",
+          "robot": 1,
+          "skill": "PickupObject",
+          "target": "Newspaper|+02.15|+00.41|-00.72",
+          "objects": [
+            "Newspaper|+02.15|+00.41|-00.72"
+          ],
+          "duration": 4.0,
+          "deps": [],
+          "navigation_steps": 3,
+          "grid_start": [
+            2.5,
+            0.25
+          ],
+          "grid_end": [
+            2.25,
+            -0.25
+          ],
+          "job": "j1"
+        },
+        {
+          "id": "j1_put",
+          "robot": 1,
+          "skill": "PutObject",
+          "target": "CoffeeTable|+01.59|00.00|+00.45",
+          "objects": [
+            "CoffeeTable|+01.59|00.00|+00.45",
+            "Newspaper|+02.15|+00.41|-00.72"
+          ],
+          "duration": 11.0,
+          "deps": [
+            "j1_pick"
+          ],
+          "navigation_steps": 10,
+          "grid_start": [
+            2.25,
+            -0.25
+          ],
+          "grid_end": [
+            1.5,
+            1.0
+          ],
+          "job": "j1",
+          "carried_object": "Newspaper|+02.15|+00.41|-00.72"
+        },
+        {
+          "id": "j0_pick",
+          "robot": 0,
+          "skill": "PickupObject",
+          "target": "CreditCard|+01.41|+00.47|+00.65",
+          "objects": [
+            "CreditCard|+01.41|+00.47|+00.65"
+          ],
+          "duration": 10.0,
+          "deps": [],
+          "navigation_steps": 9,
+          "grid_start": [
+            3.5,
+            0.75
+          ],
+          "grid_end": [
+            1.5,
+            1.0
+          ],
+          "job": "j0"
+        },
+        {
+          "id": "j0_put",
+          "robot": 0,
+          "skill": "PutObject",
+          "target": "Drawer|+03.88|+00.77|+00.86",
+          "objects": [
+            "Drawer|+03.88|+00.77|+00.86",
+            "CreditCard|+01.41|+00.47|+00.65"
+          ],
+          "duration": 10.0,
+          "deps": [
+            "j0_pick",
+            "open_0"
+          ],
+          "navigation_steps": 9,
+          "grid_start": [
+            1.5,
+            1.0
+          ],
+          "grid_end": [
+            3.5,
+            0.75
+          ],
+          "job": "j0",
+          "carried_object": "CreditCard|+01.41|+00.47|+00.65"
+        },
+        {
+          "id": "j2_pick",
+          "robot": 2,
+          "skill": "PickupObject",
+          "target": "KeyChain|+01.50|+00.47|+00.53",
+          "objects": [
+            "KeyChain|+01.50|+00.47|+00.53"
+          ],
+          "duration": 12.0,
+          "deps": [],
+          "navigation_steps": 11,
+          "grid_start": [
+            -0.5,
+            0.25
+          ],
+          "grid_end": [
+            1.5,
+            1.0
+          ],
+          "job": "j2"
+        },
+        {
+          "id": "j2_put",
+          "robot": 2,
+          "skill": "PutObject",
+          "target": "Drawer|+03.88|+00.77|+00.86",
+          "objects": [
+            "Drawer|+03.88|+00.77|+00.86",
+            "KeyChain|+01.50|+00.47|+00.53"
+          ],
+          "duration": 10.0,
+          "deps": [
+            "j2_pick",
+            "open_0",
+            "j0_put"
+          ],
+          "navigation_steps": 9,
+          "grid_start": [
+            1.5,
+            1.0
+          ],
+          "grid_end": [
+            3.5,
+            0.75
+          ],
+          "job": "j2",
+          "carried_object": "KeyChain|+01.50|+00.47|+00.53"
+        },
+        {
+          "id": "j3_pick",
+          "robot": 0,
+          "skill": "PickupObject",
+          "target": "Pen|+03.93|+00.87|+01.04",
+          "objects": [
+            "Pen|+03.93|+00.87|+01.04"
+          ],
+          "duration": 2.0,
+          "deps": [],
+          "navigation_steps": 1,
+          "grid_start": [
+            3.5,
+            0.75
+          ],
+          "grid_end": [
+            3.5,
+            1.0
+          ],
+          "job": "j3"
+        },
+        {
+          "id": "j3_put",
+          "robot": 0,
+          "skill": "PutObject",
+          "target": "CoffeeTable|+01.59|00.00|+00.45",
+          "objects": [
+            "CoffeeTable|+01.59|00.00|+00.45",
+            "Pen|+03.93|+00.87|+01.04"
+          ],
+          "duration": 9.0,
+          "deps": [
+            "j3_pick",
+            "j1_put"
+          ],
+          "navigation_steps": 8,
+          "grid_start": [
+            3.5,
+            1.0
+          ],
+          "grid_end": [
+            1.5,
+            1.0
+          ],
+          "job": "j3",
+          "carried_object": "Pen|+03.93|+00.87|+01.04"
+        },
+        {
+          "id": "j4_pick",
+          "robot": 1,
+          "skill": "PickupObject",
+          "target": "Laptop|+01.80|+00.47|+00.50",
+          "objects": [
+            "Laptop|+01.80|+00.47|+00.50"
+          ],
+          "duration": 2.0,
+          "deps": [],
+          "navigation_steps": 1,
+          "grid_start": [
+            1.5,
+            1.0
+          ],
+          "grid_end": [
+            1.75,
+            1.0
+          ],
+          "job": "j4"
+        },
+        {
+          "id": "j4_put",
+          "robot": 1,
+          "skill": "PutObject",
+          "target": "Drawer|+03.88|+00.77|+00.86",
+          "objects": [
+            "Drawer|+03.88|+00.77|+00.86",
+            "Laptop|+01.80|+00.47|+00.50"
+          ],
+          "duration": 9.0,
+          "deps": [
+            "j4_pick",
+            "open_0",
+            "j2_put"
+          ],
+          "navigation_steps": 8,
+          "grid_start": [
+            1.75,
+            1.0
+          ],
+          "grid_end": [
+            3.5,
+            0.75
+          ],
+          "job": "j4",
+          "carried_object": "Laptop|+01.80|+00.47|+00.50"
+        },
+        {
+          "id": "j5_pick",
+          "robot": 2,
+          "skill": "PickupObject",
+          "target": "Pencil|+03.89|+00.87|+01.18",
+          "objects": [
+            "Pencil|+03.89|+00.87|+01.18"
+          ],
+          "duration": 5.0,
+          "deps": [],
+          "navigation_steps": 4,
+          "grid_start": [
+            3.5,
+            0.75
+          ],
+          "grid_end": [
+            3.75,
+            1.5
+          ],
+          "job": "j5"
+        },
+        {
+          "id": "j5_put",
+          "robot": 2,
+          "skill": "PutObject",
+          "target": "CoffeeTable|+01.59|00.00|+00.45",
+          "objects": [
+            "CoffeeTable|+01.59|00.00|+00.45",
+            "Pencil|+03.89|+00.87|+01.18"
+          ],
+          "duration": 12.0,
+          "deps": [
+            "j5_pick",
+            "j3_put"
+          ],
+          "navigation_steps": 11,
+          "grid_start": [
+            3.75,
+            1.5
+          ],
+          "grid_end": [
+            1.5,
+            1.0
+          ],
+          "job": "j5",
+          "carried_object": "Pencil|+03.89|+00.87|+01.18"
+        },
+        {
+          "id": "j6_pick",
+          "robot": 0,
+          "skill": "PickupObject",
+          "target": "Pillow|+00.65|+00.39|+01.71",
+          "objects": [
+            "Pillow|+00.65|+00.39|+01.71"
+          ],
+          "duration": 4.0,
+          "deps": [],
+          "navigation_steps": 3,
+          "grid_start": [
+            1.5,
+            1.0
+          ],
+          "grid_end": [
+            0.75,
+            1.0
+          ],
+          "job": "j6"
+        },
+        {
+          "id": "j6_put",
+          "robot": 0,
+          "skill": "PutObject",
+          "target": "Drawer|+03.88|+00.77|+00.86",
+          "objects": [
+            "Drawer|+03.88|+00.77|+00.86",
+            "Pillow|+00.65|+00.39|+01.71"
+          ],
+          "duration": 13.0,
+          "deps": [
+            "j6_pick",
+            "open_0",
+            "j4_put"
+          ],
+          "navigation_steps": 12,
+          "grid_start": [
+            0.75,
+            1.0
+          ],
+          "grid_end": [
+            3.5,
+            0.75
+          ],
+          "job": "j6",
+          "carried_object": "Pillow|+00.65|+00.39|+01.71"
+        },
+        {
+          "id": "j7_pick",
+          "robot": 1,
+          "skill": "PickupObject",
+          "target": "RemoteControl|+01.88|+00.33|+01.73",
+          "objects": [
+            "RemoteControl|+01.88|+00.33|+01.73"
+          ],
+          "duration": 8.0,
+          "deps": [],
+          "navigation_steps": 7,
+          "grid_start": [
+            3.5,
+            0.75
+          ],
+          "grid_end": [
+            2.0,
+            1.0
+          ],
+          "job": "j7"
+        },
+        {
+          "id": "j7_put",
+          "robot": 1,
+          "skill": "PutObject",
+          "target": "CoffeeTable|+01.59|00.00|+00.45",
+          "objects": [
+            "CoffeeTable|+01.59|00.00|+00.45",
+            "RemoteControl|+01.88|+00.33|+01.73"
+          ],
+          "duration": 3.0,
+          "deps": [
+            "j7_pick",
+            "j5_put"
+          ],
+          "navigation_steps": 2,
+          "grid_start": [
+            2.0,
+            1.0
+          ],
+          "grid_end": [
+            1.5,
+            1.0
+          ],
+          "job": "j7",
+          "carried_object": "RemoteControl|+01.88|+00.33|+01.73"
+        },
+        {
+          "id": "close_0",
+          "robot": 0,
+          "skill": "CloseObject",
+          "target": "Drawer|+03.88|+00.77|+00.86",
+          "objects": [
+            "Drawer|+03.88|+00.77|+00.86"
+          ],
+          "duration": 1.0,
+          "deps": [
+            "j0_put",
+            "j2_put",
+            "j4_put",
+            "j6_put"
+          ],
+          "navigation_steps": 0,
+          "grid_start": [
+            3.5,
+            0.75
+          ],
+          "grid_end": [
+            3.5,
+            0.75
+          ]
+        }
+      ],
+      "candidate": {
+        "robots": [
+          0,
+          1,
+          2,
+          0,
+          1,
+          2,
+          0,
+          1
+        ],
+        "order": [
+          "j1",
+          "j0",
+          "j2",
+          "j3",
+          "j4",
+          "j5",
+          "j6",
+          "j7"
+        ],
+        "opener": 0,
+        "closer": 0
+      },
+      "task_id": "t212_n8",
+      "robot_ids": [
+        0,
+        1,
+        2
+      ],
+      "cost_model": "static-grid-0.25m-plus-manipulation-v1"
+    },
+    {
+      "actions": [
+        {
+          "id": "open_0",
+          "robot": 0,
+          "skill": "OpenObject",
+          "target": "Drawer|+03.88|+00.77|+00.86",
+          "objects": [
+            "Drawer|+03.88|+00.77|+00.86"
+          ],
+          "duration": 13.0,
+          "deps": [],
+          "navigation_steps": 12,
+          "grid_start": [
+            0.75,
+            1.0
+          ],
+          "grid_end": [
+            3.5,
+            0.75
+          ]
+        },
+        {
+          "id": "j1_pick",
+          "robot": 1,
+          "skill": "PickupObject",
+          "target": "Newspaper|+02.15|+00.41|-00.72",
+          "objects": [
+            "Newspaper|+02.15|+00.41|-00.72"
+          ],
+          "duration": 4.0,
+          "deps": [],
+          "navigation_steps": 3,
+          "grid_start": [
+            2.5,
+            0.25
+          ],
+          "grid_end": [
+            2.25,
+            -0.25
+          ],
+          "job": "j1"
+        },
+        {
+          "id": "j1_put",
+          "robot": 1,
+          "skill": "PutObject",
+          "target": "CoffeeTable|+01.59|00.00|+00.45",
+          "objects": [
+            "CoffeeTable|+01.59|00.00|+00.45",
+            "Newspaper|+02.15|+00.41|-00.72"
+          ],
+          "duration": 11.0,
+          "deps": [
+            "j1_pick"
+          ],
+          "navigation_steps": 10,
+          "grid_start": [
+            2.25,
+            -0.25
+          ],
+          "grid_end": [
+            1.5,
+            1.0
+          ],
+          "job": "j1",
+          "carried_object": "Newspaper|+02.15|+00.41|-00.72"
+        },
+        {
+          "id": "j3_pick",
+          "robot": 0,
+          "skill": "PickupObject",
+          "target": "Pen|+03.93|+00.87|+01.04",
+          "objects": [
+            "Pen|+03.93|+00.87|+01.04"
+          ],
+          "duration": 2.0,
+          "deps": [],
+          "navigation_steps": 1,
+          "grid_start": [
+            3.5,
+            0.75
+          ],
+          "grid_end": [
+            3.5,
+            1.0
+          ],
+          "job": "j3"
+        },
+        {
+          "id": "j3_put",
+          "robot": 0,
+          "skill": "PutObject",
+          "target": "CoffeeTable|+01.59|00.00|+00.45",
+          "objects": [
+            "CoffeeTable|+01.59|00.00|+00.45",
+            "Pen|+03.93|+00.87|+01.04"
+          ],
+          "duration": 9.0,
+          "deps": [
+            "j3_pick",
+            "j1_put"
+          ],
+          "navigation_steps": 8,
+          "grid_start": [
+            3.5,
+            1.0
+          ],
+          "grid_end": [
+            1.5,
+            1.0
+          ],
+          "job": "j3",
+          "carried_object": "Pen|+03.93|+00.87|+01.04"
+        },
+        {
+          "id": "j0_pick",
+          "robot": 0,
+          "skill": "PickupObject",
+          "target": "CreditCard|+01.41|+00.47|+00.65",
+          "objects": [
+            "CreditCard|+01.41|+00.47|+00.65"
+          ],
+          "duration": 1.0,
+          "deps": [],
+          "navigation_steps": 0,
+          "grid_start": [
+            1.5,
+            1.0
+          ],
+          "grid_end": [
+            1.5,
+            1.0
+          ],
+          "job": "j0"
+        },
+        {
+          "id": "j0_put",
+          "robot": 0,
+          "skill": "PutObject",
+          "target": "Drawer|+03.88|+00.77|+00.86",
+          "objects": [
+            "Drawer|+03.88|+00.77|+00.86",
+            "CreditCard|+01.41|+00.47|+00.65"
+          ],
+          "duration": 10.0,
+          "deps": [
+            "j0_pick",
+            "open_0"
+          ],
+          "navigation_steps": 9,
+          "grid_start": [
+            1.5,
+            1.0
+          ],
+          "grid_end": [
+            3.5,
+            0.75
+          ],
+          "job": "j0",
+          "carried_object": "CreditCard|+01.41|+00.47|+00.65"
+        },
+        {
+          "id": "j2_pick",
+          "robot": 2,
+          "skill": "PickupObject",
+          "target": "KeyChain|+01.50|+00.47|+00.53",
+          "objects": [
+            "KeyChain|+01.50|+00.47|+00.53"
+          ],
+          "duration": 12.0,
+          "deps": [],
+          "navigation_steps": 11,
+          "grid_start": [
+            -0.5,
+            0.25
+          ],
+          "grid_end": [
+            1.5,
+            1.0
+          ],
+          "job": "j2"
+        },
+        {
+          "id": "j2_put",
+          "robot": 2,
+          "skill": "PutObject",
+          "target": "Drawer|+03.88|+00.77|+00.86",
+          "objects": [
+            "Drawer|+03.88|+00.77|+00.86",
+            "KeyChain|+01.50|+00.47|+00.53"
+          ],
+          "duration": 10.0,
+          "deps": [
+            "j2_pick",
+            "open_0",
+            "j0_put"
+          ],
+          "navigation_steps": 9,
+          "grid_start": [
+            1.5,
+            1.0
+          ],
+          "grid_end": [
+            3.5,
+            0.75
+          ],
+          "job": "j2",
+          "carried_object": "KeyChain|+01.50|+00.47|+00.53"
+        },
+        {
+          "id": "j4_pick",
+          "robot": 1,
+          "skill": "PickupObject",
+          "target": "Laptop|+01.80|+00.47|+00.50",
+          "objects": [
+            "Laptop|+01.80|+00.47|+00.50"
+          ],
+          "duration": 2.0,
+          "deps": [],
+          "navigation_steps": 1,
+          "grid_start": [
+            1.5,
+            1.0
+          ],
+          "grid_end": [
+            1.75,
+            1.0
+          ],
+          "job": "j4"
+        },
+        {
+          "id": "j4_put",
+          "robot": 1,
+          "skill": "PutObject",
+          "target": "Drawer|+03.88|+00.77|+00.86",
+          "objects": [
+            "Drawer|+03.88|+00.77|+00.86",
+            "Laptop|+01.80|+00.47|+00.50"
+          ],
+          "duration": 9.0,
+          "deps": [
+            "j4_pick",
+            "open_0",
+            "j2_put"
+          ],
+          "navigation_steps": 8,
+          "grid_start": [
+            1.75,
+            1.0
+          ],
+          "grid_end": [
+            3.5,
+            0.75
+          ],
+          "job": "j4",
+          "carried_object": "Laptop|+01.80|+00.47|+00.50"
+        },
+        {
+          "id": "j5_pick",
+          "robot": 2,
+          "skill": "PickupObject",
+          "target": "Pencil|+03.89|+00.87|+01.18",
+          "objects": [
+            "Pencil|+03.89|+00.87|+01.18"
+          ],
+          "duration": 5.0,
+          "deps": [],
+          "navigation_steps": 4,
+          "grid_start": [
+            3.5,
+            0.75
+          ],
+          "grid_end": [
+            3.75,
+            1.5
+          ],
+          "job": "j5"
+        },
+        {
+          "id": "j5_put",
+          "robot": 2,
+          "skill": "PutObject",
+          "target": "CoffeeTable|+01.59|00.00|+00.45",
+          "objects": [
+            "CoffeeTable|+01.59|00.00|+00.45",
+            "Pencil|+03.89|+00.87|+01.18"
+          ],
+          "duration": 12.0,
+          "deps": [
+            "j5_pick",
+            "j3_put"
+          ],
+          "navigation_steps": 11,
+          "grid_start": [
+            3.75,
+            1.5
+          ],
+          "grid_end": [
+            1.5,
+            1.0
+          ],
+          "job": "j5",
+          "carried_object": "Pencil|+03.89|+00.87|+01.18"
+        },
+        {
+          "id": "j6_pick",
+          "robot": 0,
+          "skill": "PickupObject",
+          "target": "Pillow|+00.65|+00.39|+01.71",
+          "objects": [
+            "Pillow|+00.65|+00.39|+01.71"
+          ],
+          "duration": 13.0,
+          "deps": [],
+          "navigation_steps": 12,
+          "grid_start": [
+            3.5,
+            0.75
+          ],
+          "grid_end": [
+            0.75,
+            1.0
+          ],
+          "job": "j6"
+        },
+        {
+          "id": "j6_put",
+          "robot": 0,
+          "skill": "PutObject",
+          "target": "Drawer|+03.88|+00.77|+00.86",
+          "objects": [
+            "Drawer|+03.88|+00.77|+00.86",
+            "Pillow|+00.65|+00.39|+01.71"
+          ],
+          "duration": 13.0,
+          "deps": [
+            "j6_pick",
+            "open_0",
+            "j4_put"
+          ],
+          "navigation_steps": 12,
+          "grid_start": [
+            0.75,
+            1.0
+          ],
+          "grid_end": [
+            3.5,
+            0.75
+          ],
+          "job": "j6",
+          "carried_object": "Pillow|+00.65|+00.39|+01.71"
+        },
+        {
+          "id": "j7_pick",
+          "robot": 1,
+          "skill": "PickupObject",
+          "target": "RemoteControl|+01.88|+00.33|+01.73",
+          "objects": [
+            "RemoteControl|+01.88|+00.33|+01.73"
+          ],
+          "duration": 8.0,
+          "deps": [],
+          "navigation_steps": 7,
+          "grid_start": [
+            3.5,
+            0.75
+          ],
+          "grid_end": [
+            2.0,
+            1.0
+          ],
+          "job": "j7"
+        },
+        {
+          "id": "j7_put",
+          "robot": 1,
+          "skill": "PutObject",
+          "target": "CoffeeTable|+01.59|00.00|+00.45",
+          "objects": [
+            "CoffeeTable|+01.59|00.00|+00.45",
+            "RemoteControl|+01.88|+00.33|+01.73"
+          ],
+          "duration": 3.0,
+          "deps": [
+            "j7_pick",
+            "j5_put"
+          ],
+          "navigation_steps": 2,
+          "grid_start": [
+            2.0,
+            1.0
+          ],
+          "grid_end": [
+            1.5,
+            1.0
+          ],
+          "job": "j7",
+          "carried_object": "RemoteControl|+01.88|+00.33|+01.73"
+        },
+        {
+          "id": "close_0",
+          "robot": 0,
+          "skill": "CloseObject",
+          "target": "Drawer|+03.88|+00.77|+00.86",
+          "objects": [
+            "Drawer|+03.88|+00.77|+00.86"
+          ],
+          "duration": 1.0,
+          "deps": [
+            "j0_put",
+            "j2_put",
+            "j4_put",
+            "j6_put"
+          ],
+          "navigation_steps": 0,
+          "grid_start": [
+            3.5,
+            0.75
+          ],
+          "grid_end": [
+            3.5,
+            0.75
+          ]
+        }
+      ],
+      "candidate": {
+        "robots": [
+          0,
+          1,
+          2,
+          0,
+          1,
+          2,
+          0,
+          1
+        ],
+        "order": [
+          "j1",
+          "j3",
+          "j0",
+          "j2",
+          "j4",
+          "j5",
+          "j6",
+          "j7"
+        ],
+        "opener": 0,
+        "closer": 0
+      },
+      "task_id": "t212_n8",
+      "robot_ids": [
+        0,
+        1,
+        2
+      ],
+      "cost_model": "static-grid-0.25m-plus-manipulation-v1"
+    },
+    {
+      "actions": [
+        {
+          "id": "open_0",
+          "robot": 0,
+          "skill": "OpenObject",
+          "target": "Drawer|+03.88|+00.77|+00.86",
+          "objects": [
+            "Drawer|+03.88|+00.77|+00.86"
+          ],
+          "duration": 13.0,
+          "deps": [],
+          "navigation_steps": 12,
+          "grid_start": [
+            0.75,
+            1.0
+          ],
+          "grid_end": [
+            3.5,
+            0.75
+          ]
+        },
+        {
+          "id": "j2_pick",
+          "robot": 2,
+          "skill": "PickupObject",
+          "target": "KeyChain|+01.50|+00.47|+00.53",
+          "objects": [
+            "KeyChain|+01.50|+00.47|+00.53"
+          ],
+          "duration": 12.0,
+          "deps": [],
+          "navigation_steps": 11,
+          "grid_start": [
+            -0.5,
+            0.25
+          ],
+          "grid_end": [
+            1.5,
+            1.0
+          ],
+          "job": "j2"
+        },
+        {
+          "id": "j2_put",
+          "robot": 2,
+          "skill": "PutObject",
+          "target": "Drawer|+03.88|+00.77|+00.86",
+          "objects": [
+            "Drawer|+03.88|+00.77|+00.86",
+            "KeyChain|+01.50|+00.47|+00.53"
+          ],
+          "duration": 10.0,
+          "deps": [
+            "j2_pick",
+            "open_0"
+          ],
+          "navigation_steps": 9,
+          "grid_start": [
+            1.5,
+            1.0
+          ],
+          "grid_end": [
+            3.5,
+            0.75
+          ],
+          "job": "j2",
+          "carried_object": "KeyChain|+01.50|+00.47|+00.53"
+        },
+        {
+          "id": "j0_pick",
+          "robot": 0,
+          "skill": "PickupObject",
+          "target": "CreditCard|+01.41|+00.47|+00.65",
+          "objects": [
+            "CreditCard|+01.41|+00.47|+00.65"
+          ],
+          "duration": 10.0,
+          "deps": [],
+          "navigation_steps": 9,
+          "grid_start": [
+            3.5,
+            0.75
+          ],
+          "grid_end": [
+            1.5,
+            1.0
+          ],
+          "job": "j0"
+        },
+        {
+          "id": "j0_put",
+          "robot": 0,
+          "skill": "PutObject",
+          "target": "Drawer|+03.88|+00.77|+00.86",
+          "objects": [
+            "Drawer|+03.88|+00.77|+00.86",
+            "CreditCard|+01.41|+00.47|+00.65"
+          ],
+          "duration": 10.0,
+          "deps": [
+            "j0_pick",
+            "open_0",
+            "j2_put"
+          ],
+          "navigation_steps": 9,
+          "grid_start": [
+            1.5,
+            1.0
+          ],
+          "grid_end": [
+            3.5,
+            0.75
+          ],
+          "job": "j0",
+          "carried_object": "CreditCard|+01.41|+00.47|+00.65"
+        },
+        {
+          "id": "j1_pick",
+          "robot": 1,
+          "skill": "PickupObject",
+          "target": "Newspaper|+02.15|+00.41|-00.72",
+          "objects": [
+            "Newspaper|+02.15|+00.41|-00.72"
+          ],
+          "duration": 4.0,
+          "deps": [],
+          "navigation_steps": 3,
+          "grid_start": [
+            2.5,
+            0.25
+          ],
+          "grid_end": [
+            2.25,
+            -0.25
+          ],
+          "job": "j1"
+        },
+        {
+          "id": "j1_put",
+          "robot": 1,
+          "skill": "PutObject",
+          "target": "CoffeeTable|+01.59|00.00|+00.45",
+          "objects": [
+            "CoffeeTable|+01.59|00.00|+00.45",
+            "Newspaper|+02.15|+00.41|-00.72"
+          ],
+          "duration": 11.0,
+          "deps": [
+            "j1_pick"
+          ],
+          "navigation_steps": 10,
+          "grid_start": [
+            2.25,
+            -0.25
+          ],
+          "grid_end": [
+            1.5,
+            1.0
+          ],
+          "job": "j1",
+          "carried_object": "Newspaper|+02.15|+00.41|-00.72"
+        },
+        {
+          "id": "j3_pick",
+          "robot": 0,
+          "skill": "PickupObject",
+          "target": "Pen|+03.93|+00.87|+01.04",
+          "objects": [
+            "Pen|+03.93|+00.87|+01.04"
+          ],
+          "duration": 2.0,
+          "deps": [],
+          "navigation_steps": 1,
+          "grid_start": [
+            3.5,
+            0.75
+          ],
+          "grid_end": [
+            3.5,
+            1.0
+          ],
+          "job": "j3"
+        },
+        {
+          "id": "j3_put",
+          "robot": 0,
+          "skill": "PutObject",
+          "target": "CoffeeTable|+01.59|00.00|+00.45",
+          "objects": [
+            "CoffeeTable|+01.59|00.00|+00.45",
+            "Pen|+03.93|+00.87|+01.04"
+          ],
+          "duration": 9.0,
+          "deps": [
+            "j3_pick",
+            "j1_put"
+          ],
+          "navigation_steps": 8,
+          "grid_start": [
+            3.5,
+            1.0
+          ],
+          "grid_end": [
+            1.5,
+            1.0
+          ],
+          "job": "j3",
+          "carried_object": "Pen|+03.93|+00.87|+01.04"
+        },
+        {
+          "id": "j4_pick",
+          "robot": 1,
+          "skill": "PickupObject",
+          "target": "Laptop|+01.80|+00.47|+00.50",
+          "objects": [
+            "Laptop|+01.80|+00.47|+00.50"
+          ],
+          "duration": 2.0,
+          "deps": [],
+          "navigation_steps": 1,
+          "grid_start": [
+            1.5,
+            1.0
+          ],
+          "grid_end": [
+            1.75,
+            1.0
+          ],
+          "job": "j4"
+        },
+        {
+          "id": "j4_put",
+          "robot": 1,
+          "skill": "PutObject",
+          "target": "Drawer|+03.88|+00.77|+00.86",
+          "objects": [
+            "Drawer|+03.88|+00.77|+00.86",
+            "Laptop|+01.80|+00.47|+00.50"
+          ],
+          "duration": 9.0,
+          "deps": [
+            "j4_pick",
+            "open_0",
+            "j0_put"
+          ],
+          "navigation_steps": 8,
+          "grid_start": [
+            1.75,
+            1.0
+          ],
+          "grid_end": [
+            3.5,
+            0.75
+          ],
+          "job": "j4",
+          "carried_object": "Laptop|+01.80|+00.47|+00.50"
+        },
+        {
+          "id": "j5_pick",
+          "robot": 2,
+          "skill": "PickupObject",
+          "target": "Pencil|+03.89|+00.87|+01.18",
+          "objects": [
+            "Pencil|+03.89|+00.87|+01.18"
+          ],
+          "duration": 5.0,
+          "deps": [],
+          "navigation_steps": 4,
+          "grid_start": [
+            3.5,
+            0.75
+          ],
+          "grid_end": [
+            3.75,
+            1.5
+          ],
+          "job": "j5"
+        },
+        {
+          "id": "j5_put",
+          "robot": 2,
+          "skill": "PutObject",
+          "target": "CoffeeTable|+01.59|00.00|+00.45",
+          "objects": [
+            "CoffeeTable|+01.59|00.00|+00.45",
+            "Pencil|+03.89|+00.87|+01.18"
+          ],
+          "duration": 12.0,
+          "deps": [
+            "j5_pick",
+            "j3_put"
+          ],
+          "navigation_steps": 11,
+          "grid_start": [
+            3.75,
+            1.5
+          ],
+          "grid_end": [
+            1.5,
+            1.0
+          ],
+          "job": "j5",
+          "carried_object": "Pencil|+03.89|+00.87|+01.18"
+        },
+        {
+          "id": "j6_pick",
+          "robot": 0,
+          "skill": "PickupObject",
+          "target": "Pillow|+00.65|+00.39|+01.71",
+          "objects": [
+            "Pillow|+00.65|+00.39|+01.71"
+          ],
+          "duration": 4.0,
+          "deps": [],
+          "navigation_steps": 3,
+          "grid_start": [
+            1.5,
+            1.0
+          ],
+          "grid_end": [
+            0.75,
+            1.0
+          ],
+          "job": "j6"
+        },
+        {
+          "id": "j6_put",
+          "robot": 0,
+          "skill": "PutObject",
+          "target": "Drawer|+03.88|+00.77|+00.86",
+          "objects": [
+            "Drawer|+03.88|+00.77|+00.86",
+            "Pillow|+00.65|+00.39|+01.71"
+          ],
+          "duration": 13.0,
+          "deps": [
+            "j6_pick",
+            "open_0",
+            "j4_put"
+          ],
+          "navigation_steps": 12,
+          "grid_start": [
+            0.75,
+            1.0
+          ],
+          "grid_end": [
+            3.5,
+            0.75
+          ],
+          "job": "j6",
+          "carried_object": "Pillow|+00.65|+00.39|+01.71"
+        },
+        {
+          "id": "j7_pick",
+          "robot": 1,
+          "skill": "PickupObject",
+          "target": "RemoteControl|+01.88|+00.33|+01.73",
+          "objects": [
+            "RemoteControl|+01.88|+00.33|+01.73"
+          ],
+          "duration": 8.0,
+          "deps": [],
+          "navigation_steps": 7,
+          "grid_start": [
+            3.5,
+            0.75
+          ],
+          "grid_end": [
+            2.0,
+            1.0
+          ],
+          "job": "j7"
+        },
+        {
+          "id": "j7_put",
+          "robot": 1,
+          "skill": "PutObject",
+          "target": "CoffeeTable|+01.59|00.00|+00.45",
+          "objects": [
+            "CoffeeTable|+01.59|00.00|+00.45",
+            "RemoteControl|+01.88|+00.33|+01.73"
+          ],
+          "duration": 3.0,
+          "deps": [
+            "j7_pick",
+            "j5_put"
+          ],
+          "navigation_steps": 2,
+          "grid_start": [
+            2.0,
+            1.0
+          ],
+          "grid_end": [
+            1.5,
+            1.0
+          ],
+          "job": "j7",
+          "carried_object": "RemoteControl|+01.88|+00.33|+01.73"
+        },
+        {
+          "id": "close_0",
+          "robot": 0,
+          "skill": "CloseObject",
+          "target": "Drawer|+03.88|+00.77|+00.86",
+          "objects": [
+            "Drawer|+03.88|+00.77|+00.86"
+          ],
+          "duration": 1.0,
+          "deps": [
+            "j2_put",
+            "j0_put",
+            "j4_put",
+            "j6_put"
+          ],
+          "navigation_steps": 0,
+          "grid_start": [
+            3.5,
+            0.75
+          ],
+          "grid_end": [
+            3.5,
+            0.75
+          ]
+        }
+      ],
+      "candidate": {
+        "robots": [
+          0,
+          1,
+          2,
+          0,
+          1,
+          2,
+          0,
+          1
+        ],
+        "order": [
+          "j2",
+          "j0",
+          "j1",
+          "j3",
+          "j4",
+          "j5",
+          "j6",
+          "j7"
+        ],
+        "opener": 0,
+        "closer": 0
+      },
+      "task_id": "t212_n8",
+      "robot_ids": [
+        0,
+        1,
+        2
+      ],
+      "cost_model": "static-grid-0.25m-plus-manipulation-v1"
+    },
+    {
+      "actions": [
+        {
+          "id": "open_0",
+          "robot": 0,
+          "skill": "OpenObject",
+          "target": "Drawer|+03.88|+00.77|+00.86",
+          "objects": [
+            "Drawer|+03.88|+00.77|+00.86"
+          ],
+          "duration": 13.0,
+          "deps": [],
+          "navigation_steps": 12,
+          "grid_start": [
+            0.75,
+            1.0
+          ],
+          "grid_end": [
+            3.5,
+            0.75
+          ]
+        },
+        {
+          "id": "j2_pick",
+          "robot": 2,
+          "skill": "PickupObject",
+          "target": "KeyChain|+01.50|+00.47|+00.53",
+          "objects": [
+            "KeyChain|+01.50|+00.47|+00.53"
+          ],
+          "duration": 12.0,
+          "deps": [],
+          "navigation_steps": 11,
+          "grid_start": [
+            -0.5,
+            0.25
+          ],
+          "grid_end": [
+            1.5,
+            1.0
+          ],
+          "job": "j2"
+        },
+        {
+          "id": "j2_put",
+          "robot": 2,
+          "skill": "PutObject",
+          "target": "Drawer|+03.88|+00.77|+00.86",
+          "objects": [
+            "Drawer|+03.88|+00.77|+00.86",
+            "KeyChain|+01.50|+00.47|+00.53"
+          ],
+          "duration": 10.0,
+          "deps": [
+            "j2_pick",
+            "open_0"
+          ],
+          "navigation_steps": 9,
+          "grid_start": [
+            1.5,
+            1.0
+          ],
+          "grid_end": [
+            3.5,
+            0.75
+          ],
+          "job": "j2",
+          "carried_object": "KeyChain|+01.50|+00.47|+00.53"
+        },
+        {
+          "id": "j3_pick",
+          "robot": 0,
+          "skill": "PickupObject",
+          "target": "Pen|+03.93|+00.87|+01.04",
+          "objects": [
+            "Pen|+03.93|+00.87|+01.04"
+          ],
+          "duration": 2.0,
+          "deps": [],
+          "navigation_steps": 1,
+          "grid_start": [
+            3.5,
+            0.75
+          ],
+          "grid_end": [
+            3.5,
+            1.0
+          ],
+          "job": "j3"
+        },
+        {
+          "id": "j3_put",
+          "robot": 0,
+          "skill": "PutObject",
+          "target": "CoffeeTable|+01.59|00.00|+00.45",
+          "objects": [
+            "CoffeeTable|+01.59|00.00|+00.45",
+            "Pen|+03.93|+00.87|+01.04"
+          ],
+          "duration": 9.0,
+          "deps": [
+            "j3_pick"
+          ],
+          "navigation_steps": 8,
+          "grid_start": [
+            3.5,
+            1.0
+          ],
+          "grid_end": [
+            1.5,
+            1.0
+          ],
+          "job": "j3",
+          "carried_object": "Pen|+03.93|+00.87|+01.04"
+        },
+        {
+          "id": "j0_pick",
+          "robot": 0,
+          "skill": "PickupObject",
+          "target": "CreditCard|+01.41|+00.47|+00.65",
+          "objects": [
+            "CreditCard|+01.41|+00.47|+00.65"
+          ],
+          "duration": 1.0,
+          "deps": [],
+          "navigation_steps": 0,
+          "grid_start": [
+            1.5,
+            1.0
+          ],
+          "grid_end": [
+            1.5,
+            1.0
+          ],
+          "job": "j0"
+        },
+        {
+          "id": "j0_put",
+          "robot": 0,
+          "skill": "PutObject",
+          "target": "Drawer|+03.88|+00.77|+00.86",
+          "objects": [
+            "Drawer|+03.88|+00.77|+00.86",
+            "CreditCard|+01.41|+00.47|+00.65"
+          ],
+          "duration": 10.0,
+          "deps": [
+            "j0_pick",
+            "open_0",
+            "j2_put"
+          ],
+          "navigation_steps": 9,
+          "grid_start": [
+            1.5,
+            1.0
+          ],
+          "grid_end": [
+            3.5,
+            0.75
+          ],
+          "job": "j0",
+          "carried_object": "CreditCard|+01.41|+00.47|+00.65"
+        },
+        {
+          "id": "j1_pick",
+          "robot": 1,
+          "skill": "PickupObject",
+          "target": "Newspaper|+02.15|+00.41|-00.72",
+          "objects": [
+            "Newspaper|+02.15|+00.41|-00.72"
+          ],
+          "duration": 4.0,
+          "deps": [],
+          "navigation_steps": 3,
+          "grid_start": [
+            2.5,
+            0.25
+          ],
+          "grid_end": [
+            2.25,
+            -0.25
+          ],
+          "job": "j1"
+        },
+        {
+          "id": "j1_put",
+          "robot": 1,
+          "skill": "PutObject",
+          "target": "CoffeeTable|+01.59|00.00|+00.45",
+          "objects": [
+            "CoffeeTable|+01.59|00.00|+00.45",
+            "Newspaper|+02.15|+00.41|-00.72"
+          ],
+          "duration": 11.0,
+          "deps": [
+            "j1_pick",
+            "j3_put"
+          ],
+          "navigation_steps": 10,
+          "grid_start": [
+            2.25,
+            -0.25
+          ],
+          "grid_end": [
+            1.5,
+            1.0
+          ],
+          "job": "j1",
+          "carried_object": "Newspaper|+02.15|+00.41|-00.72"
+        },
+        {
+          "id": "j4_pick",
+          "robot": 1,
+          "skill": "PickupObject",
+          "target": "Laptop|+01.80|+00.47|+00.50",
+          "objects": [
+            "Laptop|+01.80|+00.47|+00.50"
+          ],
+          "duration": 2.0,
+          "deps": [],
+          "navigation_steps": 1,
+          "grid_start": [
+            1.5,
+            1.0
+          ],
+          "grid_end": [
+            1.75,
+            1.0
+          ],
+          "job": "j4"
+        },
+        {
+          "id": "j4_put",
+          "robot": 1,
+          "skill": "PutObject",
+          "target": "Drawer|+03.88|+00.77|+00.86",
+          "objects": [
+            "Drawer|+03.88|+00.77|+00.86",
+            "Laptop|+01.80|+00.47|+00.50"
+          ],
+          "duration": 9.0,
+          "deps": [
+            "j4_pick",
+            "open_0",
+            "j0_put"
+          ],
+          "navigation_steps": 8,
+          "grid_start": [
+            1.75,
+            1.0
+          ],
+          "grid_end": [
+            3.5,
+            0.75
+          ],
+          "job": "j4",
+          "carried_object": "Laptop|+01.80|+00.47|+00.50"
+        },
+        {
+          "id": "j5_pick",
+          "robot": 2,
+          "skill": "PickupObject",
+          "target": "Pencil|+03.89|+00.87|+01.18",
+          "objects": [
+            "Pencil|+03.89|+00.87|+01.18"
+          ],
+          "duration": 5.0,
+          "deps": [],
+          "navigation_steps": 4,
+          "grid_start": [
+            3.5,
+            0.75
+          ],
+          "grid_end": [
+            3.75,
+            1.5
+          ],
+          "job": "j5"
+        },
+        {
+          "id": "j5_put",
+          "robot": 2,
+          "skill": "PutObject",
+          "target": "CoffeeTable|+01.59|00.00|+00.45",
+          "objects": [
+            "CoffeeTable|+01.59|00.00|+00.45",
+            "Pencil|+03.89|+00.87|+01.18"
+          ],
+          "duration": 12.0,
+          "deps": [
+            "j5_pick",
+            "j1_put"
+          ],
+          "navigation_steps": 11,
+          "grid_start": [
+            3.75,
+            1.5
+          ],
+          "grid_end": [
+            1.5,
+            1.0
+          ],
+          "job": "j5",
+          "carried_object": "Pencil|+03.89|+00.87|+01.18"
+        },
+        {
+          "id": "j6_pick",
+          "robot": 0,
+          "skill": "PickupObject",
+          "target": "Pillow|+00.65|+00.39|+01.71",
+          "objects": [
+            "Pillow|+00.65|+00.39|+01.71"
+          ],
+          "duration": 13.0,
+          "deps": [],
+          "navigation_steps": 12,
+          "grid_start": [
+            3.5,
+            0.75
+          ],
+          "grid_end": [
+            0.75,
+            1.0
+          ],
+          "job": "j6"
+        },
+        {
+          "id": "j6_put",
+          "robot": 0,
+          "skill": "PutObject",
+          "target": "Drawer|+03.88|+00.77|+00.86",
+          "objects": [
+            "Drawer|+03.88|+00.77|+00.86",
+            "Pillow|+00.65|+00.39|+01.71"
+          ],
+          "duration": 13.0,
+          "deps": [
+            "j6_pick",
+            "open_0",
+            "j4_put"
+          ],
+          "navigation_steps": 12,
+          "grid_start": [
+            0.75,
+            1.0
+          ],
+          "grid_end": [
+            3.5,
+            0.75
+          ],
+          "job": "j6",
+          "carried_object": "Pillow|+00.65|+00.39|+01.71"
+        },
+        {
+          "id": "j7_pick",
+          "robot": 1,
+          "skill": "PickupObject",
+          "target": "RemoteControl|+01.88|+00.33|+01.73",
+          "objects": [
+            "RemoteControl|+01.88|+00.33|+01.73"
+          ],
+          "duration": 8.0,
+          "deps": [],
+          "navigation_steps": 7,
+          "grid_start": [
+            3.5,
+            0.75
+          ],
+          "grid_end": [
+            2.0,
+            1.0
+          ],
+          "job": "j7"
+        },
+        {
+          "id": "j7_put",
+          "robot": 1,
+          "skill": "PutObject",
+          "target": "CoffeeTable|+01.59|00.00|+00.45",
+          "objects": [
+            "CoffeeTable|+01.59|00.00|+00.45",
+            "RemoteControl|+01.88|+00.33|+01.73"
+          ],
+          "duration": 3.0,
+          "deps": [
+            "j7_pick",
+            "j5_put"
+          ],
+          "navigation_steps": 2,
+          "grid_start": [
+            2.0,
+            1.0
+          ],
+          "grid_end": [
+            1.5,
+            1.0
+          ],
+          "job": "j7",
+          "carried_object": "RemoteControl|+01.88|+00.33|+01.73"
+        },
+        {
+          "id": "close_0",
+          "robot": 0,
+          "skill": "CloseObject",
+          "target": "Drawer|+03.88|+00.77|+00.86",
+          "objects": [
+            "Drawer|+03.88|+00.77|+00.86"
+          ],
+          "duration": 1.0,
+          "deps": [
+            "j2_put",
+            "j0_put",
+            "j4_put",
+            "j6_put"
+          ],
+          "navigation_steps": 0,
+          "grid_start": [
+            3.5,
+            0.75
+          ],
+          "grid_end": [
+            3.5,
+            0.75
+          ]
+        }
+      ],
+      "candidate": {
+        "robots": [
+          0,
+          1,
+          2,
+          0,
+          1,
+          2,
+          0,
+          1
+        ],
+        "order": [
+          "j2",
+          "j3",
+          "j0",
+          "j1",
+          "j4",
+          "j5",
+          "j6",
+          "j7"
+        ],
+        "opener": 0,
+        "closer": 0
+      },
+      "task_id": "t212_n8",
+      "robot_ids": [
+        0,
+        1,
+        2
+      ],
+      "cost_model": "static-grid-0.25m-plus-manipulation-v1"
+    },
+    {
+      "actions": [
+        {
+          "id": "open_0",
+          "robot": 0,
+          "skill": "OpenObject",
+          "target": "Drawer|+03.88|+00.77|+00.86",
+          "objects": [
+            "Drawer|+03.88|+00.77|+00.86"
+          ],
+          "duration": 13.0,
+          "deps": [],
+          "navigation_steps": 12,
+          "grid_start": [
+            0.75,
+            1.0
+          ],
+          "grid_end": [
+            3.5,
+            0.75
+          ]
+        },
+        {
+          "id": "j4_pick",
+          "robot": 1,
+          "skill": "PickupObject",
+          "target": "Laptop|+01.80|+00.47|+00.50",
+          "objects": [
+            "Laptop|+01.80|+00.47|+00.50"
+          ],
+          "duration": 7.0,
+          "deps": [],
+          "navigation_steps": 6,
+          "grid_start": [
+            2.5,
+            0.25
+          ],
+          "grid_end": [
+            1.75,
+            1.0
+          ],
+          "job": "j4"
+        },
+        {
+          "id": "j4_put",
+          "robot": 1,
+          "skill": "PutObject",
+          "target": "Drawer|+03.88|+00.77|+00.86",
+          "objects": [
+            "Drawer|+03.88|+00.77|+00.86",
+            "Laptop|+01.80|+00.47|+00.50"
+          ],
+          "duration": 9.0,
+          "deps": [
+            "j4_pick",
+            "open_0"
+          ],
+          "navigation_steps": 8,
+          "grid_start": [
+            1.75,
+            1.0
+          ],
+          "grid_end": [
+            3.5,
+            0.75
+          ],
+          "job": "j4",
+          "carried_object": "Laptop|+01.80|+00.47|+00.50"
+        },
+        {
+          "id": "j0_pick",
+          "robot": 0,
+          "skill": "PickupObject",
+          "target": "CreditCard|+01.41|+00.47|+00.65",
+          "objects": [
+            "CreditCard|+01.41|+00.47|+00.65"
+          ],
+          "duration": 10.0,
+          "deps": [],
+          "navigation_steps": 9,
+          "grid_start": [
+            3.5,
+            0.75
+          ],
+          "grid_end": [
+            1.5,
+            1.0
+          ],
+          "job": "j0"
+        },
+        {
+          "id": "j0_put",
+          "robot": 0,
+          "skill": "PutObject",
+          "target": "Drawer|+03.88|+00.77|+00.86",
+          "objects": [
+            "Drawer|+03.88|+00.77|+00.86",
+            "CreditCard|+01.41|+00.47|+00.65"
+          ],
+          "duration": 10.0,
+          "deps": [
+            "j0_pick",
+            "open_0",
+            "j4_put"
+          ],
+          "navigation_steps": 9,
+          "grid_start": [
+            1.5,
+            1.0
+          ],
+          "grid_end": [
+            3.5,
+            0.75
+          ],
+          "job": "j0",
+          "carried_object": "CreditCard|+01.41|+00.47|+00.65"
+        },
+        {
+          "id": "j1_pick",
+          "robot": 1,
+          "skill": "PickupObject",
+          "target": "Newspaper|+02.15|+00.41|-00.72",
+          "objects": [
+            "Newspaper|+02.15|+00.41|-00.72"
+          ],
+          "duration": 10.0,
+          "deps": [],
+          "navigation_steps": 9,
+          "grid_start": [
+            3.5,
+            0.75
+          ],
+          "grid_end": [
+            2.25,
+            -0.25
+          ],
+          "job": "j1"
+        },
+        {
+          "id": "j1_put",
+          "robot": 1,
+          "skill": "PutObject",
+          "target": "CoffeeTable|+01.59|00.00|+00.45",
+          "objects": [
+            "CoffeeTable|+01.59|00.00|+00.45",
+            "Newspaper|+02.15|+00.41|-00.72"
+          ],
+          "duration": 11.0,
+          "deps": [
+            "j1_pick"
+          ],
+          "navigation_steps": 10,
+          "grid_start": [
+            2.25,
+            -0.25
+          ],
+          "grid_end": [
+            1.5,
+            1.0
+          ],
+          "job": "j1",
+          "carried_object": "Newspaper|+02.15|+00.41|-00.72"
+        },
+        {
+          "id": "j3_pick",
+          "robot": 0,
+          "skill": "PickupObject",
+          "target": "Pen|+03.93|+00.87|+01.04",
+          "objects": [
+            "Pen|+03.93|+00.87|+01.04"
+          ],
+          "duration": 2.0,
+          "deps": [],
+          "navigation_steps": 1,
+          "grid_start": [
+            3.5,
+            0.75
+          ],
+          "grid_end": [
+            3.5,
+            1.0
+          ],
+          "job": "j3"
+        },
+        {
+          "id": "j3_put",
+          "robot": 0,
+          "skill": "PutObject",
+          "target": "CoffeeTable|+01.59|00.00|+00.45",
+          "objects": [
+            "CoffeeTable|+01.59|00.00|+00.45",
+            "Pen|+03.93|+00.87|+01.04"
+          ],
+          "duration": 9.0,
+          "deps": [
+            "j3_pick",
+            "j1_put"
+          ],
+          "navigation_steps": 8,
+          "grid_start": [
+            3.5,
+            1.0
+          ],
+          "grid_end": [
+            1.5,
+            1.0
+          ],
+          "job": "j3",
+          "carried_object": "Pen|+03.93|+00.87|+01.04"
+        },
+        {
+          "id": "j2_pick",
+          "robot": 2,
+          "skill": "PickupObject",
+          "target": "KeyChain|+01.50|+00.47|+00.53",
+          "objects": [
+            "KeyChain|+01.50|+00.47|+00.53"
+          ],
+          "duration": 12.0,
+          "deps": [],
+          "navigation_steps": 11,
+          "grid_start": [
+            -0.5,
+            0.25
+          ],
+          "grid_end": [
+            1.5,
+            1.0
+          ],
+          "job": "j2"
+        },
+        {
+          "id": "j2_put",
+          "robot": 2,
+          "skill": "PutObject",
+          "target": "Drawer|+03.88|+00.77|+00.86",
+          "objects": [
+            "Drawer|+03.88|+00.77|+00.86",
+            "KeyChain|+01.50|+00.47|+00.53"
+          ],
+          "duration": 10.0,
+          "deps": [
+            "j2_pick",
+            "open_0",
+            "j0_put"
+          ],
+          "navigation_steps": 9,
+          "grid_start": [
+            1.5,
+            1.0
+          ],
+          "grid_end": [
+            3.5,
+            0.75
+          ],
+          "job": "j2",
+          "carried_object": "KeyChain|+01.50|+00.47|+00.53"
+        },
+        {
+          "id": "j5_pick",
+          "robot": 2,
+          "skill": "PickupObject",
+          "target": "Pencil|+03.89|+00.87|+01.18",
+          "objects": [
+            "Pencil|+03.89|+00.87|+01.18"
+          ],
+          "duration": 5.0,
+          "deps": [],
+          "navigation_steps": 4,
+          "grid_start": [
+            3.5,
+            0.75
+          ],
+          "grid_end": [
+            3.75,
+            1.5
+          ],
+          "job": "j5"
+        },
+        {
+          "id": "j5_put",
+          "robot": 2,
+          "skill": "PutObject",
+          "target": "CoffeeTable|+01.59|00.00|+00.45",
+          "objects": [
+            "CoffeeTable|+01.59|00.00|+00.45",
+            "Pencil|+03.89|+00.87|+01.18"
+          ],
+          "duration": 12.0,
+          "deps": [
+            "j5_pick",
+            "j3_put"
+          ],
+          "navigation_steps": 11,
+          "grid_start": [
+            3.75,
+            1.5
+          ],
+          "grid_end": [
+            1.5,
+            1.0
+          ],
+          "job": "j5",
+          "carried_object": "Pencil|+03.89|+00.87|+01.18"
+        },
+        {
+          "id": "j6_pick",
+          "robot": 0,
+          "skill": "PickupObject",
+          "target": "Pillow|+00.65|+00.39|+01.71",
+          "objects": [
+            "Pillow|+00.65|+00.39|+01.71"
+          ],
+          "duration": 4.0,
+          "deps": [],
+          "navigation_steps": 3,
+          "grid_start": [
+            1.5,
+            1.0
+          ],
+          "grid_end": [
+            0.75,
+            1.0
+          ],
+          "job": "j6"
+        },
+        {
+          "id": "j6_put",
+          "robot": 0,
+          "skill": "PutObject",
+          "target": "Drawer|+03.88|+00.77|+00.86",
+          "objects": [
+            "Drawer|+03.88|+00.77|+00.86",
+            "Pillow|+00.65|+00.39|+01.71"
+          ],
+          "duration": 13.0,
+          "deps": [
+            "j6_pick",
+            "open_0",
+            "j2_put"
+          ],
+          "navigation_steps": 12,
+          "grid_start": [
+            0.75,
+            1.0
+          ],
+          "grid_end": [
+            3.5,
+            0.75
+          ],
+          "job": "j6",
+          "carried_object": "Pillow|+00.65|+00.39|+01.71"
+        },
+        {
+          "id": "j7_pick",
+          "robot": 1,
+          "skill": "PickupObject",
+          "target": "RemoteControl|+01.88|+00.33|+01.73",
+          "objects": [
+            "RemoteControl|+01.88|+00.33|+01.73"
+          ],
+          "duration": 3.0,
+          "deps": [],
+          "navigation_steps": 2,
+          "grid_start": [
+            1.5,
+            1.0
+          ],
+          "grid_end": [
+            2.0,
+            1.0
+          ],
+          "job": "j7"
+        },
+        {
+          "id": "j7_put",
+          "robot": 1,
+          "skill": "PutObject",
+          "target": "CoffeeTable|+01.59|00.00|+00.45",
+          "objects": [
+            "CoffeeTable|+01.59|00.00|+00.45",
+            "RemoteControl|+01.88|+00.33|+01.73"
+          ],
+          "duration": 3.0,
+          "deps": [
+            "j7_pick",
+            "j5_put"
+          ],
+          "navigation_steps": 2,
+          "grid_start": [
+            2.0,
+            1.0
+          ],
+          "grid_end": [
+            1.5,
+            1.0
+          ],
+          "job": "j7",
+          "carried_object": "RemoteControl|+01.88|+00.33|+01.73"
+        },
+        {
+          "id": "close_0",
+          "robot": 0,
+          "skill": "CloseObject",
+          "target": "Drawer|+03.88|+00.77|+00.86",
+          "objects": [
+            "Drawer|+03.88|+00.77|+00.86"
+          ],
+          "duration": 1.0,
+          "deps": [
+            "j4_put",
+            "j0_put",
+            "j2_put",
+            "j6_put"
+          ],
+          "navigation_steps": 0,
+          "grid_start": [
+            3.5,
+            0.75
+          ],
+          "grid_end": [
+            3.5,
+            0.75
+          ]
+        }
+      ],
+      "candidate": {
+        "robots": [
+          0,
+          1,
+          2,
+          0,
+          1,
+          2,
+          0,
+          1
+        ],
+        "order": [
+          "j4",
+          "j0",
+          "j1",
+          "j3",
+          "j2",
+          "j5",
+          "j6",
+          "j7"
+        ],
+        "opener": 0,
+        "closer": 0
+      },
+      "task_id": "t212_n8",
+      "robot_ids": [
+        0,
+        1,
+        2
+      ],
+      "cost_model": "static-grid-0.25m-plus-manipulation-v1"
+    },
+    {
+      "actions": [
+        {
+          "id": "open_0",
+          "robot": 0,
+          "skill": "OpenObject",
+          "target": "Drawer|+03.88|+00.77|+00.86",
+          "objects": [
+            "Drawer|+03.88|+00.77|+00.86"
+          ],
+          "duration": 13.0,
+          "deps": [],
+          "navigation_steps": 12,
+          "grid_start": [
+            0.75,
+            1.0
+          ],
+          "grid_end": [
+            3.5,
+            0.75
+          ]
+        },
+        {
+          "id": "j4_pick",
+          "robot": 1,
+          "skill": "PickupObject",
+          "target": "Laptop|+01.80|+00.47|+00.50",
+          "objects": [
+            "Laptop|+01.80|+00.47|+00.50"
+          ],
+          "duration": 7.0,
+          "deps": [],
+          "navigation_steps": 6,
+          "grid_start": [
+            2.5,
+            0.25
+          ],
+          "grid_end": [
+            1.75,
+            1.0
+          ],
+          "job": "j4"
+        },
+        {
+          "id": "j4_put",
+          "robot": 1,
+          "skill": "PutObject",
+          "target": "Drawer|+03.88|+00.77|+00.86",
+          "objects": [
+            "Drawer|+03.88|+00.77|+00.86",
+            "Laptop|+01.80|+00.47|+00.50"
+          ],
+          "duration": 9.0,
+          "deps": [
+            "j4_pick",
+            "open_0"
+          ],
+          "navigation_steps": 8,
+          "grid_start": [
+            1.75,
+            1.0
+          ],
+          "grid_end": [
+            3.5,
+            0.75
+          ],
+          "job": "j4",
+          "carried_object": "Laptop|+01.80|+00.47|+00.50"
+        },
+        {
+          "id": "j3_pick",
+          "robot": 0,
+          "skill": "PickupObject",
+          "target": "Pen|+03.93|+00.87|+01.04",
+          "objects": [
+            "Pen|+03.93|+00.87|+01.04"
+          ],
+          "duration": 2.0,
+          "deps": [],
+          "navigation_steps": 1,
+          "grid_start": [
+            3.5,
+            0.75
+          ],
+          "grid_end": [
+            3.5,
+            1.0
+          ],
+          "job": "j3"
+        },
+        {
+          "id": "j3_put",
+          "robot": 0,
+          "skill": "PutObject",
+          "target": "CoffeeTable|+01.59|00.00|+00.45",
+          "objects": [
+            "CoffeeTable|+01.59|00.00|+00.45",
+            "Pen|+03.93|+00.87|+01.04"
+          ],
+          "duration": 9.0,
+          "deps": [
+            "j3_pick"
+          ],
+          "navigation_steps": 8,
+          "grid_start": [
+            3.5,
+            1.0
+          ],
+          "grid_end": [
+            1.5,
+            1.0
+          ],
+          "job": "j3",
+          "carried_object": "Pen|+03.93|+00.87|+01.04"
+        },
+        {
+          "id": "j0_pick",
+          "robot": 0,
+          "skill": "PickupObject",
+          "target": "CreditCard|+01.41|+00.47|+00.65",
+          "objects": [
+            "CreditCard|+01.41|+00.47|+00.65"
+          ],
+          "duration": 1.0,
+          "deps": [],
+          "navigation_steps": 0,
+          "grid_start": [
+            1.5,
+            1.0
+          ],
+          "grid_end": [
+            1.5,
+            1.0
+          ],
+          "job": "j0"
+        },
+        {
+          "id": "j0_put",
+          "robot": 0,
+          "skill": "PutObject",
+          "target": "Drawer|+03.88|+00.77|+00.86",
+          "objects": [
+            "Drawer|+03.88|+00.77|+00.86",
+            "CreditCard|+01.41|+00.47|+00.65"
+          ],
+          "duration": 10.0,
+          "deps": [
+            "j0_pick",
+            "open_0",
+            "j4_put"
+          ],
+          "navigation_steps": 9,
+          "grid_start": [
+            1.5,
+            1.0
+          ],
+          "grid_end": [
+            3.5,
+            0.75
+          ],
+          "job": "j0",
+          "carried_object": "CreditCard|+01.41|+00.47|+00.65"
+        },
+        {
+          "id": "j1_pick",
+          "robot": 1,
+          "skill": "PickupObject",
+          "target": "Newspaper|+02.15|+00.41|-00.72",
+          "objects": [
+            "Newspaper|+02.15|+00.41|-00.72"
+          ],
+          "duration": 10.0,
+          "deps": [],
+          "navigation_steps": 9,
+          "grid_start": [
+            3.5,
+            0.75
+          ],
+          "grid_end": [
+            2.25,
+            -0.25
+          ],
+          "job": "j1"
+        },
+        {
+          "id": "j1_put",
+          "robot": 1,
+          "skill": "PutObject",
+          "target": "CoffeeTable|+01.59|00.00|+00.45",
+          "objects": [
+            "CoffeeTable|+01.59|00.00|+00.45",
+            "Newspaper|+02.15|+00.41|-00.72"
+          ],
+          "duration": 11.0,
+          "deps": [
+            "j1_pick",
+            "j3_put"
+          ],
+          "navigation_steps": 10,
+          "grid_start": [
+            2.25,
+            -0.25
+          ],
+          "grid_end": [
+            1.5,
+            1.0
+          ],
+          "job": "j1",
+          "carried_object": "Newspaper|+02.15|+00.41|-00.72"
+        },
+        {
+          "id": "j2_pick",
+          "robot": 2,
+          "skill": "PickupObject",
+          "target": "KeyChain|+01.50|+00.47|+00.53",
+          "objects": [
+            "KeyChain|+01.50|+00.47|+00.53"
+          ],
+          "duration": 12.0,
+          "deps": [],
+          "navigation_steps": 11,
+          "grid_start": [
+            -0.5,
+            0.25
+          ],
+          "grid_end": [
+            1.5,
+            1.0
+          ],
+          "job": "j2"
+        },
+        {
+          "id": "j2_put",
+          "robot": 2,
+          "skill": "PutObject",
+          "target": "Drawer|+03.88|+00.77|+00.86",
+          "objects": [
+            "Drawer|+03.88|+00.77|+00.86",
+            "KeyChain|+01.50|+00.47|+00.53"
+          ],
+          "duration": 10.0,
+          "deps": [
+            "j2_pick",
+            "open_0",
+            "j0_put"
+          ],
+          "navigation_steps": 9,
+          "grid_start": [
+            1.5,
+            1.0
+          ],
+          "grid_end": [
+            3.5,
+            0.75
+          ],
+          "job": "j2",
+          "carried_object": "KeyChain|+01.50|+00.47|+00.53"
+        },
+        {
+          "id": "j5_pick",
+          "robot": 2,
+          "skill": "PickupObject",
+          "target": "Pencil|+03.89|+00.87|+01.18",
+          "objects": [
+            "Pencil|+03.89|+00.87|+01.18"
+          ],
+          "duration": 5.0,
+          "deps": [],
+          "navigation_steps": 4,
+          "grid_start": [
+            3.5,
+            0.75
+          ],
+          "grid_end": [
+            3.75,
+            1.5
+          ],
+          "job": "j5"
+        },
+        {
+          "id": "j5_put",
+          "robot": 2,
+          "skill": "PutObject",
+          "target": "CoffeeTable|+01.59|00.00|+00.45",
+          "objects": [
+            "CoffeeTable|+01.59|00.00|+00.45",
+            "Pencil|+03.89|+00.87|+01.18"
+          ],
+          "duration": 12.0,
+          "deps": [
+            "j5_pick",
+            "j1_put"
+          ],
+          "navigation_steps": 11,
+          "grid_start": [
+            3.75,
+            1.5
+          ],
+          "grid_end": [
+            1.5,
+            1.0
+          ],
+          "job": "j5",
+          "carried_object": "Pencil|+03.89|+00.87|+01.18"
+        },
+        {
+          "id": "j6_pick",
+          "robot": 0,
+          "skill": "PickupObject",
+          "target": "Pillow|+00.65|+00.39|+01.71",
+          "objects": [
+            "Pillow|+00.65|+00.39|+01.71"
+          ],
+          "duration": 13.0,
+          "deps": [],
+          "navigation_steps": 12,
+          "grid_start": [
+            3.5,
+            0.75
+          ],
+          "grid_end": [
+            0.75,
+            1.0
+          ],
+          "job": "j6"
+        },
+        {
+          "id": "j6_put",
+          "robot": 0,
+          "skill": "PutObject",
+          "target": "Drawer|+03.88|+00.77|+00.86",
+          "objects": [
+            "Drawer|+03.88|+00.77|+00.86",
+            "Pillow|+00.65|+00.39|+01.71"
+          ],
+          "duration": 13.0,
+          "deps": [
+            "j6_pick",
+            "open_0",
+            "j2_put"
+          ],
+          "navigation_steps": 12,
+          "grid_start": [
+            0.75,
+            1.0
+          ],
+          "grid_end": [
+            3.5,
+            0.75
+          ],
+          "job": "j6",
+          "carried_object": "Pillow|+00.65|+00.39|+01.71"
+        },
+        {
+          "id": "j7_pick",
+          "robot": 1,
+          "skill": "PickupObject",
+          "target": "RemoteControl|+01.88|+00.33|+01.73",
+          "objects": [
+            "RemoteControl|+01.88|+00.33|+01.73"
+          ],
+          "duration": 3.0,
+          "deps": [],
+          "navigation_steps": 2,
+          "grid_start": [
+            1.5,
+            1.0
+          ],
+          "grid_end": [
+            2.0,
+            1.0
+          ],
+          "job": "j7"
+        },
+        {
+          "id": "j7_put",
+          "robot": 1,
+          "skill": "PutObject",
+          "target": "CoffeeTable|+01.59|00.00|+00.45",
+          "objects": [
+            "CoffeeTable|+01.59|00.00|+00.45",
+            "RemoteControl|+01.88|+00.33|+01.73"
+          ],
+          "duration": 3.0,
+          "deps": [
+            "j7_pick",
+            "j5_put"
+          ],
+          "navigation_steps": 2,
+          "grid_start": [
+            2.0,
+            1.0
+          ],
+          "grid_end": [
+            1.5,
+            1.0
+          ],
+          "job": "j7",
+          "carried_object": "RemoteControl|+01.88|+00.33|+01.73"
+        },
+        {
+          "id": "close_0",
+          "robot": 0,
+          "skill": "CloseObject",
+          "target": "Drawer|+03.88|+00.77|+00.86",
+          "objects": [
+            "Drawer|+03.88|+00.77|+00.86"
+          ],
+          "duration": 1.0,
+          "deps": [
+            "j4_put",
+            "j0_put",
+            "j2_put",
+            "j6_put"
+          ],
+          "navigation_steps": 0,
+          "grid_start": [
+            3.5,
+            0.75
+          ],
+          "grid_end": [
+            3.5,
+            0.75
+          ]
+        }
+      ],
+      "candidate": {
+        "robots": [
+          0,
+          1,
+          2,
+          0,
+          1,
+          2,
+          0,
+          1
+        ],
+        "order": [
+          "j4",
+          "j3",
+          "j0",
+          "j1",
+          "j2",
+          "j5",
+          "j6",
+          "j7"
+        ],
+        "opener": 0,
+        "closer": 0
+      },
+      "task_id": "t212_n8",
+      "robot_ids": [
+        0,
+        1,
+        2
+      ],
+      "cost_model": "static-grid-0.25m-plus-manipulation-v1"
+    },
+    {
+      "actions": [
+        {
+          "id": "open_0",
+          "robot": 0,
+          "skill": "OpenObject",
+          "target": "Drawer|+03.88|+00.77|+00.86",
+          "objects": [
+            "Drawer|+03.88|+00.77|+00.86"
+          ],
+          "duration": 13.0,
+          "deps": [],
+          "navigation_steps": 12,
+          "grid_start": [
+            0.75,
+            1.0
+          ],
+          "grid_end": [
+            3.5,
+            0.75
+          ]
+        },
+        {
+          "id": "j5_pick",
+          "robot": 2,
+          "skill": "PickupObject",
+          "target": "Pencil|+03.89|+00.87|+01.18",
+          "objects": [
+            "Pencil|+03.89|+00.87|+01.18"
+          ],
+          "duration": 23.0,
+          "deps": [],
+          "navigation_steps": 22,
+          "grid_start": [
+            -0.5,
+            0.25
+          ],
+          "grid_end": [
+            3.75,
+            1.5
+          ],
+          "job": "j5"
+        },
+        {
+          "id": "j5_put",
+          "robot": 2,
+          "skill": "PutObject",
+          "target": "CoffeeTable|+01.59|00.00|+00.45",
+          "objects": [
+            "CoffeeTable|+01.59|00.00|+00.45",
+            "Pencil|+03.89|+00.87|+01.18"
+          ],
+          "duration": 12.0,
+          "deps": [
+            "j5_pick"
+          ],
+          "navigation_steps": 11,
+          "grid_start": [
+            3.75,
+            1.5
+          ],
+          "grid_end": [
+            1.5,
+            1.0
+          ],
+          "job": "j5",
+          "carried_object": "Pencil|+03.89|+00.87|+01.18"
+        },
+        {
+          "id": "j0_pick",
+          "robot": 0,
+          "skill": "PickupObject",
+          "target": "CreditCard|+01.41|+00.47|+00.65",
+          "objects": [
+            "CreditCard|+01.41|+00.47|+00.65"
+          ],
+          "duration": 10.0,
+          "deps": [],
+          "navigation_steps": 9,
+          "grid_start": [
+            3.5,
+            0.75
+          ],
+          "grid_end": [
+            1.5,
+            1.0
+          ],
+          "job": "j0"
+        },
+        {
+          "id": "j0_put",
+          "robot": 0,
+          "skill": "PutObject",
+          "target": "Drawer|+03.88|+00.77|+00.86",
+          "objects": [
+            "Drawer|+03.88|+00.77|+00.86",
+            "CreditCard|+01.41|+00.47|+00.65"
+          ],
+          "duration": 10.0,
+          "deps": [
+            "j0_pick",
+            "open_0"
+          ],
+          "navigation_steps": 9,
+          "grid_start": [
+            1.5,
+            1.0
+          ],
+          "grid_end": [
+            3.5,
+            0.75
+          ],
+          "job": "j0",
+          "carried_object": "CreditCard|+01.41|+00.47|+00.65"
+        },
+        {
+          "id": "j1_pick",
+          "robot": 1,
+          "skill": "PickupObject",
+          "target": "Newspaper|+02.15|+00.41|-00.72",
+          "objects": [
+            "Newspaper|+02.15|+00.41|-00.72"
+          ],
+          "duration": 4.0,
+          "deps": [],
+          "navigation_steps": 3,
+          "grid_start": [
+            2.5,
+            0.25
+          ],
+          "grid_end": [
+            2.25,
+            -0.25
+          ],
+          "job": "j1"
+        },
+        {
+          "id": "j1_put",
+          "robot": 1,
+          "skill": "PutObject",
+          "target": "CoffeeTable|+01.59|00.00|+00.45",
+          "objects": [
+            "CoffeeTable|+01.59|00.00|+00.45",
+            "Newspaper|+02.15|+00.41|-00.72"
+          ],
+          "duration": 11.0,
+          "deps": [
+            "j1_pick",
+            "j5_put"
+          ],
+          "navigation_steps": 10,
+          "grid_start": [
+            2.25,
+            -0.25
+          ],
+          "grid_end": [
+            1.5,
+            1.0
+          ],
+          "job": "j1",
+          "carried_object": "Newspaper|+02.15|+00.41|-00.72"
+        },
+        {
+          "id": "j3_pick",
+          "robot": 0,
+          "skill": "PickupObject",
+          "target": "Pen|+03.93|+00.87|+01.04",
+          "objects": [
+            "Pen|+03.93|+00.87|+01.04"
+          ],
+          "duration": 2.0,
+          "deps": [],
+          "navigation_steps": 1,
+          "grid_start": [
+            3.5,
+            0.75
+          ],
+          "grid_end": [
+            3.5,
+            1.0
+          ],
+          "job": "j3"
+        },
+        {
+          "id": "j3_put",
+          "robot": 0,
+          "skill": "PutObject",
+          "target": "CoffeeTable|+01.59|00.00|+00.45",
+          "objects": [
+            "CoffeeTable|+01.59|00.00|+00.45",
+            "Pen|+03.93|+00.87|+01.04"
+          ],
+          "duration": 9.0,
+          "deps": [
+            "j3_pick",
+            "j1_put"
+          ],
+          "navigation_steps": 8,
+          "grid_start": [
+            3.5,
+            1.0
+          ],
+          "grid_end": [
+            1.5,
+            1.0
+          ],
+          "job": "j3",
+          "carried_object": "Pen|+03.93|+00.87|+01.04"
+        },
+        {
+          "id": "j2_pick",
+          "robot": 2,
+          "skill": "PickupObject",
+          "target": "KeyChain|+01.50|+00.47|+00.53",
+          "objects": [
+            "KeyChain|+01.50|+00.47|+00.53"
+          ],
+          "duration": 1.0,
+          "deps": [],
+          "navigation_steps": 0,
+          "grid_start": [
+            1.5,
+            1.0
+          ],
+          "grid_end": [
+            1.5,
+            1.0
+          ],
+          "job": "j2"
+        },
+        {
+          "id": "j2_put",
+          "robot": 2,
+          "skill": "PutObject",
+          "target": "Drawer|+03.88|+00.77|+00.86",
+          "objects": [
+            "Drawer|+03.88|+00.77|+00.86",
+            "KeyChain|+01.50|+00.47|+00.53"
+          ],
+          "duration": 10.0,
+          "deps": [
+            "j2_pick",
+            "open_0",
+            "j0_put"
+          ],
+          "navigation_steps": 9,
+          "grid_start": [
+            1.5,
+            1.0
+          ],
+          "grid_end": [
+            3.5,
+            0.75
+          ],
+          "job": "j2",
+          "carried_object": "KeyChain|+01.50|+00.47|+00.53"
+        },
+        {
+          "id": "j4_pick",
+          "robot": 1,
+          "skill": "PickupObject",
+          "target": "Laptop|+01.80|+00.47|+00.50",
+          "objects": [
+            "Laptop|+01.80|+00.47|+00.50"
+          ],
+          "duration": 2.0,
+          "deps": [],
+          "navigation_steps": 1,
+          "grid_start": [
+            1.5,
+            1.0
+          ],
+          "grid_end": [
+            1.75,
+            1.0
+          ],
+          "job": "j4"
+        },
+        {
+          "id": "j4_put",
+          "robot": 1,
+          "skill": "PutObject",
+          "target": "Drawer|+03.88|+00.77|+00.86",
+          "objects": [
+            "Drawer|+03.88|+00.77|+00.86",
+            "Laptop|+01.80|+00.47|+00.50"
+          ],
+          "duration": 9.0,
+          "deps": [
+            "j4_pick",
+            "open_0",
+            "j2_put"
+          ],
+          "navigation_steps": 8,
+          "grid_start": [
+            1.75,
+            1.0
+          ],
+          "grid_end": [
+            3.5,
+            0.75
+          ],
+          "job": "j4",
+          "carried_object": "Laptop|+01.80|+00.47|+00.50"
+        },
+        {
+          "id": "j6_pick",
+          "robot": 0,
+          "skill": "PickupObject",
+          "target": "Pillow|+00.65|+00.39|+01.71",
+          "objects": [
+            "Pillow|+00.65|+00.39|+01.71"
+          ],
+          "duration": 4.0,
+          "deps": [],
+          "navigation_steps": 3,
+          "grid_start": [
+            1.5,
+            1.0
+          ],
+          "grid_end": [
+            0.75,
+            1.0
+          ],
+          "job": "j6"
+        },
+        {
+          "id": "j6_put",
+          "robot": 0,
+          "skill": "PutObject",
+          "target": "Drawer|+03.88|+00.77|+00.86",
+          "objects": [
+            "Drawer|+03.88|+00.77|+00.86",
+            "Pillow|+00.65|+00.39|+01.71"
+          ],
+          "duration": 13.0,
+          "deps": [
+            "j6_pick",
+            "open_0",
+            "j4_put"
+          ],
+          "navigation_steps": 12,
+          "grid_start": [
+            0.75,
+            1.0
+          ],
+          "grid_end": [
+            3.5,
+            0.75
+          ],
+          "job": "j6",
+          "carried_object": "Pillow|+00.65|+00.39|+01.71"
+        },
+        {
+          "id": "j7_pick",
+          "robot": 1,
+          "skill": "PickupObject",
+          "target": "RemoteControl|+01.88|+00.33|+01.73",
+          "objects": [
+            "RemoteControl|+01.88|+00.33|+01.73"
+          ],
+          "duration": 8.0,
+          "deps": [],
+          "navigation_steps": 7,
+          "grid_start": [
+            3.5,
+            0.75
+          ],
+          "grid_end": [
+            2.0,
+            1.0
+          ],
+          "job": "j7"
+        },
+        {
+          "id": "j7_put",
+          "robot": 1,
+          "skill": "PutObject",
+          "target": "CoffeeTable|+01.59|00.00|+00.45",
+          "objects": [
+            "CoffeeTable|+01.59|00.00|+00.45",
+            "RemoteControl|+01.88|+00.33|+01.73"
+          ],
+          "duration": 3.0,
+          "deps": [
+            "j7_pick",
+            "j3_put"
+          ],
+          "navigation_steps": 2,
+          "grid_start": [
+            2.0,
+            1.0
+          ],
+          "grid_end": [
+            1.5,
+            1.0
+          ],
+          "job": "j7",
+          "carried_object": "RemoteControl|+01.88|+00.33|+01.73"
+        },
+        {
+          "id": "close_0",
+          "robot": 0,
+          "skill": "CloseObject",
+          "target": "Drawer|+03.88|+00.77|+00.86",
+          "objects": [
+            "Drawer|+03.88|+00.77|+00.86"
+          ],
+          "duration": 1.0,
+          "deps": [
+            "j0_put",
+            "j2_put",
+            "j4_put",
+            "j6_put"
+          ],
+          "navigation_steps": 0,
+          "grid_start": [
+            3.5,
+            0.75
+          ],
+          "grid_end": [
+            3.5,
+            0.75
+          ]
+        }
+      ],
+      "candidate": {
+        "robots": [
+          0,
+          1,
+          2,
+          0,
+          1,
+          2,
+          0,
+          1
+        ],
+        "order": [
+          "j5",
+          "j0",
+          "j1",
+          "j3",
+          "j2",
+          "j4",
+          "j6",
+          "j7"
+        ],
+        "opener": 0,
+        "closer": 0
+      },
+      "task_id": "t212_n8",
+      "robot_ids": [
+        0,
+        1,
+        2
+      ],
+      "cost_model": "static-grid-0.25m-plus-manipulation-v1"
+    },
+    {
+      "actions": [
+        {
+          "id": "open_0",
+          "robot": 0,
+          "skill": "OpenObject",
+          "target": "Drawer|+03.88|+00.77|+00.86",
+          "objects": [
+            "Drawer|+03.88|+00.77|+00.86"
+          ],
+          "duration": 13.0,
+          "deps": [],
+          "navigation_steps": 12,
+          "grid_start": [
+            0.75,
+            1.0
+          ],
+          "grid_end": [
+            3.5,
+            0.75
+          ]
+        },
+        {
+          "id": "j5_pick",
+          "robot": 2,
+          "skill": "PickupObject",
+          "target": "Pencil|+03.89|+00.87|+01.18",
+          "objects": [
+            "Pencil|+03.89|+00.87|+01.18"
+          ],
+          "duration": 23.0,
+          "deps": [],
+          "navigation_steps": 22,
+          "grid_start": [
+            -0.5,
+            0.25
+          ],
+          "grid_end": [
+            3.75,
+            1.5
+          ],
+          "job": "j5"
+        },
+        {
+          "id": "j5_put",
+          "robot": 2,
+          "skill": "PutObject",
+          "target": "CoffeeTable|+01.59|00.00|+00.45",
+          "objects": [
+            "CoffeeTable|+01.59|00.00|+00.45",
+            "Pencil|+03.89|+00.87|+01.18"
+          ],
+          "duration": 12.0,
+          "deps": [
+            "j5_pick"
+          ],
+          "navigation_steps": 11,
+          "grid_start": [
+            3.75,
+            1.5
+          ],
+          "grid_end": [
+            1.5,
+            1.0
+          ],
+          "job": "j5",
+          "carried_object": "Pencil|+03.89|+00.87|+01.18"
+        },
+        {
+          "id": "j3_pick",
+          "robot": 0,
+          "skill": "PickupObject",
+          "target": "Pen|+03.93|+00.87|+01.04",
+          "objects": [
+            "Pen|+03.93|+00.87|+01.04"
+          ],
+          "duration": 2.0,
+          "deps": [],
+          "navigation_steps": 1,
+          "grid_start": [
+            3.5,
+            0.75
+          ],
+          "grid_end": [
+            3.5,
+            1.0
+          ],
+          "job": "j3"
+        },
+        {
+          "id": "j3_put",
+          "robot": 0,
+          "skill": "PutObject",
+          "target": "CoffeeTable|+01.59|00.00|+00.45",
+          "objects": [
+            "CoffeeTable|+01.59|00.00|+00.45",
+            "Pen|+03.93|+00.87|+01.04"
+          ],
+          "duration": 9.0,
+          "deps": [
+            "j3_pick",
+            "j5_put"
+          ],
+          "navigation_steps": 8,
+          "grid_start": [
+            3.5,
+            1.0
+          ],
+          "grid_end": [
+            1.5,
+            1.0
+          ],
+          "job": "j3",
+          "carried_object": "Pen|+03.93|+00.87|+01.04"
+        },
+        {
+          "id": "j0_pick",
+          "robot": 0,
+          "skill": "PickupObject",
+          "target": "CreditCard|+01.41|+00.47|+00.65",
+          "objects": [
+            "CreditCard|+01.41|+00.47|+00.65"
+          ],
+          "duration": 1.0,
+          "deps": [],
+          "navigation_steps": 0,
+          "grid_start": [
+            1.5,
+            1.0
+          ],
+          "grid_end": [
+            1.5,
+            1.0
+          ],
+          "job": "j0"
+        },
+        {
+          "id": "j0_put",
+          "robot": 0,
+          "skill": "PutObject",
+          "target": "Drawer|+03.88|+00.77|+00.86",
+          "objects": [
+            "Drawer|+03.88|+00.77|+00.86",
+            "CreditCard|+01.41|+00.47|+00.65"
+          ],
+          "duration": 10.0,
+          "deps": [
+            "j0_pick",
+            "open_0"
+          ],
+          "navigation_steps": 9,
+          "grid_start": [
+            1.5,
+            1.0
+          ],
+          "grid_end": [
+            3.5,
+            0.75
+          ],
+          "job": "j0",
+          "carried_object": "CreditCard|+01.41|+00.47|+00.65"
+        },
+        {
+          "id": "j1_pick",
+          "robot": 1,
+          "skill": "PickupObject",
+          "target": "Newspaper|+02.15|+00.41|-00.72",
+          "objects": [
+            "Newspaper|+02.15|+00.41|-00.72"
+          ],
+          "duration": 4.0,
+          "deps": [],
+          "navigation_steps": 3,
+          "grid_start": [
+            2.5,
+            0.25
+          ],
+          "grid_end": [
+            2.25,
+            -0.25
+          ],
+          "job": "j1"
+        },
+        {
+          "id": "j1_put",
+          "robot": 1,
+          "skill": "PutObject",
+          "target": "CoffeeTable|+01.59|00.00|+00.45",
+          "objects": [
+            "CoffeeTable|+01.59|00.00|+00.45",
+            "Newspaper|+02.15|+00.41|-00.72"
+          ],
+          "duration": 11.0,
+          "deps": [
+            "j1_pick",
+            "j3_put"
+          ],
+          "navigation_steps": 10,
+          "grid_start": [
+            2.25,
+            -0.25
+          ],
+          "grid_end": [
+            1.5,
+            1.0
+          ],
+          "job": "j1",
+          "carried_object": "Newspaper|+02.15|+00.41|-00.72"
+        },
+        {
+          "id": "j2_pick",
+          "robot": 2,
+          "skill": "PickupObject",
+          "target": "KeyChain|+01.50|+00.47|+00.53",
+          "objects": [
+            "KeyChain|+01.50|+00.47|+00.53"
+          ],
+          "duration": 1.0,
+          "deps": [],
+          "navigation_steps": 0,
+          "grid_start": [
+            1.5,
+            1.0
+          ],
+          "grid_end": [
+            1.5,
+            1.0
+          ],
+          "job": "j2"
+        },
+        {
+          "id": "j2_put",
+          "robot": 2,
+          "skill": "PutObject",
+          "target": "Drawer|+03.88|+00.77|+00.86",
+          "objects": [
+            "Drawer|+03.88|+00.77|+00.86",
+            "KeyChain|+01.50|+00.47|+00.53"
+          ],
+          "duration": 10.0,
+          "deps": [
+            "j2_pick",
+            "open_0",
+            "j0_put"
+          ],
+          "navigation_steps": 9,
+          "grid_start": [
+            1.5,
+            1.0
+          ],
+          "grid_end": [
+            3.5,
+            0.75
+          ],
+          "job": "j2",
+          "carried_object": "KeyChain|+01.50|+00.47|+00.53"
+        },
+        {
+          "id": "j4_pick",
+          "robot": 1,
+          "skill": "PickupObject",
+          "target": "Laptop|+01.80|+00.47|+00.50",
+          "objects": [
+            "Laptop|+01.80|+00.47|+00.50"
+          ],
+          "duration": 2.0,
+          "deps": [],
+          "navigation_steps": 1,
+          "grid_start": [
+            1.5,
+            1.0
+          ],
+          "grid_end": [
+            1.75,
+            1.0
+          ],
+          "job": "j4"
+        },
+        {
+          "id": "j4_put",
+          "robot": 1,
+          "skill": "PutObject",
+          "target": "Drawer|+03.88|+00.77|+00.86",
+          "objects": [
+            "Drawer|+03.88|+00.77|+00.86",
+            "Laptop|+01.80|+00.47|+00.50"
+          ],
+          "duration": 9.0,
+          "deps": [
+            "j4_pick",
+            "open_0",
+            "j2_put"
+          ],
+          "navigation_steps": 8,
+          "grid_start": [
+            1.75,
+            1.0
+          ],
+          "grid_end": [
+            3.5,
+            0.75
+          ],
+          "job": "j4",
+          "carried_object": "Laptop|+01.80|+00.47|+00.50"
+        },
+        {
+          "id": "j6_pick",
+          "robot": 0,
+          "skill": "PickupObject",
+          "target": "Pillow|+00.65|+00.39|+01.71",
+          "objects": [
+            "Pillow|+00.65|+00.39|+01.71"
+          ],
+          "duration": 13.0,
+          "deps": [],
+          "navigation_steps": 12,
+          "grid_start": [
+            3.5,
+            0.75
+          ],
+          "grid_end": [
+            0.75,
+            1.0
+          ],
+          "job": "j6"
+        },
+        {
+          "id": "j6_put",
+          "robot": 0,
+          "skill": "PutObject",
+          "target": "Drawer|+03.88|+00.77|+00.86",
+          "objects": [
+            "Drawer|+03.88|+00.77|+00.86",
+            "Pillow|+00.65|+00.39|+01.71"
+          ],
+          "duration": 13.0,
+          "deps": [
+            "j6_pick",
+            "open_0",
+            "j4_put"
+          ],
+          "navigation_steps": 12,
+          "grid_start": [
+            0.75,
+            1.0
+          ],
+          "grid_end": [
+            3.5,
+            0.75
+          ],
+          "job": "j6",
+          "carried_object": "Pillow|+00.65|+00.39|+01.71"
+        },
+        {
+          "id": "j7_pick",
+          "robot": 1,
+          "skill": "PickupObject",
+          "target": "RemoteControl|+01.88|+00.33|+01.73",
+          "objects": [
+            "RemoteControl|+01.88|+00.33|+01.73"
+          ],
+          "duration": 8.0,
+          "deps": [],
+          "navigation_steps": 7,
+          "grid_start": [
+            3.5,
+            0.75
+          ],
+          "grid_end": [
+            2.0,
+            1.0
+          ],
+          "job": "j7"
+        },
+        {
+          "id": "j7_put",
+          "robot": 1,
+          "skill": "PutObject",
+          "target": "CoffeeTable|+01.59|00.00|+00.45",
+          "objects": [
+            "CoffeeTable|+01.59|00.00|+00.45",
+            "RemoteControl|+01.88|+00.33|+01.73"
+          ],
+          "duration": 3.0,
+          "deps": [
+            "j7_pick",
+            "j1_put"
+          ],
+          "navigation_steps": 2,
+          "grid_start": [
+            2.0,
+            1.0
+          ],
+          "grid_end": [
+            1.5,
+            1.0
+          ],
+          "job": "j7",
+          "carried_object": "RemoteControl|+01.88|+00.33|+01.73"
+        },
+        {
+          "id": "close_0",
+          "robot": 0,
+          "skill": "CloseObject",
+          "target": "Drawer|+03.88|+00.77|+00.86",
+          "objects": [
+            "Drawer|+03.88|+00.77|+00.86"
+          ],
+          "duration": 1.0,
+          "deps": [
+            "j0_put",
+            "j2_put",
+            "j4_put",
+            "j6_put"
+          ],
+          "navigation_steps": 0,
+          "grid_start": [
+            3.5,
+            0.75
+          ],
+          "grid_end": [
+            3.5,
+            0.75
+          ]
+        }
+      ],
+      "candidate": {
+        "robots": [
+          0,
+          1,
+          2,
+          0,
+          1,
+          2,
+          0,
+          1
+        ],
+        "order": [
+          "j5",
+          "j3",
+          "j0",
+          "j1",
+          "j2",
+          "j4",
+          "j6",
+          "j7"
+        ],
+        "opener": 0,
+        "closer": 0
+      },
+      "task_id": "t212_n8",
+      "robot_ids": [
+        0,
+        1,
+        2
+      ],
+      "cost_model": "static-grid-0.25m-plus-manipulation-v1"
+    },
+    {
+      "actions": [
+        {
+          "id": "open_0",
+          "robot": 0,
+          "skill": "OpenObject",
+          "target": "Drawer|+03.88|+00.77|+00.86",
+          "objects": [
+            "Drawer|+03.88|+00.77|+00.86"
+          ],
+          "duration": 13.0,
+          "deps": [],
+          "navigation_steps": 12,
+          "grid_start": [
+            0.75,
+            1.0
+          ],
+          "grid_end": [
+            3.5,
+            0.75
+          ]
+        },
+        {
+          "id": "j6_pick",
+          "robot": 0,
+          "skill": "PickupObject",
+          "target": "Pillow|+00.65|+00.39|+01.71",
+          "objects": [
+            "Pillow|+00.65|+00.39|+01.71"
+          ],
+          "duration": 13.0,
+          "deps": [],
+          "navigation_steps": 12,
+          "grid_start": [
+            3.5,
+            0.75
+          ],
+          "grid_end": [
+            0.75,
+            1.0
+          ],
+          "job": "j6"
+        },
+        {
+          "id": "j6_put",
+          "robot": 0,
+          "skill": "PutObject",
+          "target": "Drawer|+03.88|+00.77|+00.86",
+          "objects": [
+            "Drawer|+03.88|+00.77|+00.86",
+            "Pillow|+00.65|+00.39|+01.71"
+          ],
+          "duration": 13.0,
+          "deps": [
+            "j6_pick",
+            "open_0"
+          ],
+          "navigation_steps": 12,
+          "grid_start": [
+            0.75,
+            1.0
+          ],
+          "grid_end": [
+            3.5,
+            0.75
+          ],
+          "job": "j6",
+          "carried_object": "Pillow|+00.65|+00.39|+01.71"
+        },
+        {
+          "id": "j0_pick",
+          "robot": 0,
+          "skill": "PickupObject",
+          "target": "CreditCard|+01.41|+00.47|+00.65",
+          "objects": [
+            "CreditCard|+01.41|+00.47|+00.65"
+          ],
+          "duration": 10.0,
+          "deps": [],
+          "navigation_steps": 9,
+          "grid_start": [
+            3.5,
+            0.75
+          ],
+          "grid_end": [
+            1.5,
+            1.0
+          ],
+          "job": "j0"
+        },
+        {
+          "id": "j0_put",
+          "robot": 0,
+          "skill": "PutObject",
+          "target": "Drawer|+03.88|+00.77|+00.86",
+          "objects": [
+            "Drawer|+03.88|+00.77|+00.86",
+            "CreditCard|+01.41|+00.47|+00.65"
+          ],
+          "duration": 10.0,
+          "deps": [
+            "j0_pick",
+            "open_0",
+            "j6_put"
+          ],
+          "navigation_steps": 9,
+          "grid_start": [
+            1.5,
+            1.0
+          ],
+          "grid_end": [
+            3.5,
+            0.75
+          ],
+          "job": "j0",
+          "carried_object": "CreditCard|+01.41|+00.47|+00.65"
+        },
+        {
+          "id": "j1_pick",
+          "robot": 1,
+          "skill": "PickupObject",
+          "target": "Newspaper|+02.15|+00.41|-00.72",
+          "objects": [
+            "Newspaper|+02.15|+00.41|-00.72"
+          ],
+          "duration": 4.0,
+          "deps": [],
+          "navigation_steps": 3,
+          "grid_start": [
+            2.5,
+            0.25
+          ],
+          "grid_end": [
+            2.25,
+            -0.25
+          ],
+          "job": "j1"
+        },
+        {
+          "id": "j1_put",
+          "robot": 1,
+          "skill": "PutObject",
+          "target": "CoffeeTable|+01.59|00.00|+00.45",
+          "objects": [
+            "CoffeeTable|+01.59|00.00|+00.45",
+            "Newspaper|+02.15|+00.41|-00.72"
+          ],
+          "duration": 11.0,
+          "deps": [
+            "j1_pick"
+          ],
+          "navigation_steps": 10,
+          "grid_start": [
+            2.25,
+            -0.25
+          ],
+          "grid_end": [
+            1.5,
+            1.0
+          ],
+          "job": "j1",
+          "carried_object": "Newspaper|+02.15|+00.41|-00.72"
+        },
+        {
+          "id": "j3_pick",
+          "robot": 0,
+          "skill": "PickupObject",
+          "target": "Pen|+03.93|+00.87|+01.04",
+          "objects": [
+            "Pen|+03.93|+00.87|+01.04"
+          ],
+          "duration": 2.0,
+          "deps": [],
+          "navigation_steps": 1,
+          "grid_start": [
+            3.5,
+            0.75
+          ],
+          "grid_end": [
+            3.5,
+            1.0
+          ],
+          "job": "j3"
+        },
+        {
+          "id": "j3_put",
+          "robot": 0,
+          "skill": "PutObject",
+          "target": "CoffeeTable|+01.59|00.00|+00.45",
+          "objects": [
+            "CoffeeTable|+01.59|00.00|+00.45",
+            "Pen|+03.93|+00.87|+01.04"
+          ],
+          "duration": 9.0,
+          "deps": [
+            "j3_pick",
+            "j1_put"
+          ],
+          "navigation_steps": 8,
+          "grid_start": [
+            3.5,
+            1.0
+          ],
+          "grid_end": [
+            1.5,
+            1.0
+          ],
+          "job": "j3",
+          "carried_object": "Pen|+03.93|+00.87|+01.04"
+        },
+        {
+          "id": "j2_pick",
+          "robot": 2,
+          "skill": "PickupObject",
+          "target": "KeyChain|+01.50|+00.47|+00.53",
+          "objects": [
+            "KeyChain|+01.50|+00.47|+00.53"
+          ],
+          "duration": 12.0,
+          "deps": [],
+          "navigation_steps": 11,
+          "grid_start": [
+            -0.5,
+            0.25
+          ],
+          "grid_end": [
+            1.5,
+            1.0
+          ],
+          "job": "j2"
+        },
+        {
+          "id": "j2_put",
+          "robot": 2,
+          "skill": "PutObject",
+          "target": "Drawer|+03.88|+00.77|+00.86",
+          "objects": [
+            "Drawer|+03.88|+00.77|+00.86",
+            "KeyChain|+01.50|+00.47|+00.53"
+          ],
+          "duration": 10.0,
+          "deps": [
+            "j2_pick",
+            "open_0",
+            "j0_put"
+          ],
+          "navigation_steps": 9,
+          "grid_start": [
+            1.5,
+            1.0
+          ],
+          "grid_end": [
+            3.5,
+            0.75
+          ],
+          "job": "j2",
+          "carried_object": "KeyChain|+01.50|+00.47|+00.53"
+        },
+        {
+          "id": "j4_pick",
+          "robot": 1,
+          "skill": "PickupObject",
+          "target": "Laptop|+01.80|+00.47|+00.50",
+          "objects": [
+            "Laptop|+01.80|+00.47|+00.50"
+          ],
+          "duration": 2.0,
+          "deps": [],
+          "navigation_steps": 1,
+          "grid_start": [
+            1.5,
+            1.0
+          ],
+          "grid_end": [
+            1.75,
+            1.0
+          ],
+          "job": "j4"
+        },
+        {
+          "id": "j4_put",
+          "robot": 1,
+          "skill": "PutObject",
+          "target": "Drawer|+03.88|+00.77|+00.86",
+          "objects": [
+            "Drawer|+03.88|+00.77|+00.86",
+            "Laptop|+01.80|+00.47|+00.50"
+          ],
+          "duration": 9.0,
+          "deps": [
+            "j4_pick",
+            "open_0",
+            "j2_put"
+          ],
+          "navigation_steps": 8,
+          "grid_start": [
+            1.75,
+            1.0
+          ],
+          "grid_end": [
+            3.5,
+            0.75
+          ],
+          "job": "j4",
+          "carried_object": "Laptop|+01.80|+00.47|+00.50"
+        },
+        {
+          "id": "j5_pick",
+          "robot": 2,
+          "skill": "PickupObject",
+          "target": "Pencil|+03.89|+00.87|+01.18",
+          "objects": [
+            "Pencil|+03.89|+00.87|+01.18"
+          ],
+          "duration": 5.0,
+          "deps": [],
+          "navigation_steps": 4,
+          "grid_start": [
+            3.5,
+            0.75
+          ],
+          "grid_end": [
+            3.75,
+            1.5
+          ],
+          "job": "j5"
+        },
+        {
+          "id": "j5_put",
+          "robot": 2,
+          "skill": "PutObject",
+          "target": "CoffeeTable|+01.59|00.00|+00.45",
+          "objects": [
+            "CoffeeTable|+01.59|00.00|+00.45",
+            "Pencil|+03.89|+00.87|+01.18"
+          ],
+          "duration": 12.0,
+          "deps": [
+            "j5_pick",
+            "j3_put"
+          ],
+          "navigation_steps": 11,
+          "grid_start": [
+            3.75,
+            1.5
+          ],
+          "grid_end": [
+            1.5,
+            1.0
+          ],
+          "job": "j5",
+          "carried_object": "Pencil|+03.89|+00.87|+01.18"
+        },
+        {
+          "id": "j7_pick",
+          "robot": 1,
+          "skill": "PickupObject",
+          "target": "RemoteControl|+01.88|+00.33|+01.73",
+          "objects": [
+            "RemoteControl|+01.88|+00.33|+01.73"
+          ],
+          "duration": 8.0,
+          "deps": [],
+          "navigation_steps": 7,
+          "grid_start": [
+            3.5,
+            0.75
+          ],
+          "grid_end": [
+            2.0,
+            1.0
+          ],
+          "job": "j7"
+        },
+        {
+          "id": "j7_put",
+          "robot": 1,
+          "skill": "PutObject",
+          "target": "CoffeeTable|+01.59|00.00|+00.45",
+          "objects": [
+            "CoffeeTable|+01.59|00.00|+00.45",
+            "RemoteControl|+01.88|+00.33|+01.73"
+          ],
+          "duration": 3.0,
+          "deps": [
+            "j7_pick",
+            "j5_put"
+          ],
+          "navigation_steps": 2,
+          "grid_start": [
+            2.0,
+            1.0
+          ],
+          "grid_end": [
+            1.5,
+            1.0
+          ],
+          "job": "j7",
+          "carried_object": "RemoteControl|+01.88|+00.33|+01.73"
+        },
+        {
+          "id": "close_0",
+          "robot": 0,
+          "skill": "CloseObject",
+          "target": "Drawer|+03.88|+00.77|+00.86",
+          "objects": [
+            "Drawer|+03.88|+00.77|+00.86"
+          ],
+          "duration": 10.0,
+          "deps": [
+            "j6_put",
+            "j0_put",
+            "j2_put",
+            "j4_put"
+          ],
+          "navigation_steps": 9,
+          "grid_start": [
+            1.5,
+            1.0
+          ],
+          "grid_end": [
+            3.5,
+            0.75
+          ]
+        }
+      ],
+      "candidate": {
+        "robots": [
+          0,
+          1,
+          2,
+          0,
+          1,
+          2,
+          0,
+          1
+        ],
+        "order": [
+          "j6",
+          "j0",
+          "j1",
+          "j3",
+          "j2",
+          "j4",
+          "j5",
+          "j7"
+        ],
+        "opener": 0,
+        "closer": 0
+      },
+      "task_id": "t212_n8",
+      "robot_ids": [
+        0,
+        1,
+        2
+      ],
+      "cost_model": "static-grid-0.25m-plus-manipulation-v1"
+    }
+  ],
+  "invalid": [],
+  "service_attempts": [],
+  "raw_response": {
+    "id": "chatcmpl-i7257g5q5zntytnkagd0x9",
+    "object": "chat.completion",
+    "created": 1790663765,
+    "model": "qwen3-vl-8b-instruct",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "{\n  \"plans\": [\n    {\n      \"robots\": [0, 1, 2, 0, 1, 2, 0, 1],\n      \"order\": [\"j0\", \"j1\", \"j2\", \"j3\", \"j4\", \"j5\", \"j6\", \"j7\"],\n      \"opener\": 0,\n      \"closer\": 0\n    },\n    {\n      \"robots\": [0, 1, 2, 0, 1, 2, 0, 1],\n      \"order\": [\"j0\", \"j1\", \"j3\", \"j2\", \"j4\", \"j5\", \"j6\", \"j7\"],\n      \"opener\": 0,\n      \"closer\": 0\n    },\n    {\n      \"robots\": [0, 1, 2, 0, 1, 2, 0, 1],\n      \"order\": [\"j0\", \"j2\", \"j1\", \"j3\", \"j4\", \"j5\", \"j6\", \"j7\"],\n      \"opener\": 0,\n      \"closer\": 0\n    },\n    {\n      \"robots\": [0, 1, 2, 0, 1, 2, 0, 1],\n      \"order\": [\"j1\", \"j0\", \"j2\", \"j3\", \"j4\", \"j5\", \"j6\", \"j7\"],\n      \"opener\": 0,\n      \"closer\": 0\n    },\n    {\n      \"robots\": [0, 1, 2, 0, 1, 2, 0, 1],\n      \"order\": [\"j1\", \"j3\", \"j0\", \"j2\", \"j4\", \"j5\", \"j6\", \"j7\"],\n      \"opener\": 0,\n      \"closer\": 0\n    },\n    {\n      \"robots\": [0, 1, 2, 0, 1, 2, 0, 1],\n      \"order\": [\"j2\", \"j0\", \"j1\", \"j3\", \"j4\", \"j5\", \"j6\", \"j7\"],\n      \"opener\": 0,\n      \"closer\": 0\n    },\n    {\n      \"robots\": [0, 1, 2, 0, 1, 2, 0, 1],\n      \"order\": [\"j2\", \"j3\", \"j0\", \"j1\", \"j4\", \"j5\", \"j6\", \"j7\"],\n      \"opener\": 0,\n      \"closer\": 0\n    },\n    {\n      \"robots\": [0, 1, 2, 0, 1, 2, 0, 1],\n      \"order\": [\"j4\", \"j0\", \"j1\", \"j3\", \"j2\", \"j5\", \"j6\", \"j7\"],\n      \"opener\": 0,\n      \"closer\": 0\n    },\n    {\n      \"robots\": [0, 1, 2, 0, 1, 2, 0, 1],\n      \"order\": [\"j4\", \"j3\", \"j0\", \"j1\", \"j2\", \"j5\", \"j6\", \"j7\"],\n      \"opener\": 0,\n      \"closer\": 0\n    },\n    {\n      \"robots\": [0, 1, 2, 0, 1, 2, 0, 1],\n      \"order\": [\"j5\", \"j0\", \"j1\", \"j3\", \"j2\", \"j4\", \"j6\", \"j7\"],\n      \"opener\": 0,\n      \"closer\": 0\n    },\n    {\n      \"robots\": [0, 1, 2, 0, 1, 2, 0, 1],\n      \"order\": [\"j5\", \"j3\", \"j0\", \"j1\", \"j2\", \"j4\", \"j6\", \"j7\"],\n      \"opener\": 0,\n      \"closer\": 0\n    },\n    {\n      \"robots\": [0, 1, 2, 0, 1, 2, 0, 1],\n      \"order\": [\"j6\", \"j0\", \"j1\", \"j3\", \"j2\", \"j4\", \"j5\", \"j7\"],\n      \"opener\": 0,\n      \"closer\": 0\n    }\n  ]\n}",
+          "reasoning_content": "",
+          "tool_calls": []
+        },
+        "logprobs": null,
+        "finish_reason": "stop"
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 311,
+      "completion_tokens": 1018,
+      "total_tokens": 1329,
+      "completion_tokens_details": {
+        "reasoning_tokens": 0
+      }
+    },
+    "stats": {},
+    "system_fingerprint": "qwen3-vl-8b-instruct"
+  },
+  "elapsed_s": 9.340680747292936
+}

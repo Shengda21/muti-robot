@@ -1,0 +1,26 @@
+{
+  "observed_utc": "2026-09-29T06:36:37.970007+00:00",
+  "os": "Linux-6.17.0-20-generic-x86_64-with-glibc2.39",
+  "python": "3.12.3",
+  "cpu": "Intel(R) Xeon(R) W-2245 CPU @ 3.90GHz",
+  "logical_cpus": 16,
+  "memory_gib": 62.49,
+  "gpu": "NVIDIA GeForce RTX 3090, 24576 MiB, 580.126.09",
+  "packages": {
+    "ai2thor": "5.0.0",
+    "numpy": "2.5.3",
+    "scipy": "1.18.1",
+    "requests": "2.34.2"
+  },
+  "models": [
+    {
+      "id": "qwen3-vl-8b-instruct",
+      "arch": "qwen3vl",
+      "quantization": "Q4_K_M",
+      "max_context_length": 262144,
+      "state": "loaded"
+    }
+  ],
+  "training": false,
+  "timing_model": "shortest 0.25m reachable-grid translations plus one manipulation unit; turns and seconds excluded"
+}

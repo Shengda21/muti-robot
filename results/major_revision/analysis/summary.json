@@ -1,0 +1,2988 @@
+{
+  "status": "complete evaluation",
+  "missing_tasks": [],
+  "counts": {
+    "task_records": 81,
+    "tasks_with_llm_pool": 81,
+    "paired_pruning_runs_checked": 486,
+    "search_runs": 1701,
+    "compiled_proposals": 435456,
+    "audited_pruned_proposals": 94185
+  },
+  "n_tasks": 81,
+  "n_scenes": 30,
+  "scenes": [
+    "FloorPlan204",
+    "FloorPlan205",
+    "FloorPlan206",
+    "FloorPlan207",
+    "FloorPlan208",
+    "FloorPlan209",
+    "FloorPlan210",
+    "FloorPlan211",
+    "FloorPlan212",
+    "FloorPlan213",
+    "FloorPlan214",
+    "FloorPlan215",
+    "FloorPlan216",
+    "FloorPlan217",
+    "FloorPlan218",
+    "FloorPlan304",
+    "FloorPlan305",
+    "FloorPlan306",
+    "FloorPlan307",
+    "FloorPlan308",
+    "FloorPlan309",
+    "FloorPlan310",
+    "FloorPlan311",
+    "FloorPlan312",
+    "FloorPlan313",
+    "FloorPlan314",
+    "FloorPlan315",
+    "FloorPlan316",
+    "FloorPlan317",
+    "FloorPlan318"
+  ],
+  "tasks_by_family": {
+    "living": 43,
+    "bedroom": 38
+  },
+  "excluded_tasks": [
+    {
+      "task": "t217_n8",
+      "reason": "only 6 eligible distinct objects"
+    },
+    {
+      "task": "t218_n8",
+      "reason": "only 7 eligible distinct objects"
+    },
+    {
+      "task": "t310_n6",
+      "reason": "only 5 eligible distinct objects"
+    },
+    {
+      "task": "t310_n8",
+      "reason": "only 5 eligible distinct objects"
+    },
+    {
+      "task": "t312_n8",
+      "reason": "only 7 eligible distinct objects"
+    },
+    {
+      "task": "t313_n8",
+      "reason": "only 7 eligible distinct objects"
+    },
+    {
+      "task": "t314_n8",
+      "reason": "only 7 eligible distinct objects"
+    },
+    {
+      "task": "t316_n6",
+      "reason": "only 5 eligible distinct objects"
+    },
+    {
+      "task": "t316_n8",
+      "reason": "only 5 eligible distinct objects"
+    }
+  ],
+  "statistics": "Three seeds averaged per task; task sizes averaged within scene; scenes equally weighted.",
+  "quality": {
+    "32": {
+      "llm_nominal_none": {
+        "C": {
+          "mean": 66.40555555555555,
+          "n_scenes": 30
+        },
+        "J": {
+          "mean": 75.89822639383429,
+          "n_scenes": 30
+        },
+        "test_J": {
+          "mean": 82.14773686386245,
+          "n_scenes": 30
+        },
+        "C_over_T": {
+          "mean": 0.9606521268086388,
+          "n_scenes": 30
+        },
+        "J_over_T": {
+          "mean": 1.097126292963888,
+          "n_scenes": 30
+        },
+        "test_J_over_T": {
+          "mean": 1.186904923099223,
+          "n_scenes": 30
+        },
+        "risk_evaluations": {
+          "mean": 32,
+          "n_scenes": 30
+        },
+        "evaluated_fraction": {
+          "mean": 1.0,
+          "n_scenes": 30
+        },
+        "cpu_ms": {
+          "mean": 4.274982642592561,
+          "n_scenes": 30
+        },
+        "wall_ms": {
+          "mean": 4.27574424624995,
+          "n_scenes": 30
+        },
+        "score_cpu_ms": {
+          "mean": 1.1675197796296908,
+          "n_scenes": 30
+        },
+        "compile_cpu_ms": {
+          "mean": 2.8367347129629663,
+          "n_scenes": 30
+        },
+        "change_from_llm_nominal": {
+          "mean": -7.016402529535254,
+          "n_scenes": 30
+        },
+        "fraction_change_from_llm_nominal": {
+          "mean": -0.07233430519784487,
+          "n_scenes": 30
+        }
+      },
+      "llm_risk_none": {
+        "C": {
+          "mean": 66.82962962962964,
+          "n_scenes": 30
+        },
+        "J": {
+          "mean": 76.31774949184889,
+          "n_scenes": 30
+        },
+        "test_J": {
+          "mean": 82.58860983465468,
+          "n_scenes": 30
+        },
+        "C_over_T": {
+          "mean": 0.9658094418020683,
+          "n_scenes": 30
+        },
+        "J_over_T": {
+          "mean": 1.101750960303909,
+          "n_scenes": 30
+        },
+        "test_J_over_T": {
+          "mean": 1.1916411629855503,
+          "n_scenes": 30
+        },
+        "risk_evaluations": {
+          "mean": 32,
+          "n_scenes": 30
+        },
+        "evaluated_fraction": {
+          "mean": 1.0,
+          "n_scenes": 30
+        },
+        "cpu_ms": {
+          "mean": 4.357269820370332,
+          "n_scenes": 30
+        },
+        "wall_ms": {
+          "mean": 4.357943435509999,
+          "n_scenes": 30
+        },
+        "score_cpu_ms": {
+          "mean": 1.1643409314816675,
+          "n_scenes": 30
+        },
+        "compile_cpu_ms": {
+          "mean": 2.9233936370371003,
+          "n_scenes": 30
+        },
+        "change_from_llm_nominal": {
+          "mean": -6.575529558743032,
+          "n_scenes": 30
+        },
+        "fraction_change_from_llm_nominal": {
+          "mean": -0.06854080540033085,
+          "n_scenes": 30
+        }
+      },
+      "llm_risk_nominal": {
+        "C": {
+          "mean": 66.82962962962964,
+          "n_scenes": 30
+        },
+        "J": {
+          "mean": 76.31774949184889,
+          "n_scenes": 30
+        },
+        "test_J": {
+          "mean": 82.58860983465468,
+          "n_scenes": 30
+        },
+        "C_over_T": {
+          "mean": 0.9658094418020683,
+          "n_scenes": 30
+        },
+        "J_over_T": {
+          "mean": 1.101750960303909,
+          "n_scenes": 30
+        },
+        "test_J_over_T": {
+          "mean": 1.1916411629855503,
+          "n_scenes": 30
+        },
+        "risk_evaluations": {
+          "mean": 18.927777777777777,
+          "n_scenes": 30
+        },
+        "evaluated_fraction": {
+          "mean": 0.5914930555555555,
+          "n_scenes": 30
+        },
+        "cpu_ms": {
+          "mean": 3.65887787592594,
+          "n_scenes": 30
+        },
+        "wall_ms": {
+          "mean": 3.659771163775413,
+          "n_scenes": 30
+        },
+        "score_cpu_ms": {
+          "mean": 0.7031981537036711,
+          "n_scenes": 30
+        },
+        "compile_cpu_ms": {
+          "mean": 2.713502753703913,
+          "n_scenes": 30
+        },
+        "change_from_llm_nominal": {
+          "mean": -6.575529558743032,
+          "n_scenes": 30
+        },
+        "fraction_change_from_llm_nominal": {
+          "mean": -0.06854080540033085,
+          "n_scenes": 30
+        }
+      },
+      "llm_risk_critical": {
+        "C": {
+          "mean": 66.82962962962964,
+          "n_scenes": 30
+        },
+        "J": {
+          "mean": 76.31774949184889,
+          "n_scenes": 30
+        },
+        "test_J": {
+          "mean": 82.58860983465468,
+          "n_scenes": 30
+        },
+        "C_over_T": {
+          "mean": 0.9658094418020683,
+          "n_scenes": 30
+        },
+        "J_over_T": {
+          "mean": 1.101750960303909,
+          "n_scenes": 30
+        },
+        "test_J_over_T": {
+          "mean": 1.1916411629855503,
+          "n_scenes": 30
+        },
+        "risk_evaluations": {
+          "mean": 15.988888888888889,
+          "n_scenes": 30
+        },
+        "evaluated_fraction": {
+          "mean": 0.4996527777777778,
+          "n_scenes": 30
+        },
+        "cpu_ms": {
+          "mean": 3.6431324351851897,
+          "n_scenes": 30
+        },
+        "wall_ms": {
+          "mean": 3.643976959089438,
+          "n_scenes": 30
+        },
+        "score_cpu_ms": {
+          "mean": 0.5928979907406161,
+          "n_scenes": 30
+        },
+        "compile_cpu_ms": {
+          "mean": 2.737358540740888,
+          "n_scenes": 30
+        },
+        "change_from_llm_nominal": {
+          "mean": -6.575529558743032,
+          "n_scenes": 30
+        },
+        "fraction_change_from_llm_nominal": {
+          "mean": -0.06854080540033085,
+          "n_scenes": 30
+        }
+      },
+      "uniform_nominal_none": {
+        "C": {
+          "mean": 67.47592592592592,
+          "n_scenes": 30
+        },
+        "J": {
+          "mean": 76.76266475711611,
+          "n_scenes": 30
+        },
+        "test_J": {
+          "mean": 82.92543011748795,
+          "n_scenes": 30
+        },
+        "C_over_T": {
+          "mean": 0.977858671895774,
+          "n_scenes": 30
+        },
+        "J_over_T": {
+          "mean": 1.1100682458939117,
+          "n_scenes": 30
+        },
+        "test_J_over_T": {
+          "mean": 1.1985437343695267,
+          "n_scenes": 30
+        },
+        "risk_evaluations": {
+          "mean": 32,
+          "n_scenes": 30
+        },
+        "evaluated_fraction": {
+          "mean": 1.0,
+          "n_scenes": 30
+        },
+        "cpu_ms": {
+          "mean": 4.481121725925904,
+          "n_scenes": 30
+        },
+        "wall_ms": {
+          "mean": 4.482690541556588,
+          "n_scenes": 30
+        },
+        "score_cpu_ms": {
+          "mean": 1.164902135184915,
+          "n_scenes": 30
+        },
+        "compile_cpu_ms": {
+          "mean": 3.0550044370368243,
+          "n_scenes": 30
+        },
+        "change_from_llm_nominal": {
+          "mean": -6.238709275909756,
+          "n_scenes": 30
+        },
+        "fraction_change_from_llm_nominal": {
+          "mean": -0.06117423247943416,
+          "n_scenes": 30
+        }
+      },
+      "uniform_risk_none": {
+        "C": {
+          "mean": 67.53888888888889,
+          "n_scenes": 30
+        },
+        "J": {
+          "mean": 76.83633421313375,
+          "n_scenes": 30
+        },
+        "test_J": {
+          "mean": 82.98745487324565,
+          "n_scenes": 30
+        },
+        "C_over_T": {
+          "mean": 0.9787908249049292,
+          "n_scenes": 30
+        },
+        "J_over_T": {
+          "mean": 1.1114456755128914,
+          "n_scenes": 30
+        },
+        "test_J_over_T": {
+          "mean": 1.1996213390827475,
+          "n_scenes": 30
+        },
+        "risk_evaluations": {
+          "mean": 32,
+          "n_scenes": 30
+        },
+        "evaluated_fraction": {
+          "mean": 1.0,
+          "n_scenes": 30
+        },
+        "cpu_ms": {
+          "mean": 4.240098522222236,
+          "n_scenes": 30
+        },
+        "wall_ms": {
+          "mean": 4.240692593157291,
+          "n_scenes": 30
+        },
+        "score_cpu_ms": {
+          "mean": 1.1641564537039901,
+          "n_scenes": 30
+        },
+        "compile_cpu_ms": {
+          "mean": 2.811241549999853,
+          "n_scenes": 30
+        },
+        "change_from_llm_nominal": {
+          "mean": -6.176684520152055,
+          "n_scenes": 30
+        },
+        "fraction_change_from_llm_nominal": {
+          "mean": -0.060152866138745445,
+          "n_scenes": 30
+        }
+      },
+      "uniform_random": {
+        "C": {
+          "mean": 69.54814814814814,
+          "n_scenes": 30
+        },
+        "J": {
+          "mean": 78.5986037831289,
+          "n_scenes": 30
+        },
+        "test_J": {
+          "mean": 84.74927380464138,
+          "n_scenes": 30
+        },
+        "C_over_T": {
+          "mean": 1.0061231886890698,
+          "n_scenes": 30
+        },
+        "J_over_T": {
+          "mean": 1.1359499810953388,
+          "n_scenes": 30
+        },
+        "test_J_over_T": {
+          "mean": 1.2240479678781155,
+          "n_scenes": 30
+        },
+        "risk_evaluations": {
+          "mean": 32,
+          "n_scenes": 30
+        },
+        "evaluated_fraction": {
+          "mean": 1.0,
+          "n_scenes": 30
+        },
+        "cpu_ms": {
+          "mean": 4.320985514814856,
+          "n_scenes": 30
+        },
+        "wall_ms": {
+          "mean": 4.321676403008126,
+          "n_scenes": 30
+        },
+        "score_cpu_ms": {
+          "mean": 1.158422225925645,
+          "n_scenes": 30
+        },
+        "compile_cpu_ms": {
+          "mean": 2.8919173407409544,
+          "n_scenes": 30
+        },
+        "change_from_llm_nominal": {
+          "mean": -4.414865588756321,
+          "n_scenes": 30
+        },
+        "fraction_change_from_llm_nominal": {
+          "mean": -0.040483601312865304,
+          "n_scenes": 30
+        }
+      }
+    },
+    "64": {
+      "llm_nominal_none": {
+        "C": {
+          "mean": 63.84444444444444,
+          "n_scenes": 30
+        },
+        "J": {
+          "mean": 73.42398326473368,
+          "n_scenes": 30
+        },
+        "test_J": {
+          "mean": 79.58943955067166,
+          "n_scenes": 30
+        },
+        "C_over_T": {
+          "mean": 0.9236842504473126,
+          "n_scenes": 30
+        },
+        "J_over_T": {
+          "mean": 1.0612154260857452,
+          "n_scenes": 30
+        },
+        "test_J_over_T": {
+          "mean": 1.1496445412190621,
+          "n_scenes": 30
+        },
+        "risk_evaluations": {
+          "mean": 64,
+          "n_scenes": 30
+        },
+        "evaluated_fraction": {
+          "mean": 1.0,
+          "n_scenes": 30
+        },
+        "cpu_ms": {
+          "mean": 8.666676349999987,
+          "n_scenes": 30
+        },
+        "wall_ms": {
+          "mean": 8.667593349323228,
+          "n_scenes": 30
+        },
+        "score_cpu_ms": {
+          "mean": 2.3330072981482273,
+          "n_scenes": 30
+        },
+        "compile_cpu_ms": {
+          "mean": 5.714194577778021,
+          "n_scenes": 30
+        },
+        "change_from_llm_nominal": {
+          "mean": -9.574699842726046,
+          "n_scenes": 30
+        },
+        "fraction_change_from_llm_nominal": {
+          "mean": -0.10068519696888543,
+          "n_scenes": 30
+        }
+      },
+      "llm_risk_none": {
+        "C": {
+          "mean": 64.02962962962962,
+          "n_scenes": 30
+        },
+        "J": {
+          "mean": 73.59707215348476,
+          "n_scenes": 30
+        },
+        "test_J": {
+          "mean": 79.77958145063104,
+          "n_scenes": 30
+        },
+        "C_over_T": {
+          "mean": 0.9260517831637028,
+          "n_scenes": 30
+        },
+        "J_over_T": {
+          "mean": 1.063423715402916,
+          "n_scenes": 30
+        },
+        "test_J_over_T": {
+          "mean": 1.1522818818638187,
+          "n_scenes": 30
+        },
+        "risk_evaluations": {
+          "mean": 64,
+          "n_scenes": 30
+        },
+        "evaluated_fraction": {
+          "mean": 1.0,
+          "n_scenes": 30
+        },
+        "cpu_ms": {
+          "mean": 8.771726012962956,
+          "n_scenes": 30
+        },
+        "wall_ms": {
+          "mean": 8.7725846234847,
+          "n_scenes": 30
+        },
+        "score_cpu_ms": {
+          "mean": 2.3256200314817392,
+          "n_scenes": 30
+        },
+        "compile_cpu_ms": {
+          "mean": 5.833640322222219,
+          "n_scenes": 30
+        },
+        "change_from_llm_nominal": {
+          "mean": -9.384557942766657,
+          "n_scenes": 30
+        },
+        "fraction_change_from_llm_nominal": {
+          "mean": -0.0986890031595348,
+          "n_scenes": 30
+        }
+      },
+      "llm_risk_nominal": {
+        "C": {
+          "mean": 64.02962962962962,
+          "n_scenes": 30
+        },
+        "J": {
+          "mean": 73.59707215348476,
+          "n_scenes": 30
+        },
+        "test_J": {
+          "mean": 79.77958145063104,
+          "n_scenes": 30
+        },
+        "C_over_T": {
+          "mean": 0.9260517831637028,
+          "n_scenes": 30
+        },
+        "J_over_T": {
+          "mean": 1.063423715402916,
+          "n_scenes": 30
+        },
+        "test_J_over_T": {
+          "mean": 1.1522818818638187,
+          "n_scenes": 30
+        },
+        "risk_evaluations": {
+          "mean": 30.985185185185188,
+          "n_scenes": 30
+        },
+        "evaluated_fraction": {
+          "mean": 0.48414351851851856,
+          "n_scenes": 30
+        },
+        "cpu_ms": {
+          "mean": 7.275228774074082,
+          "n_scenes": 30
+        },
+        "wall_ms": {
+          "mean": 7.276534992787573,
+          "n_scenes": 30
+        },
+        "score_cpu_ms": {
+          "mean": 1.165642342592542,
+          "n_scenes": 30
+        },
+        "compile_cpu_ms": {
+          "mean": 5.56896127407422,
+          "n_scenes": 30
+        },
+        "change_from_llm_nominal": {
+          "mean": -9.384557942766657,
+          "n_scenes": 30
+        },
+        "fraction_change_from_llm_nominal": {
+          "mean": -0.0986890031595348,
+          "n_scenes": 30
+        }
+      },
+      "llm_risk_critical": {
+        "C": {
+          "mean": 64.02962962962962,
+          "n_scenes": 30
+        },
+        "J": {
+          "mean": 73.59707215348476,
+          "n_scenes": 30
+        },
+        "test_J": {
+          "mean": 79.77958145063104,
+          "n_scenes": 30
+        },
+        "C_over_T": {
+          "mean": 0.9260517831637028,
+          "n_scenes": 30
+        },
+        "J_over_T": {
+          "mean": 1.063423715402916,
+          "n_scenes": 30
+        },
+        "test_J_over_T": {
+          "mean": 1.1522818818638187,
+          "n_scenes": 30
+        },
+        "risk_evaluations": {
+          "mean": 24.831481481481482,
+          "n_scenes": 30
+        },
+        "evaluated_fraction": {
+          "mean": 0.38799189814814816,
+          "n_scenes": 30
+        },
+        "cpu_ms": {
+          "mean": 7.3142926611111,
+          "n_scenes": 30
+        },
+        "wall_ms": {
+          "mean": 7.315512334376022,
+          "n_scenes": 30
+        },
+        "score_cpu_ms": {
+          "mean": 0.9272553833332067,
+          "n_scenes": 30
+        },
+        "compile_cpu_ms": {
+          "mean": 5.698087549999889,
+          "n_scenes": 30
+        },
+        "change_from_llm_nominal": {
+          "mean": -9.384557942766657,
+          "n_scenes": 30
+        },
+        "fraction_change_from_llm_nominal": {
+          "mean": -0.0986890031595348,
+          "n_scenes": 30
+        }
+      },
+      "uniform_nominal_none": {
+        "C": {
+          "mean": 63.87592592592593,
+          "n_scenes": 30
+        },
+        "J": {
+          "mean": 73.23057681432547,
+          "n_scenes": 30
+        },
+        "test_J": {
+          "mean": 79.2710288119248,
+          "n_scenes": 30
+        },
+        "C_over_T": {
+          "mean": 0.9254646540094273,
+          "n_scenes": 30
+        },
+        "J_over_T": {
+          "mean": 1.0592460909967736,
+          "n_scenes": 30
+        },
+        "test_J_over_T": {
+          "mean": 1.1459699529372318,
+          "n_scenes": 30
+        },
+        "risk_evaluations": {
+          "mean": 64,
+          "n_scenes": 30
+        },
+        "evaluated_fraction": {
+          "mean": 1.0,
+          "n_scenes": 30
+        },
+        "cpu_ms": {
+          "mean": 8.775157899999977,
+          "n_scenes": 30
+        },
+        "wall_ms": {
+          "mean": 8.776880481659814,
+          "n_scenes": 30
+        },
+        "score_cpu_ms": {
+          "mean": 2.3247430888887637,
+          "n_scenes": 30
+        },
+        "compile_cpu_ms": {
+          "mean": 5.854050311110825,
+          "n_scenes": 30
+        },
+        "change_from_llm_nominal": {
+          "mean": -9.89311058147291,
+          "n_scenes": 30
+        },
+        "fraction_change_from_llm_nominal": {
+          "mean": -0.10279624343868592,
+          "n_scenes": 30
+        }
+      },
+      "uniform_risk_none": {
+        "C": {
+          "mean": 63.95925925925926,
+          "n_scenes": 30
+        },
+        "J": {
+          "mean": 73.3690911478247,
+          "n_scenes": 30
+        },
+        "test_J": {
+          "mean": 79.48673877798434,
+          "n_scenes": 30
+        },
+        "C_over_T": {
+          "mean": 0.9258396950176078,
+          "n_scenes": 30
+        },
+        "J_over_T": {
+          "mean": 1.0606558234840082,
+          "n_scenes": 30
+        },
+        "test_J_over_T": {
+          "mean": 1.148547496341837,
+          "n_scenes": 30
+        },
+        "risk_evaluations": {
+          "mean": 64,
+          "n_scenes": 30
+        },
+        "evaluated_fraction": {
+          "mean": 1.0,
+          "n_scenes": 30
+        },
+        "cpu_ms": {
+          "mean": 8.646777122222243,
+          "n_scenes": 30
+        },
+        "wall_ms": {
+          "mean": 8.64820790787538,
+          "n_scenes": 30
+        },
+        "score_cpu_ms": {
+          "mean": 2.3341930537040216,
+          "n_scenes": 30
+        },
+        "compile_cpu_ms": {
+          "mean": 5.70890363703667,
+          "n_scenes": 30
+        },
+        "change_from_llm_nominal": {
+          "mean": -9.677400615413367,
+          "n_scenes": 30
+        },
+        "fraction_change_from_llm_nominal": {
+          "mean": -0.10028701876831886,
+          "n_scenes": 30
+        }
+      },
+      "uniform_random": {
+        "C": {
+          "mean": 67.15925925925926,
+          "n_scenes": 30
+        },
+        "J": {
+          "mean": 76.23939509515968,
+          "n_scenes": 30
+        },
+        "test_J": {
+          "mean": 82.35522068276252,
+          "n_scenes": 30
+        },
+        "C_over_T": {
+          "mean": 0.9678310384534933,
+          "n_scenes": 30
+        },
+        "J_over_T": {
+          "mean": 1.098096857578666,
+          "n_scenes": 30
+        },
+        "test_J_over_T": {
+          "mean": 1.1855999768235361,
+          "n_scenes": 30
+        },
+        "risk_evaluations": {
+          "mean": 64,
+          "n_scenes": 30
+        },
+        "evaluated_fraction": {
+          "mean": 1.0,
+          "n_scenes": 30
+        },
+        "cpu_ms": {
+          "mean": 8.579182733333347,
+          "n_scenes": 30
+        },
+        "wall_ms": {
+          "mean": 8.5802699835902,
+          "n_scenes": 30
+        },
+        "score_cpu_ms": {
+          "mean": 2.3137118944444293,
+          "n_scenes": 30
+        },
+        "compile_cpu_ms": {
+          "mean": 5.670627912963189,
+          "n_scenes": 30
+        },
+        "change_from_llm_nominal": {
+          "mean": -6.8089187106351865,
+          "n_scenes": 30
+        },
+        "fraction_change_from_llm_nominal": {
+          "mean": -0.07157538378044866,
+          "n_scenes": 30
+        }
+      }
+    },
+    "128": {
+      "llm_nominal_none": {
+        "C": {
+          "mean": 62.14259259259259,
+          "n_scenes": 30
+        },
+        "J": {
+          "mean": 71.61396341377763,
+          "n_scenes": 30
+        },
+        "test_J": {
+          "mean": 77.6535272398289,
+          "n_scenes": 30
+        },
+        "C_over_T": {
+          "mean": 0.9014530767150782,
+          "n_scenes": 30
+        },
+        "J_over_T": {
+          "mean": 1.0366304428412039,
+          "n_scenes": 30
+        },
+        "test_J_over_T": {
+          "mean": 1.1233411524384507,
+          "n_scenes": 30
+        },
+        "risk_evaluations": {
+          "mean": 128,
+          "n_scenes": 30
+        },
+        "evaluated_fraction": {
+          "mean": 1.0,
+          "n_scenes": 30
+        },
+        "cpu_ms": {
+          "mean": 18.234356190740737,
+          "n_scenes": 30
+        },
+        "wall_ms": {
+          "mean": 18.23603946508633,
+          "n_scenes": 30
+        },
+        "score_cpu_ms": {
+          "mean": 4.670783081481451,
+          "n_scenes": 30
+        },
+        "compile_cpu_ms": {
+          "mean": 12.109793511111414,
+          "n_scenes": 30
+        },
+        "change_from_llm_nominal": {
+          "mean": -11.510612153568806,
+          "n_scenes": 30
+        },
+        "fraction_change_from_llm_nominal": {
+          "mean": -0.12096203531657693,
+          "n_scenes": 30
+        }
+      },
+      "llm_risk_none": {
+        "C": {
+          "mean": 61.96851851851852,
+          "n_scenes": 30
+        },
+        "J": {
+          "mean": 71.49708599496321,
+          "n_scenes": 30
+        },
+        "test_J": {
+          "mean": 77.56794038895204,
+          "n_scenes": 30
+        },
+        "C_over_T": {
+          "mean": 0.8983502820733134,
+          "n_scenes": 30
+        },
+        "J_over_T": {
+          "mean": 1.035292550039692,
+          "n_scenes": 30
+        },
+        "test_J_over_T": {
+          "mean": 1.1226399551685482,
+          "n_scenes": 30
+        },
+        "risk_evaluations": {
+          "mean": 128,
+          "n_scenes": 30
+        },
+        "evaluated_fraction": {
+          "mean": 1.0,
+          "n_scenes": 30
+        },
+        "cpu_ms": {
+          "mean": 18.065379057407377,
+          "n_scenes": 30
+        },
+        "wall_ms": {
+          "mean": 18.06755610914142,
+          "n_scenes": 30
+        },
+        "score_cpu_ms": {
+          "mean": 4.654642992592786,
+          "n_scenes": 30
+        },
+        "compile_cpu_ms": {
+          "mean": 12.00118972407424,
+          "n_scenes": 30
+        },
+        "change_from_llm_nominal": {
+          "mean": -11.596199004445658,
+          "n_scenes": 30
+        },
+        "fraction_change_from_llm_nominal": {
+          "mean": -0.1216411301344101,
+          "n_scenes": 30
+        }
+      },
+      "llm_risk_nominal": {
+        "C": {
+          "mean": 61.96851851851852,
+          "n_scenes": 30
+        },
+        "J": {
+          "mean": 71.49708599496321,
+          "n_scenes": 30
+        },
+        "test_J": {
+          "mean": 77.56794038895204,
+          "n_scenes": 30
+        },
+        "C_over_T": {
+          "mean": 0.8983502820733134,
+          "n_scenes": 30
+        },
+        "J_over_T": {
+          "mean": 1.035292550039692,
+          "n_scenes": 30
+        },
+        "test_J_over_T": {
+          "mean": 1.1226399551685482,
+          "n_scenes": 30
+        },
+        "risk_evaluations": {
+          "mean": 47.82962962962963,
+          "n_scenes": 30
+        },
+        "evaluated_fraction": {
+          "mean": 0.3736689814814815,
+          "n_scenes": 30
+        },
+        "cpu_ms": {
+          "mean": 14.427808127777785,
+          "n_scenes": 30
+        },
+        "wall_ms": {
+          "mean": 14.429891357819239,
+          "n_scenes": 30
+        },
+        "score_cpu_ms": {
+          "mean": 1.823404944444554,
+          "n_scenes": 30
+        },
+        "compile_cpu_ms": {
+          "mean": 11.381752020370396,
+          "n_scenes": 30
+        },
+        "change_from_llm_nominal": {
+          "mean": -11.596199004445658,
+          "n_scenes": 30
+        },
+        "fraction_change_from_llm_nominal": {
+          "mean": -0.1216411301344101,
+          "n_scenes": 30
+        }
+      },
+      "llm_risk_critical": {
+        "C": {
+          "mean": 61.96851851851852,
+          "n_scenes": 30
+        },
+        "J": {
+          "mean": 71.49708599496321,
+          "n_scenes": 30
+        },
+        "test_J": {
+          "mean": 77.56794038895204,
+          "n_scenes": 30
+        },
+        "C_over_T": {
+          "mean": 0.8983502820733134,
+          "n_scenes": 30
+        },
+        "J_over_T": {
+          "mean": 1.035292550039692,
+          "n_scenes": 30
+        },
+        "test_J_over_T": {
+          "mean": 1.1226399551685482,
+          "n_scenes": 30
+        },
+        "risk_evaluations": {
+          "mean": 36.45,
+          "n_scenes": 30
+        },
+        "evaluated_fraction": {
+          "mean": 0.284765625,
+          "n_scenes": 30
+        },
+        "cpu_ms": {
+          "mean": 14.478807433333317,
+          "n_scenes": 30
+        },
+        "wall_ms": {
+          "mean": 14.480739542179638,
+          "n_scenes": 30
+        },
+        "score_cpu_ms": {
+          "mean": 1.375792874073913,
+          "n_scenes": 30
+        },
+        "compile_cpu_ms": {
+          "mean": 11.575335518518159,
+          "n_scenes": 30
+        },
+        "change_from_llm_nominal": {
+          "mean": -11.596199004445658,
+          "n_scenes": 30
+        },
+        "fraction_change_from_llm_nominal": {
+          "mean": -0.1216411301344101,
+          "n_scenes": 30
+        }
+      },
+      "uniform_nominal_none": {
+        "C": {
+          "mean": 61.90185185185185,
+          "n_scenes": 30
+        },
+        "J": {
+          "mean": 71.21945127616638,
+          "n_scenes": 30
+        },
+        "test_J": {
+          "mean": 77.1970179573835,
+          "n_scenes": 30
+        },
+        "C_over_T": {
+          "mean": 0.8982464326154781,
+          "n_scenes": 30
+        },
+        "J_over_T": {
+          "mean": 1.0312170886275862,
+          "n_scenes": 30
+        },
+        "test_J_over_T": {
+          "mean": 1.1168958000939904,
+          "n_scenes": 30
+        },
+        "risk_evaluations": {
+          "mean": 128,
+          "n_scenes": 30
+        },
+        "evaluated_fraction": {
+          "mean": 1.0,
+          "n_scenes": 30
+        },
+        "cpu_ms": {
+          "mean": 17.872913570370343,
+          "n_scenes": 30
+        },
+        "wall_ms": {
+          "mean": 17.875564507105285,
+          "n_scenes": 30
+        },
+        "score_cpu_ms": {
+          "mean": 4.657086200000012,
+          "n_scenes": 30
+        },
+        "compile_cpu_ms": {
+          "mean": 11.82028244074006,
+          "n_scenes": 30
+        },
+        "change_from_llm_nominal": {
+          "mean": -11.967121436014212,
+          "n_scenes": 30
+        },
+        "fraction_change_from_llm_nominal": {
+          "mean": -0.12544523258056894,
+          "n_scenes": 30
+        }
+      },
+      "uniform_risk_none": {
+        "C": {
+          "mean": 61.73518518518519,
+          "n_scenes": 30
+        },
+        "J": {
+          "mean": 71.11484505831362,
+          "n_scenes": 30
+        },
+        "test_J": {
+          "mean": 77.12512228562939,
+          "n_scenes": 30
+        },
+        "C_over_T": {
+          "mean": 0.8952557088329519,
+          "n_scenes": 30
+        },
+        "J_over_T": {
+          "mean": 1.0297270226562876,
+          "n_scenes": 30
+        },
+        "test_J_over_T": {
+          "mean": 1.1160028714454011,
+          "n_scenes": 30
+        },
+        "risk_evaluations": {
+          "mean": 128,
+          "n_scenes": 30
+        },
+        "evaluated_fraction": {
+          "mean": 1.0,
+          "n_scenes": 30
+        },
+        "cpu_ms": {
+          "mean": 17.761728679629638,
+          "n_scenes": 30
+        },
+        "wall_ms": {
+          "mean": 17.764660769521637,
+          "n_scenes": 30
+        },
+        "score_cpu_ms": {
+          "mean": 4.667073122222508,
+          "n_scenes": 30
+        },
+        "compile_cpu_ms": {
+          "mean": 11.713722022221845,
+          "n_scenes": 30
+        },
+        "change_from_llm_nominal": {
+          "mean": -12.039017107768318,
+          "n_scenes": 30
+        },
+        "fraction_change_from_llm_nominal": {
+          "mean": -0.12612618597485795,
+          "n_scenes": 30
+        }
+      },
+      "uniform_random": {
+        "C": {
+          "mean": 64.74074074074075,
+          "n_scenes": 30
+        },
+        "J": {
+          "mean": 73.99574970716773,
+          "n_scenes": 30
+        },
+        "test_J": {
+          "mean": 80.06016669847085,
+          "n_scenes": 30
+        },
+        "C_over_T": {
+          "mean": 0.9321572448550356,
+          "n_scenes": 30
+        },
+        "J_over_T": {
+          "mean": 1.0649511192420353,
+          "n_scenes": 30
+        },
+        "test_J_over_T": {
+          "mean": 1.1520819804042963,
+          "n_scenes": 30
+        },
+        "risk_evaluations": {
+          "mean": 128,
+          "n_scenes": 30
+        },
+        "evaluated_fraction": {
+          "mean": 1.0,
+          "n_scenes": 30
+        },
+        "cpu_ms": {
+          "mean": 17.507140624074122,
+          "n_scenes": 30
+        },
+        "wall_ms": {
+          "mean": 17.508781658209585,
+          "n_scenes": 30
+        },
+        "score_cpu_ms": {
+          "mean": 4.6297626185187655,
+          "n_scenes": 30
+        },
+        "compile_cpu_ms": {
+          "mean": 11.63217763333336,
+          "n_scenes": 30
+        },
+        "change_from_llm_nominal": {
+          "mean": -9.103972694926853,
+          "n_scenes": 30
+        },
+        "fraction_change_from_llm_nominal": {
+          "mean": -0.09769129420552235,
+          "n_scenes": 30
+        }
+      }
+    },
+    "256": {
+      "llm_nominal_none": {
+        "C": {
+          "mean": 60.44259259259259,
+          "n_scenes": 30
+        },
+        "J": {
+          "mean": 69.93757300387469,
+          "n_scenes": 30
+        },
+        "test_J": {
+          "mean": 75.91238911390191,
+          "n_scenes": 30
+        },
+        "C_over_T": {
+          "mean": 0.8763890110782273,
+          "n_scenes": 30
+        },
+        "J_over_T": {
+          "mean": 1.0123082343119683,
+          "n_scenes": 30
+        },
+        "test_J_over_T": {
+          "mean": 1.0979532081929058,
+          "n_scenes": 30
+        },
+        "risk_evaluations": {
+          "mean": 256,
+          "n_scenes": 30
+        },
+        "evaluated_fraction": {
+          "mean": 1.0,
+          "n_scenes": 30
+        },
+        "cpu_ms": {
+          "mean": 38.0767725037037,
+          "n_scenes": 30
+        },
+        "wall_ms": {
+          "mean": 38.08005495100386,
+          "n_scenes": 30
+        },
+        "score_cpu_ms": {
+          "mean": 9.328964994444018,
+          "n_scenes": 30
+        },
+        "compile_cpu_ms": {
+          "mean": 25.345727346296833,
+          "n_scenes": 30
+        },
+        "change_from_llm_nominal": {
+          "mean": -13.251750279495797,
+          "n_scenes": 30
+        },
+        "fraction_change_from_llm_nominal": {
+          "mean": -0.14065997833749108,
+          "n_scenes": 30
+        }
+      },
+      "llm_risk_none": {
+        "C": {
+          "mean": 60.068518518518516,
+          "n_scenes": 30
+        },
+        "J": {
+          "mean": 69.55021371539232,
+          "n_scenes": 30
+        },
+        "test_J": {
+          "mean": 75.51535347411601,
+          "n_scenes": 30
+        },
+        "C_over_T": {
+          "mean": 0.8705578233968339,
+          "n_scenes": 30
+        },
+        "J_over_T": {
+          "mean": 1.0067873488016967,
+          "n_scenes": 30
+        },
+        "test_J_over_T": {
+          "mean": 1.0926553531230903,
+          "n_scenes": 30
+        },
+        "risk_evaluations": {
+          "mean": 256,
+          "n_scenes": 30
+        },
+        "evaluated_fraction": {
+          "mean": 1.0,
+          "n_scenes": 30
+        },
+        "cpu_ms": {
+          "mean": 37.650023831481455,
+          "n_scenes": 30
+        },
+        "wall_ms": {
+          "mean": 37.654659286555315,
+          "n_scenes": 30
+        },
+        "score_cpu_ms": {
+          "mean": 9.315124388889437,
+          "n_scenes": 30
+        },
+        "compile_cpu_ms": {
+          "mean": 25.103681827778402,
+          "n_scenes": 30
+        },
+        "change_from_llm_nominal": {
+          "mean": -13.64878591928169,
+          "n_scenes": 30
+        },
+        "fraction_change_from_llm_nominal": {
+          "mean": -0.14462734883282163,
+          "n_scenes": 30
+        }
+      },
+      "llm_risk_nominal": {
+        "C": {
+          "mean": 60.068518518518516,
+          "n_scenes": 30
+        },
+        "J": {
+          "mean": 69.55021371539232,
+          "n_scenes": 30
+        },
+        "test_J": {
+          "mean": 75.51535347411601,
+          "n_scenes": 30
+        },
+        "C_over_T": {
+          "mean": 0.8705578233968339,
+          "n_scenes": 30
+        },
+        "J_over_T": {
+          "mean": 1.0067873488016967,
+          "n_scenes": 30
+        },
+        "test_J_over_T": {
+          "mean": 1.0926553531230903,
+          "n_scenes": 30
+        },
+        "risk_evaluations": {
+          "mean": 70.85185185185185,
+          "n_scenes": 30
+        },
+        "evaluated_fraction": {
+          "mean": 0.2767650462962963,
+          "n_scenes": 30
+        },
+        "cpu_ms": {
+          "mean": 29.112370470370358,
+          "n_scenes": 30
+        },
+        "wall_ms": {
+          "mean": 29.11562033308049,
+          "n_scenes": 30
+        },
+        "score_cpu_ms": {
+          "mean": 2.7369202907408345,
+          "n_scenes": 30
+        },
+        "compile_cpu_ms": {
+          "mean": 23.61102518703713,
+          "n_scenes": 30
+        },
+        "change_from_llm_nominal": {
+          "mean": -13.64878591928169,
+          "n_scenes": 30
+        },
+        "fraction_change_from_llm_nominal": {
+          "mean": -0.14462734883282163,
+          "n_scenes": 30
+        }
+      },
+      "llm_risk_critical": {
+        "C": {
+          "mean": 60.068518518518516,
+          "n_scenes": 30
+        },
+        "J": {
+          "mean": 69.55021371539232,
+          "n_scenes": 30
+        },
+        "test_J": {
+          "mean": 75.51535347411601,
+          "n_scenes": 30
+        },
+        "C_over_T": {
+          "mean": 0.8705578233968339,
+          "n_scenes": 30
+        },
+        "J_over_T": {
+          "mean": 1.0067873488016967,
+          "n_scenes": 30
+        },
+        "test_J_over_T": {
+          "mean": 1.0926553531230903,
+          "n_scenes": 30
+        },
+        "risk_evaluations": {
+          "mean": 51.42037037037037,
+          "n_scenes": 30
+        },
+        "evaluated_fraction": {
+          "mean": 0.20086082175925926,
+          "n_scenes": 30
+        },
+        "cpu_ms": {
+          "mean": 28.799585318518517,
+          "n_scenes": 30
+        },
+        "wall_ms": {
+          "mean": 28.80258239046843,
+          "n_scenes": 30
+        },
+        "score_cpu_ms": {
+          "mean": 1.959950172222125,
+          "n_scenes": 30
+        },
+        "compile_cpu_ms": {
+          "mean": 23.45556602407384,
+          "n_scenes": 30
+        },
+        "change_from_llm_nominal": {
+          "mean": -13.64878591928169,
+          "n_scenes": 30
+        },
+        "fraction_change_from_llm_nominal": {
+          "mean": -0.14462734883282163,
+          "n_scenes": 30
+        }
+      },
+      "uniform_nominal_none": {
+        "C": {
+          "mean": 60.32962962962963,
+          "n_scenes": 30
+        },
+        "J": {
+          "mean": 69.73303936969205,
+          "n_scenes": 30
+        },
+        "test_J": {
+          "mean": 75.69774764541823,
+          "n_scenes": 30
+        },
+        "C_over_T": {
+          "mean": 0.8759386401162279,
+          "n_scenes": 30
+        },
+        "J_over_T": {
+          "mean": 1.0098432060507254,
+          "n_scenes": 30
+        },
+        "test_J_over_T": {
+          "mean": 1.095367632045413,
+          "n_scenes": 30
+        },
+        "risk_evaluations": {
+          "mean": 256,
+          "n_scenes": 30
+        },
+        "evaluated_fraction": {
+          "mean": 1.0,
+          "n_scenes": 30
+        },
+        "cpu_ms": {
+          "mean": 37.006114811111104,
+          "n_scenes": 30
+        },
+        "wall_ms": {
+          "mean": 37.01031505199218,
+          "n_scenes": 30
+        },
+        "score_cpu_ms": {
+          "mean": 9.316424375926008,
+          "n_scenes": 30
+        },
+        "compile_cpu_ms": {
+          "mean": 24.372622624073518,
+          "n_scenes": 30
+        },
+        "change_from_llm_nominal": {
+          "mean": -13.466391747979472,
+          "n_scenes": 30
+        },
+        "fraction_change_from_llm_nominal": {
+          "mean": -0.1422483237695238,
+          "n_scenes": 30
+        }
+      },
+      "uniform_risk_none": {
+        "C": {
+          "mean": 60.053703703703704,
+          "n_scenes": 30
+        },
+        "J": {
+          "mean": 69.48107310507437,
+          "n_scenes": 30
+        },
+        "test_J": {
+          "mean": 75.44457399265826,
+          "n_scenes": 30
+        },
+        "C_over_T": {
+          "mean": 0.8714972244280329,
+          "n_scenes": 30
+        },
+        "J_over_T": {
+          "mean": 1.0061190785436507,
+          "n_scenes": 30
+        },
+        "test_J_over_T": {
+          "mean": 1.0915414804955463,
+          "n_scenes": 30
+        },
+        "risk_evaluations": {
+          "mean": 256,
+          "n_scenes": 30
+        },
+        "evaluated_fraction": {
+          "mean": 1.0,
+          "n_scenes": 30
+        },
+        "cpu_ms": {
+          "mean": 36.911460605555554,
+          "n_scenes": 30
+        },
+        "wall_ms": {
+          "mean": 36.91697439213318,
+          "n_scenes": 30
+        },
+        "score_cpu_ms": {
+          "mean": 9.324877594444597,
+          "n_scenes": 30
+        },
+        "compile_cpu_ms": {
+          "mean": 24.38607828888822,
+          "n_scenes": 30
+        },
+        "change_from_llm_nominal": {
+          "mean": -13.719565400739437,
+          "n_scenes": 30
+        },
+        "fraction_change_from_llm_nominal": {
+          "mean": -0.1452679585704736,
+          "n_scenes": 30
+        }
+      },
+      "uniform_random": {
+        "C": {
+          "mean": 62.74814814814815,
+          "n_scenes": 30
+        },
+        "J": {
+          "mean": 72.16462867973611,
+          "n_scenes": 30
+        },
+        "test_J": {
+          "mean": 78.22730722706865,
+          "n_scenes": 30
+        },
+        "C_over_T": {
+          "mean": 0.9053975568430499,
+          "n_scenes": 30
+        },
+        "J_over_T": {
+          "mean": 1.039668614770961,
+          "n_scenes": 30
+        },
+        "test_J_over_T": {
+          "mean": 1.1264568981842298,
+          "n_scenes": 30
+        },
+        "risk_evaluations": {
+          "mean": 256,
+          "n_scenes": 30
+        },
+        "evaluated_fraction": {
+          "mean": 1.0,
+          "n_scenes": 30
+        },
+        "cpu_ms": {
+          "mean": 35.87121156481485,
+          "n_scenes": 30
+        },
+        "wall_ms": {
+          "mean": 35.874246457522666,
+          "n_scenes": 30
+        },
+        "score_cpu_ms": {
+          "mean": 9.257955618518842,
+          "n_scenes": 30
+        },
+        "compile_cpu_ms": {
+          "mean": 24.068045672222368,
+          "n_scenes": 30
+        },
+        "change_from_llm_nominal": {
+          "mean": -10.936832166329053,
+          "n_scenes": 30
+        },
+        "fraction_change_from_llm_nominal": {
+          "mean": -0.11817843613827284,
+          "n_scenes": 30
+        }
+      }
+    }
+  },
+  "families": {
+    "living": {
+      "llm_nominal_none": {
+        "C": {
+          "mean": 72.6037037037037,
+          "n_scenes": 15
+        },
+        "J": {
+          "mean": 84.19296440039273,
+          "n_scenes": 15
+        },
+        "test_J": {
+          "mean": 91.49330352696992,
+          "n_scenes": 15
+        },
+        "C_over_T": {
+          "mean": 0.8859146870592851,
+          "n_scenes": 15
+        },
+        "J_over_T": {
+          "mean": 1.0260265123503602,
+          "n_scenes": 15
+        },
+        "test_J_over_T": {
+          "mean": 1.1143890475780833,
+          "n_scenes": 15
+        },
+        "risk_evaluations": {
+          "mean": 256,
+          "n_scenes": 15
+        },
+        "evaluated_fraction": {
+          "mean": 1.0,
+          "n_scenes": 15
+        },
+        "cpu_ms": {
+          "mean": 39.284793848148176,
+          "n_scenes": 15
+        },
+        "wall_ms": {
+          "mean": 39.28828245649735,
+          "n_scenes": 15
+        },
+        "score_cpu_ms": {
+          "mean": 9.547067125925274,
+          "n_scenes": 15
+        },
+        "compile_cpu_ms": {
+          "mean": 26.319079533334577,
+          "n_scenes": 15
+        },
+        "change_from_llm_nominal": {
+          "mean": -13.804064587874102,
+          "n_scenes": 15
+        },
+        "fraction_change_from_llm_nominal": {
+          "mean": -0.1211172514951859,
+          "n_scenes": 15
+        }
+      },
+      "llm_risk_none": {
+        "C": {
+          "mean": 72.17777777777778,
+          "n_scenes": 15
+        },
+        "J": {
+          "mean": 83.8032954337856,
+          "n_scenes": 15
+        },
+        "test_J": {
+          "mean": 91.07250497563646,
+          "n_scenes": 15
+        },
+        "C_over_T": {
+          "mean": 0.8801832629270023,
+          "n_scenes": 15
+        },
+        "J_over_T": {
+          "mean": 1.0210627921841697,
+          "n_scenes": 15
+        },
+        "test_J_over_T": {
+          "mean": 1.1091412798698612,
+          "n_scenes": 15
+        },
+        "risk_evaluations": {
+          "mean": 256,
+          "n_scenes": 15
+        },
+        "evaluated_fraction": {
+          "mean": 1.0,
+          "n_scenes": 15
+        },
+        "cpu_ms": {
+          "mean": 38.13339477777774,
+          "n_scenes": 15
+        },
+        "wall_ms": {
+          "mean": 38.13946883159655,
+          "n_scenes": 15
+        },
+        "score_cpu_ms": {
+          "mean": 9.516689937038043,
+          "n_scenes": 15
+        },
+        "compile_cpu_ms": {
+          "mean": 25.352655333334344,
+          "n_scenes": 15
+        },
+        "change_from_llm_nominal": {
+          "mean": -14.224863139207557,
+          "n_scenes": 15
+        },
+        "fraction_change_from_llm_nominal": {
+          "mean": -0.12525351927106976,
+          "n_scenes": 15
+        }
+      },
+      "llm_risk_nominal": {
+        "C": {
+          "mean": 72.17777777777778,
+          "n_scenes": 15
+        },
+        "J": {
+          "mean": 83.8032954337856,
+          "n_scenes": 15
+        },
+        "test_J": {
+          "mean": 91.07250497563646,
+          "n_scenes": 15
+        },
+        "C_over_T": {
+          "mean": 0.8801832629270023,
+          "n_scenes": 15
+        },
+        "J_over_T": {
+          "mean": 1.0210627921841697,
+          "n_scenes": 15
+        },
+        "test_J_over_T": {
+          "mean": 1.1091412798698612,
+          "n_scenes": 15
+        },
+        "risk_evaluations": {
+          "mean": 70.8962962962963,
+          "n_scenes": 15
+        },
+        "evaluated_fraction": {
+          "mean": 0.2769386574074074,
+          "n_scenes": 15
+        },
+        "cpu_ms": {
+          "mean": 29.286386770370335,
+          "n_scenes": 15
+        },
+        "wall_ms": {
+          "mean": 29.289876631702537,
+          "n_scenes": 15
+        },
+        "score_cpu_ms": {
+          "mean": 2.7870536111110913,
+          "n_scenes": 15
+        },
+        "compile_cpu_ms": {
+          "mean": 23.71184918888901,
+          "n_scenes": 15
+        },
+        "change_from_llm_nominal": {
+          "mean": -14.224863139207557,
+          "n_scenes": 15
+        },
+        "fraction_change_from_llm_nominal": {
+          "mean": -0.12525351927106976,
+          "n_scenes": 15
+        }
+      },
+      "llm_risk_critical": {
+        "C": {
+          "mean": 72.17777777777778,
+          "n_scenes": 15
+        },
+        "J": {
+          "mean": 83.8032954337856,
+          "n_scenes": 15
+        },
+        "test_J": {
+          "mean": 91.07250497563646,
+          "n_scenes": 15
+        },
+        "C_over_T": {
+          "mean": 0.8801832629270023,
+          "n_scenes": 15
+        },
+        "J_over_T": {
+          "mean": 1.0210627921841697,
+          "n_scenes": 15
+        },
+        "test_J_over_T": {
+          "mean": 1.1091412798698612,
+          "n_scenes": 15
+        },
+        "risk_evaluations": {
+          "mean": 49.51481481481481,
+          "n_scenes": 15
+        },
+        "evaluated_fraction": {
+          "mean": 0.19341724537037036,
+          "n_scenes": 15
+        },
+        "cpu_ms": {
+          "mean": 29.615277200000012,
+          "n_scenes": 15
+        },
+        "wall_ms": {
+          "mean": 29.618959411702775,
+          "n_scenes": 15
+        },
+        "score_cpu_ms": {
+          "mean": 1.9194100629628899,
+          "n_scenes": 15
+        },
+        "compile_cpu_ms": {
+          "mean": 24.28749095555587,
+          "n_scenes": 15
+        },
+        "change_from_llm_nominal": {
+          "mean": -14.224863139207557,
+          "n_scenes": 15
+        },
+        "fraction_change_from_llm_nominal": {
+          "mean": -0.12525351927106976,
+          "n_scenes": 15
+        }
+      },
+      "uniform_nominal_none": {
+        "C": {
+          "mean": 72.62592592592593,
+          "n_scenes": 15
+        },
+        "J": {
+          "mean": 84.16039673814687,
+          "n_scenes": 15
+        },
+        "test_J": {
+          "mean": 91.45243216388558,
+          "n_scenes": 15
+        },
+        "C_over_T": {
+          "mean": 0.8869461773514914,
+          "n_scenes": 15
+        },
+        "J_over_T": {
+          "mean": 1.0258319483366747,
+          "n_scenes": 15
+        },
+        "test_J_over_T": {
+          "mean": 1.1140763454374953,
+          "n_scenes": 15
+        },
+        "risk_evaluations": {
+          "mean": 256,
+          "n_scenes": 15
+        },
+        "evaluated_fraction": {
+          "mean": 1.0,
+          "n_scenes": 15
+        },
+        "cpu_ms": {
+          "mean": 37.61303549629622,
+          "n_scenes": 15
+        },
+        "wall_ms": {
+          "mean": 37.617772389893176,
+          "n_scenes": 15
+        },
+        "score_cpu_ms": {
+          "mean": 9.534232733333726,
+          "n_scenes": 15
+        },
+        "compile_cpu_ms": {
+          "mean": 24.751162225925764,
+          "n_scenes": 15
+        },
+        "change_from_llm_nominal": {
+          "mean": -13.844935950958455,
+          "n_scenes": 15
+        },
+        "fraction_change_from_llm_nominal": {
+          "mean": -0.12073458590001572,
+          "n_scenes": 15
+        }
+      },
+      "uniform_risk_none": {
+        "C": {
+          "mean": 72.35555555555555,
+          "n_scenes": 15
+        },
+        "J": {
+          "mean": 83.87003168371469,
+          "n_scenes": 15
+        },
+        "test_J": {
+          "mean": 91.15814713513281,
+          "n_scenes": 15
+        },
+        "C_over_T": {
+          "mean": 0.8828735009064135,
+          "n_scenes": 15
+        },
+        "J_over_T": {
+          "mean": 1.0220054725328072,
+          "n_scenes": 15
+        },
+        "test_J_over_T": {
+          "mean": 1.110311390509991,
+          "n_scenes": 15
+        },
+        "risk_evaluations": {
+          "mean": 256,
+          "n_scenes": 15
+        },
+        "evaluated_fraction": {
+          "mean": 1.0,
+          "n_scenes": 15
+        },
+        "cpu_ms": {
+          "mean": 37.779336040740766,
+          "n_scenes": 15
+        },
+        "wall_ms": {
+          "mean": 37.78556923692425,
+          "n_scenes": 15
+        },
+        "score_cpu_ms": {
+          "mean": 9.527133374074085,
+          "n_scenes": 15
+        },
+        "compile_cpu_ms": {
+          "mean": 25.023919299999516,
+          "n_scenes": 15
+        },
+        "change_from_llm_nominal": {
+          "mean": -14.139220979711212,
+          "n_scenes": 15
+        },
+        "fraction_change_from_llm_nominal": {
+          "mean": -0.12390339821313921,
+          "n_scenes": 15
+        }
+      },
+      "uniform_random": {
+        "C": {
+          "mean": 75.47037037037038,
+          "n_scenes": 15
+        },
+        "J": {
+          "mean": 87.12202767742451,
+          "n_scenes": 15
+        },
+        "test_J": {
+          "mean": 94.57440801638396,
+          "n_scenes": 15
+        },
+        "C_over_T": {
+          "mean": 0.9179961795786258,
+          "n_scenes": 15
+        },
+        "J_over_T": {
+          "mean": 1.0590260764936363,
+          "n_scenes": 15
+        },
+        "test_J_over_T": {
+          "mean": 1.1493066695836545,
+          "n_scenes": 15
+        },
+        "risk_evaluations": {
+          "mean": 256,
+          "n_scenes": 15
+        },
+        "evaluated_fraction": {
+          "mean": 1.0,
+          "n_scenes": 15
+        },
+        "cpu_ms": {
+          "mean": 37.309692459259274,
+          "n_scenes": 15
+        },
+        "wall_ms": {
+          "mean": 37.312079565944494,
+          "n_scenes": 15
+        },
+        "score_cpu_ms": {
+          "mean": 9.477914592593208,
+          "n_scenes": 15
+        },
+        "compile_cpu_ms": {
+          "mean": 25.222689207407292,
+          "n_scenes": 15
+        },
+        "change_from_llm_nominal": {
+          "mean": -10.722960098460067,
+          "n_scenes": 15
+        },
+        "fraction_change_from_llm_nominal": {
+          "mean": -0.09319583075965644,
+          "n_scenes": 15
+        }
+      }
+    },
+    "bedroom": {
+      "llm_nominal_none": {
+        "C": {
+          "mean": 48.28148148148148,
+          "n_scenes": 15
+        },
+        "J": {
+          "mean": 55.68218160735665,
+          "n_scenes": 15
+        },
+        "test_J": {
+          "mean": 60.33147470083389,
+          "n_scenes": 15
+        },
+        "C_over_T": {
+          "mean": 0.8668633350971694,
+          "n_scenes": 15
+        },
+        "J_over_T": {
+          "mean": 0.9985899562735762,
+          "n_scenes": 15
+        },
+        "test_J_over_T": {
+          "mean": 1.0815173688077282,
+          "n_scenes": 15
+        },
+        "risk_evaluations": {
+          "mean": 256,
+          "n_scenes": 15
+        },
+        "evaluated_fraction": {
+          "mean": 1.0,
+          "n_scenes": 15
+        },
+        "cpu_ms": {
+          "mean": 36.868751159259226,
+          "n_scenes": 15
+        },
+        "wall_ms": {
+          "mean": 36.87182744551036,
+          "n_scenes": 15
+        },
+        "score_cpu_ms": {
+          "mean": 9.110862862962762,
+          "n_scenes": 15
+        },
+        "compile_cpu_ms": {
+          "mean": 24.37237515925909,
+          "n_scenes": 15
+        },
+        "change_from_llm_nominal": {
+          "mean": -12.699435971117493,
+          "n_scenes": 15
+        },
+        "fraction_change_from_llm_nominal": {
+          "mean": -0.16020270517979626,
+          "n_scenes": 15
+        }
+      },
+      "llm_risk_none": {
+        "C": {
+          "mean": 47.95925925925926,
+          "n_scenes": 15
+        },
+        "J": {
+          "mean": 55.29713199699902,
+          "n_scenes": 15
+        },
+        "test_J": {
+          "mean": 59.95820197259555,
+          "n_scenes": 15
+        },
+        "C_over_T": {
+          "mean": 0.8609323838666655,
+          "n_scenes": 15
+        },
+        "J_over_T": {
+          "mean": 0.9925119054192238,
+          "n_scenes": 15
+        },
+        "test_J_over_T": {
+          "mean": 1.076169426376319,
+          "n_scenes": 15
+        },
+        "risk_evaluations": {
+          "mean": 256,
+          "n_scenes": 15
+        },
+        "evaluated_fraction": {
+          "mean": 1.0,
+          "n_scenes": 15
+        },
+        "cpu_ms": {
+          "mean": 37.16665288518518,
+          "n_scenes": 15
+        },
+        "wall_ms": {
+          "mean": 37.169849741514085,
+          "n_scenes": 15
+        },
+        "score_cpu_ms": {
+          "mean": 9.11355884074083,
+          "n_scenes": 15
+        },
+        "compile_cpu_ms": {
+          "mean": 24.854708322222457,
+          "n_scenes": 15
+        },
+        "change_from_llm_nominal": {
+          "mean": -13.072708699355823,
+          "n_scenes": 15
+        },
+        "fraction_change_from_llm_nominal": {
+          "mean": -0.16400117839457354,
+          "n_scenes": 15
+        }
+      },
+      "llm_risk_nominal": {
+        "C": {
+          "mean": 47.95925925925926,
+          "n_scenes": 15
+        },
+        "J": {
+          "mean": 55.29713199699902,
+          "n_scenes": 15
+        },
+        "test_J": {
+          "mean": 59.95820197259555,
+          "n_scenes": 15
+        },
+        "C_over_T": {
+          "mean": 0.8609323838666655,
+          "n_scenes": 15
+        },
+        "J_over_T": {
+          "mean": 0.9925119054192238,
+          "n_scenes": 15
+        },
+        "test_J_over_T": {
+          "mean": 1.076169426376319,
+          "n_scenes": 15
+        },
+        "risk_evaluations": {
+          "mean": 70.80740740740741,
+          "n_scenes": 15
+        },
+        "evaluated_fraction": {
+          "mean": 0.2765914351851852,
+          "n_scenes": 15
+        },
+        "cpu_ms": {
+          "mean": 28.93835417037038,
+          "n_scenes": 15
+        },
+        "wall_ms": {
+          "mean": 28.94136403445844,
+          "n_scenes": 15
+        },
+        "score_cpu_ms": {
+          "mean": 2.686786970370578,
+          "n_scenes": 15
+        },
+        "compile_cpu_ms": {
+          "mean": 23.510201185185245,
+          "n_scenes": 15
+        },
+        "change_from_llm_nominal": {
+          "mean": -13.072708699355823,
+          "n_scenes": 15
+        },
+        "fraction_change_from_llm_nominal": {
+          "mean": -0.16400117839457354,
+          "n_scenes": 15
+        }
+      },
+      "llm_risk_critical": {
+        "C": {
+          "mean": 47.95925925925926,
+          "n_scenes": 15
+        },
+        "J": {
+          "mean": 55.29713199699902,
+          "n_scenes": 15
+        },
+        "test_J": {
+          "mean": 59.95820197259555,
+          "n_scenes": 15
+        },
+        "C_over_T": {
+          "mean": 0.8609323838666655,
+          "n_scenes": 15
+        },
+        "J_over_T": {
+          "mean": 0.9925119054192238,
+          "n_scenes": 15
+        },
+        "test_J_over_T": {
+          "mean": 1.076169426376319,
+          "n_scenes": 15
+        },
+        "risk_evaluations": {
+          "mean": 53.32592592592592,
+          "n_scenes": 15
+        },
+        "evaluated_fraction": {
+          "mean": 0.20830439814814813,
+          "n_scenes": 15
+        },
+        "cpu_ms": {
+          "mean": 27.983893437037022,
+          "n_scenes": 15
+        },
+        "wall_ms": {
+          "mean": 27.986205369234085,
+          "n_scenes": 15
+        },
+        "score_cpu_ms": {
+          "mean": 2.0004902814813605,
+          "n_scenes": 15
+        },
+        "compile_cpu_ms": {
+          "mean": 22.62364109259181,
+          "n_scenes": 15
+        },
+        "change_from_llm_nominal": {
+          "mean": -13.072708699355823,
+          "n_scenes": 15
+        },
+        "fraction_change_from_llm_nominal": {
+          "mean": -0.16400117839457354,
+          "n_scenes": 15
+        }
+      },
+      "uniform_nominal_none": {
+        "C": {
+          "mean": 48.03333333333333,
+          "n_scenes": 15
+        },
+        "J": {
+          "mean": 55.30568200123724,
+          "n_scenes": 15
+        },
+        "test_J": {
+          "mean": 59.94306312695089,
+          "n_scenes": 15
+        },
+        "C_over_T": {
+          "mean": 0.8649311028809644,
+          "n_scenes": 15
+        },
+        "J_over_T": {
+          "mean": 0.9938544637647764,
+          "n_scenes": 15
+        },
+        "test_J_over_T": {
+          "mean": 1.076658918653331,
+          "n_scenes": 15
+        },
+        "risk_evaluations": {
+          "mean": 256,
+          "n_scenes": 15
+        },
+        "evaluated_fraction": {
+          "mean": 1.0,
+          "n_scenes": 15
+        },
+        "cpu_ms": {
+          "mean": 36.39919412592599,
+          "n_scenes": 15
+        },
+        "wall_ms": {
+          "mean": 36.40285771409118,
+          "n_scenes": 15
+        },
+        "score_cpu_ms": {
+          "mean": 9.098616018518289,
+          "n_scenes": 15
+        },
+        "compile_cpu_ms": {
+          "mean": 23.99408302222127,
+          "n_scenes": 15
+        },
+        "change_from_llm_nominal": {
+          "mean": -13.087847545000491,
+          "n_scenes": 15
+        },
+        "fraction_change_from_llm_nominal": {
+          "mean": -0.16376206163903187,
+          "n_scenes": 15
+        }
+      },
+      "uniform_risk_none": {
+        "C": {
+          "mean": 47.75185185185185,
+          "n_scenes": 15
+        },
+        "J": {
+          "mean": 55.092114526434074,
+          "n_scenes": 15
+        },
+        "test_J": {
+          "mean": 59.73100085018372,
+          "n_scenes": 15
+        },
+        "C_over_T": {
+          "mean": 0.8601209479496522,
+          "n_scenes": 15
+        },
+        "J_over_T": {
+          "mean": 0.9902326845544942,
+          "n_scenes": 15
+        },
+        "test_J_over_T": {
+          "mean": 1.0727715704811014,
+          "n_scenes": 15
+        },
+        "risk_evaluations": {
+          "mean": 256,
+          "n_scenes": 15
+        },
+        "evaluated_fraction": {
+          "mean": 1.0,
+          "n_scenes": 15
+        },
+        "cpu_ms": {
+          "mean": 36.04358517037034,
+          "n_scenes": 15
+        },
+        "wall_ms": {
+          "mean": 36.04837954734211,
+          "n_scenes": 15
+        },
+        "score_cpu_ms": {
+          "mean": 9.12262181481511,
+          "n_scenes": 15
+        },
+        "compile_cpu_ms": {
+          "mean": 23.748237277776923,
+          "n_scenes": 15
+        },
+        "change_from_llm_nominal": {
+          "mean": -13.299909821767661,
+          "n_scenes": 15
+        },
+        "fraction_change_from_llm_nominal": {
+          "mean": -0.16663251892780798,
+          "n_scenes": 15
+        }
+      },
+      "uniform_random": {
+        "C": {
+          "mean": 50.025925925925925,
+          "n_scenes": 15
+        },
+        "J": {
+          "mean": 57.2072296820477,
+          "n_scenes": 15
+        },
+        "test_J": {
+          "mean": 61.880206437753344,
+          "n_scenes": 15
+        },
+        "C_over_T": {
+          "mean": 0.892798934107474,
+          "n_scenes": 15
+        },
+        "J_over_T": {
+          "mean": 1.0203111530482858,
+          "n_scenes": 15
+        },
+        "test_J_over_T": {
+          "mean": 1.1036071267848049,
+          "n_scenes": 15
+        },
+        "risk_evaluations": {
+          "mean": 256,
+          "n_scenes": 15
+        },
+        "evaluated_fraction": {
+          "mean": 1.0,
+          "n_scenes": 15
+        },
+        "cpu_ms": {
+          "mean": 34.432730670370425,
+          "n_scenes": 15
+        },
+        "wall_ms": {
+          "mean": 34.43641334910084,
+          "n_scenes": 15
+        },
+        "score_cpu_ms": {
+          "mean": 9.037996644444474,
+          "n_scenes": 15
+        },
+        "compile_cpu_ms": {
+          "mean": 22.913402137037448,
+          "n_scenes": 15
+        },
+        "change_from_llm_nominal": {
+          "mean": -11.150704234198038,
+          "n_scenes": 15
+        },
+        "fraction_change_from_llm_nominal": {
+          "mean": -0.14316104151688924,
+          "n_scenes": 15
+        }
+      }
+    }
+  },
+  "contrasts": {
+    "primary_llm_risk_minus_nominal_search": {
+      "method_a": "llm_risk_none",
+      "method_b": "llm_nominal_none",
+      "difference": "a minus b",
+      "n_tasks": 81,
+      "budget": 256,
+      "metrics": {
+        "C": {
+          "mean": -0.37407407407407484,
+          "ci95": [
+            -0.9333333333333336,
+            0.2796296296296287
+          ],
+          "n_scenes": 30,
+          "bootstrap_draws": 10000,
+          "bootstrap_seed": 20260930
+        },
+        "test_J": {
+          "mean": -0.39703563978589307,
+          "ci95": [
+            -0.9465753107715089,
+            0.19818730349551608
+          ],
+          "n_scenes": 30,
+          "bootstrap_draws": 10000,
+          "bootstrap_seed": 20260930
+        },
+        "test_J_over_T": {
+          "mean": -0.005297855069815542,
+          "ci95": [
+            -0.011649867814947382,
+            0.0012459634145962461
+          ],
+          "n_scenes": 30,
+          "bootstrap_draws": 10000,
+          "bootstrap_seed": 20260930
+        },
+        "risk_evaluations": {
+          "mean": 0,
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "n_scenes": 30,
+          "bootstrap_draws": 10000,
+          "bootstrap_seed": 20260930
+        },
+        "cpu_ms": {
+          "mean": -0.4267486722222391,
+          "ci95": [
+            -1.5582786201389023,
+            0.7340165646759214
+          ],
+          "n_scenes": 30,
+          "bootstrap_draws": 10000,
+          "bootstrap_seed": 20260930
+        }
+      }
+    },
+    "uniform_risk_minus_nominal_search": {
+      "method_a": "uniform_risk_none",
+      "method_b": "uniform_nominal_none",
+      "difference": "a minus b",
+      "n_tasks": 81,
+      "budget": 256,
+      "metrics": {
+        "C": {
+          "mean": -0.2759259259259259,
+          "ci95": [
+            -0.6833333333333336,
+            0.12962962962963
+          ],
+          "n_scenes": 30,
+          "bootstrap_draws": 10000,
+          "bootstrap_seed": 20260930
+        },
+        "test_J": {
+          "mean": -0.2531736527599653,
+          "ci95": [
+            -0.6191750959796685,
+            0.12264164656560539
+          ],
+          "n_scenes": 30,
+          "bootstrap_draws": 10000,
+          "bootstrap_seed": 20260930
+        },
+        "test_J_over_T": {
+          "mean": -0.0038261515498668798,
+          "ci95": [
+            -0.008391513983870771,
+            0.0007617472686470949
+          ],
+          "n_scenes": 30,
+          "bootstrap_draws": 10000,
+          "bootstrap_seed": 20260930
+        },
+        "risk_evaluations": {
+          "mean": 0,
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "n_scenes": 30,
+          "bootstrap_draws": 10000,
+          "bootstrap_seed": 20260930
+        },
+        "cpu_ms": {
+          "mean": -0.09465420555554517,
+          "ci95": [
+            -1.2105097666666773,
+            0.9997830579629453
+          ],
+          "n_scenes": 30,
+          "bootstrap_draws": 10000,
+          "bootstrap_seed": 20260930
+        }
+      }
+    },
+    "llm_seed_minus_uniform_seed_risk_search": {
+      "method_a": "llm_risk_none",
+      "method_b": "uniform_risk_none",
+      "difference": "a minus b",
+      "n_tasks": 81,
+      "budget": 256,
+      "metrics": {
+        "C": {
+          "mean": 0.014814814814814637,
+          "ci95": [
+            -0.5277777777777785,
+            0.6055555555555558
+          ],
+          "n_scenes": 30,
+          "bootstrap_draws": 10000,
+          "bootstrap_seed": 20260930
+        },
+        "test_J": {
+          "mean": 0.07077948145774772,
+          "ci95": [
+            -0.5333486540646669,
+            0.7081505405296648
+          ],
+          "n_scenes": 30,
+          "bootstrap_draws": 10000,
+          "bootstrap_seed": 20260930
+        },
+        "test_J_over_T": {
+          "mean": 0.001113872627543991,
+          "ci95": [
+            -0.007198896200401536,
+            0.010431415680191552
+          ],
+          "n_scenes": 30,
+          "bootstrap_draws": 10000,
+          "bootstrap_seed": 20260930
+        },
+        "risk_evaluations": {
+          "mean": 0,
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "n_scenes": 30,
+          "bootstrap_draws": 10000,
+          "bootstrap_seed": 20260930
+        },
+        "cpu_ms": {
+          "mean": 0.7385632259259026,
+          "ci95": [
+            -0.2555655676851935,
+            1.710308916018504
+          ],
+          "n_scenes": 30,
+          "bootstrap_draws": 10000,
+          "bootstrap_seed": 20260930
+        }
+      }
+    },
+    "llm_risk_search_minus_uniform_pool": {
+      "method_a": "llm_risk_none",
+      "method_b": "uniform_random",
+      "difference": "a minus b",
+      "n_tasks": 81,
+      "budget": 256,
+      "metrics": {
+        "C": {
+          "mean": -2.67962962962963,
+          "ci95": [
+            -3.425925925925926,
+            -1.9796296296296307
+          ],
+          "n_scenes": 30,
+          "bootstrap_draws": 10000,
+          "bootstrap_seed": 20260930
+        },
+        "test_J": {
+          "mean": -2.711953752952637,
+          "ci95": [
+            -3.412333595302938,
+            -2.026928043076513
+          ],
+          "n_scenes": 30,
+          "bootstrap_draws": 10000,
+          "bootstrap_seed": 20260930
+        },
+        "test_J_over_T": {
+          "mean": -0.03380154506113949,
+          "ci95": [
+            -0.04353294186412564,
+            -0.023684975150452214
+          ],
+          "n_scenes": 30,
+          "bootstrap_draws": 10000,
+          "bootstrap_seed": 20260930
+        },
+        "risk_evaluations": {
+          "mean": 0,
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "n_scenes": 30,
+          "bootstrap_draws": 10000,
+          "bootstrap_seed": 20260930
+        },
+        "cpu_ms": {
+          "mean": 1.778812266666611,
+          "ci95": [
+            0.6649850521758865,
+            2.756336579814769
+          ],
+          "n_scenes": 30,
+          "bootstrap_draws": 10000,
+          "bootstrap_seed": 20260930
+        }
+      }
+    },
+    "critical_bound_minus_full_scoring": {
+      "method_a": "llm_risk_critical",
+      "method_b": "llm_risk_none",
+      "difference": "a minus b",
+      "n_tasks": 81,
+      "budget": 256,
+      "metrics": {
+        "C": {
+          "mean": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "n_scenes": 30,
+          "bootstrap_draws": 10000,
+          "bootstrap_seed": 20260930
+        },
+        "test_J": {
+          "mean": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "n_scenes": 30,
+          "bootstrap_draws": 10000,
+          "bootstrap_seed": 20260930
+        },
+        "test_J_over_T": {
+          "mean": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "n_scenes": 30,
+          "bootstrap_draws": 10000,
+          "bootstrap_seed": 20260930
+        },
+        "risk_evaluations": {
+          "mean": -204.57962962962964,
+          "ci95": [
+            -208.19259259259258,
+            -200.84810185185185
+          ],
+          "n_scenes": 30,
+          "bootstrap_draws": 10000,
+          "bootstrap_seed": 20260930
+        },
+        "cpu_ms": {
+          "mean": -8.85043851296294,
+          "ci95": [
+            -9.730541702407331,
+            -7.969850246018464
+          ],
+          "n_scenes": 30,
+          "bootstrap_draws": 10000,
+          "bootstrap_seed": 20260930
+        }
+      }
+    },
+    "critical_bound_minus_nominal_bound": {
+      "method_a": "llm_risk_critical",
+      "method_b": "llm_risk_nominal",
+      "difference": "a minus b",
+      "n_tasks": 81,
+      "budget": 256,
+      "metrics": {
+        "C": {
+          "mean": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "n_scenes": 30,
+          "bootstrap_draws": 10000,
+          "bootstrap_seed": 20260930
+        },
+        "test_J": {
+          "mean": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "n_scenes": 30,
+          "bootstrap_draws": 10000,
+          "bootstrap_seed": 20260930
+        },
+        "test_J_over_T": {
+          "mean": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "n_scenes": 30,
+          "bootstrap_draws": 10000,
+          "bootstrap_seed": 20260930
+        },
+        "risk_evaluations": {
+          "mean": -19.43148148148148,
+          "ci95": [
+            -21.62421296296296,
+            -17.244398148148147
+          ],
+          "n_scenes": 30,
+          "bootstrap_draws": 10000,
+          "bootstrap_seed": 20260930
+        },
+        "cpu_ms": {
+          "mean": -0.3127851518518402,
+          "ci95": [
+            -1.2782650276851635,
+            0.6163093530555427
+          ],
+          "n_scenes": 30,
+          "bootstrap_draws": 10000,
+          "bootstrap_seed": 20260930
+        }
+      }
+    }
+  },
+  "pools": {
+    "llm_nominal": {
+      "C": {
+        "mean": 73.11666666666666,
+        "n_scenes": 30
+      },
+      "J": {
+        "mean": 82.78971594174239,
+        "n_scenes": 30
+      },
+      "test_J": {
+        "mean": 89.1641393933977,
+        "n_scenes": 30
+      },
+      "test_J_over_T": {
+        "mean": 1.2822016940457208,
+        "n_scenes": 30
+      }
+    },
+    "llm_risk": {
+      "C": {
+        "mean": 73.25,
+        "n_scenes": 30
+      },
+      "J": {
+        "mean": 82.59824593194035,
+        "n_scenes": 30
+      },
+      "test_J": {
+        "mean": 88.86283240493144,
+        "n_scenes": 30
+      },
+      "test_J_over_T": {
+        "mean": 1.2783129279618222,
+        "n_scenes": 30
+      }
+    },
+    "uniform_nominal": {
+      "C": {
+        "mean": 74.62222222222222,
+        "n_scenes": 30
+      },
+      "J": {
+        "mean": 83.82102401474025,
+        "n_scenes": 30
+      },
+      "test_J": {
+        "mean": 90.01064099872546,
+        "n_scenes": 30
+      },
+      "test_J_over_T": {
+        "mean": 1.3075450745557722,
+        "n_scenes": 30
+      }
+    },
+    "uniform_risk": {
+      "C": {
+        "mean": 74.70555555555556,
+        "n_scenes": 30
+      },
+      "J": {
+        "mean": 83.78146080200032,
+        "n_scenes": 30
+      },
+      "test_J": {
+        "mean": 89.90574219448388,
+        "n_scenes": 30
+      },
+      "test_J_over_T": {
+        "mean": 1.306333665724225,
+        "n_scenes": 30
+      }
+    }
+  },
+  "correctness": {
+    "false_prunes": 0,
+    "beam_or_candidate_trace_mismatches": 0,
+    "all_reported_pruning_assertions_checked": true
+  },
+  "efficiency_256": {
+    "llm_risk_nominal": {
+      "evaluations_fraction": 0.2767650462962963,
+      "cpu_ratio_to_full": 0.7732364420451641,
+      "score_cpu_ratio_to_full": 0.2938146799204615
+    },
+    "llm_risk_critical": {
+      "evaluations_fraction": 0.20086082175925926,
+      "cpu_ratio_to_full": 0.7649287407472355,
+      "score_cpu_ratio_to_full": 0.2104051529961151
+    }
+  }
+}

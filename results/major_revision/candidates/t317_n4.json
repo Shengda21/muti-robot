@@ -1,0 +1,3216 @@
+{
+  "task_id": "t317_n4",
+  "scene": "FloorPlan317",
+  "model": "qwen3-vl-8b-instruct",
+  "prompt": "Allocate these household transfers to three robots. Return JSON only.\nInstruction: Move AlarmClock to Drawer; Book to SideTable; CD to Drawer; CellPhone to SideTable, and leave the destination containers closed.\nJobs: [{\"id\":\"j0\",\"object\":\"AlarmClock\",\"destination\":\"Drawer\"},{\"id\":\"j1\",\"object\":\"Book\",\"destination\":\"SideTable\"},{\"id\":\"j2\",\"object\":\"CD\",\"destination\":\"Drawer\"},{\"id\":\"j3\",\"object\":\"CellPhone\",\"destination\":\"SideTable\"}]\nRobots 0,1,2 can each carry one object. Robots 0 and 2 can open/close containers. Each job is indivisible: one robot picks and places. A compiler adds required container actions. Provide 12 distinct allocations and job priority orders. Return {\"plans\":[...]} with each plan containing \"robots\" (one robot ID for every job, indexed by job ID), \"order\" (every job ID exactly once), \"opener\" (0 or 2), \"closer\" (0 or 2). Vary both assignments and order. No explanation.",
+  "configuration": {
+    "model": "qwen3-vl-8b-instruct",
+    "temperature": 0.7,
+    "seed": 20264104,
+    "max_tokens": 3200,
+    "response_format": {
+      "type": "json_schema",
+      "json_schema": {
+        "name": "plans",
+        "strict": true,
+        "schema": {
+          "type": "object",
+          "properties": {
+            "plans": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "robots": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer",
+                      "enum": [
+                        0,
+                        1,
+                        2
+                      ]
+                    },
+                    "minItems": 4,
+                    "maxItems": 4
+                  },
+                  "order": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "j0",
+                        "j1",
+                        "j2",
+                        "j3"
+                      ]
+                    },
+                    "minItems": 4,
+                    "maxItems": 4
+                  },
+                  "opener": {
+                    "type": "integer",
+                    "enum": [
+                      0,
+                      2
+                    ]
+                  },
+                  "closer": {
+                    "type": "integer",
+                    "enum": [
+                      0,
+                      2
+                    ]
+                  }
+                },
+                "required": [
+                  "robots",
+                  "order",
+                  "opener",
+                  "closer"
+                ],
+                "additionalProperties": false
+              },
+              "minItems": 12,
+              "maxItems": 12
+            }
+          },
+          "required": [
+            "plans"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  },
+  "candidates": [
+    {
+      "actions": [
+        {
+          "id": "open_0",
+          "robot": 0,
+          "skill": "OpenObject",
+          "target": "Drawer|+00.41|+00.68|-01.63",
+          "objects": [
+            "Drawer|+00.41|+00.68|-01.63"
+          ],
+          "duration": 7.0,
+          "deps": [],
+          "navigation_steps": 6,
+          "grid_start": [
+            -1.0,
+            -1.0
+          ],
+          "grid_end": [
+            0.5,
+            -1.0
+          ]
+        },
+        {
+          "id": "j0_pick",
+          "robot": 0,
+          "skill": "PickupObject",
+          "target": "AlarmClock|+02.19|+00.56|+01.23",
+          "objects": [
+            "AlarmClock|+02.19|+00.56|+01.23"
+          ],
+          "duration": 19.0,
+          "deps": [],
+          "navigation_steps": 18,
+          "grid_start": [
+            0.5,
+            -1.0
+          ],
+          "grid_end": [
+            1.75,
+            1.25
+          ],
+          "job": "j0"
+        },
+        {
+          "id": "j0_put",
+          "robot": 0,
+          "skill": "PutObject",
+          "target": "Drawer|+00.41|+00.68|-01.63",
+          "objects": [
+            "Drawer|+00.41|+00.68|-01.63",
+            "AlarmClock|+02.19|+00.56|+01.23"
+          ],
+          "duration": 19.0,
+          "deps": [
+            "j0_pick",
+            "open_0"
+          ],
+          "navigation_steps": 18,
+          "grid_start": [
+            1.75,
+            1.25
+          ],
+          "grid_end": [
+            0.5,
+            -1.0
+          ],
+          "job": "j0",
+          "carried_object": "AlarmClock|+02.19|+00.56|+01.23"
+        },
+        {
+          "id": "j1_pick",
+          "robot": 1,
+          "skill": "PickupObject",
+          "target": "Book|+00.07|+00.97|-01.74",
+          "objects": [
+            "Book|+00.07|+00.97|-01.74"
+          ],
+          "duration": 8.0,
+          "deps": [],
+          "navigation_steps": 7,
+          "grid_start": [
+            -1.25,
+            -0.5
+          ],
+          "grid_end": [
+            0.0,
+            -1.0
+          ],
+          "job": "j1"
+        },
+        {
+          "id": "j1_put",
+          "robot": 1,
+          "skill": "PutObject",
+          "target": "SideTable|+02.24|00.00|+01.33",
+          "objects": [
+            "SideTable|+02.24|00.00|+01.33",
+            "Book|+00.07|+00.97|-01.74"
+          ],
+          "duration": 17.0,
+          "deps": [
+            "j1_pick"
+          ],
+          "navigation_steps": 16,
+          "grid_start": [
+            0.0,
+            -1.0
+          ],
+          "grid_end": [
+            1.75,
+            1.25
+          ],
+          "job": "j1",
+          "carried_object": "Book|+00.07|+00.97|-01.74"
+        },
+        {
+          "id": "j2_pick",
+          "robot": 0,
+          "skill": "PickupObject",
+          "target": "CD|-00.20|+00.97|-01.87",
+          "objects": [
+            "CD|-00.20|+00.97|-01.87"
+          ],
+          "duration": 4.0,
+          "deps": [],
+          "navigation_steps": 3,
+          "grid_start": [
+            0.5,
+            -1.0
+          ],
+          "grid_end": [
+            -0.25,
+            -1.0
+          ],
+          "job": "j2"
+        },
+        {
+          "id": "j2_put",
+          "robot": 0,
+          "skill": "PutObject",
+          "target": "Drawer|+00.41|+00.68|-01.63",
+          "objects": [
+            "Drawer|+00.41|+00.68|-01.63",
+            "CD|-00.20|+00.97|-01.87"
+          ],
+          "duration": 4.0,
+          "deps": [
+            "j2_pick",
+            "open_0",
+            "j0_put"
+          ],
+          "navigation_steps": 3,
+          "grid_start": [
+            -0.25,
+            -1.0
+          ],
+          "grid_end": [
+            0.5,
+            -1.0
+          ],
+          "job": "j2",
+          "carried_object": "CD|-00.20|+00.97|-01.87"
+        },
+        {
+          "id": "j3_pick",
+          "robot": 2,
+          "skill": "PickupObject",
+          "target": "CellPhone|+00.70|+00.97|-01.82",
+          "objects": [
+            "CellPhone|+00.70|+00.97|-01.82"
+          ],
+          "duration": 21.0,
+          "deps": [],
+          "navigation_steps": 20,
+          "grid_start": [
+            -1.5,
+            0.75
+          ],
+          "grid_end": [
+            1.25,
+            -1.5
+          ],
+          "job": "j3"
+        },
+        {
+          "id": "j3_put",
+          "robot": 2,
+          "skill": "PutObject",
+          "target": "SideTable|+02.24|00.00|+01.33",
+          "objects": [
+            "SideTable|+02.24|00.00|+01.33",
+            "CellPhone|+00.70|+00.97|-01.82"
+          ],
+          "duration": 24.0,
+          "deps": [
+            "j3_pick",
+            "j1_put"
+          ],
+          "navigation_steps": 23,
+          "grid_start": [
+            1.25,
+            -1.5
+          ],
+          "grid_end": [
+            1.75,
+            1.25
+          ],
+          "job": "j3",
+          "carried_object": "CellPhone|+00.70|+00.97|-01.82"
+        },
+        {
+          "id": "close_0",
+          "robot": 0,
+          "skill": "CloseObject",
+          "target": "Drawer|+00.41|+00.68|-01.63",
+          "objects": [
+            "Drawer|+00.41|+00.68|-01.63"
+          ],
+          "duration": 1.0,
+          "deps": [
+            "j0_put",
+            "j2_put"
+          ],
+          "navigation_steps": 0,
+          "grid_start": [
+            0.5,
+            -1.0
+          ],
+          "grid_end": [
+            0.5,
+            -1.0
+          ]
+        }
+      ],
+      "candidate": {
+        "robots": [
+          0,
+          1,
+          0,
+          2
+        ],
+        "order": [
+          "j0",
+          "j1",
+          "j2",
+          "j3"
+        ],
+        "opener": 0,
+        "closer": 0
+      },
+      "task_id": "t317_n4",
+      "robot_ids": [
+        0,
+        1,
+        2
+      ],
+      "cost_model": "static-grid-0.25m-plus-manipulation-v1"
+    },
+    {
+      "actions": [
+        {
+          "id": "open_0",
+          "robot": 0,
+          "skill": "OpenObject",
+          "target": "Drawer|+00.41|+00.68|-01.63",
+          "objects": [
+            "Drawer|+00.41|+00.68|-01.63"
+          ],
+          "duration": 7.0,
+          "deps": [],
+          "navigation_steps": 6,
+          "grid_start": [
+            -1.0,
+            -1.0
+          ],
+          "grid_end": [
+            0.5,
+            -1.0
+          ]
+        },
+        {
+          "id": "j0_pick",
+          "robot": 0,
+          "skill": "PickupObject",
+          "target": "AlarmClock|+02.19|+00.56|+01.23",
+          "objects": [
+            "AlarmClock|+02.19|+00.56|+01.23"
+          ],
+          "duration": 19.0,
+          "deps": [],
+          "navigation_steps": 18,
+          "grid_start": [
+            0.5,
+            -1.0
+          ],
+          "grid_end": [
+            1.75,
+            1.25
+          ],
+          "job": "j0"
+        },
+        {
+          "id": "j0_put",
+          "robot": 0,
+          "skill": "PutObject",
+          "target": "Drawer|+00.41|+00.68|-01.63",
+          "objects": [
+            "Drawer|+00.41|+00.68|-01.63",
+            "AlarmClock|+02.19|+00.56|+01.23"
+          ],
+          "duration": 19.0,
+          "deps": [
+            "j0_pick",
+            "open_0"
+          ],
+          "navigation_steps": 18,
+          "grid_start": [
+            1.75,
+            1.25
+          ],
+          "grid_end": [
+            0.5,
+            -1.0
+          ],
+          "job": "j0",
+          "carried_object": "AlarmClock|+02.19|+00.56|+01.23"
+        },
+        {
+          "id": "j2_pick",
+          "robot": 0,
+          "skill": "PickupObject",
+          "target": "CD|-00.20|+00.97|-01.87",
+          "objects": [
+            "CD|-00.20|+00.97|-01.87"
+          ],
+          "duration": 4.0,
+          "deps": [],
+          "navigation_steps": 3,
+          "grid_start": [
+            0.5,
+            -1.0
+          ],
+          "grid_end": [
+            -0.25,
+            -1.0
+          ],
+          "job": "j2"
+        },
+        {
+          "id": "j2_put",
+          "robot": 0,
+          "skill": "PutObject",
+          "target": "Drawer|+00.41|+00.68|-01.63",
+          "objects": [
+            "Drawer|+00.41|+00.68|-01.63",
+            "CD|-00.20|+00.97|-01.87"
+          ],
+          "duration": 4.0,
+          "deps": [
+            "j2_pick",
+            "open_0",
+            "j0_put"
+          ],
+          "navigation_steps": 3,
+          "grid_start": [
+            -0.25,
+            -1.0
+          ],
+          "grid_end": [
+            0.5,
+            -1.0
+          ],
+          "job": "j2",
+          "carried_object": "CD|-00.20|+00.97|-01.87"
+        },
+        {
+          "id": "j1_pick",
+          "robot": 1,
+          "skill": "PickupObject",
+          "target": "Book|+00.07|+00.97|-01.74",
+          "objects": [
+            "Book|+00.07|+00.97|-01.74"
+          ],
+          "duration": 8.0,
+          "deps": [],
+          "navigation_steps": 7,
+          "grid_start": [
+            -1.25,
+            -0.5
+          ],
+          "grid_end": [
+            0.0,
+            -1.0
+          ],
+          "job": "j1"
+        },
+        {
+          "id": "j1_put",
+          "robot": 1,
+          "skill": "PutObject",
+          "target": "SideTable|+02.24|00.00|+01.33",
+          "objects": [
+            "SideTable|+02.24|00.00|+01.33",
+            "Book|+00.07|+00.97|-01.74"
+          ],
+          "duration": 17.0,
+          "deps": [
+            "j1_pick"
+          ],
+          "navigation_steps": 16,
+          "grid_start": [
+            0.0,
+            -1.0
+          ],
+          "grid_end": [
+            1.75,
+            1.25
+          ],
+          "job": "j1",
+          "carried_object": "Book|+00.07|+00.97|-01.74"
+        },
+        {
+          "id": "j3_pick",
+          "robot": 2,
+          "skill": "PickupObject",
+          "target": "CellPhone|+00.70|+00.97|-01.82",
+          "objects": [
+            "CellPhone|+00.70|+00.97|-01.82"
+          ],
+          "duration": 21.0,
+          "deps": [],
+          "navigation_steps": 20,
+          "grid_start": [
+            -1.5,
+            0.75
+          ],
+          "grid_end": [
+            1.25,
+            -1.5
+          ],
+          "job": "j3"
+        },
+        {
+          "id": "j3_put",
+          "robot": 2,
+          "skill": "PutObject",
+          "target": "SideTable|+02.24|00.00|+01.33",
+          "objects": [
+            "SideTable|+02.24|00.00|+01.33",
+            "CellPhone|+00.70|+00.97|-01.82"
+          ],
+          "duration": 24.0,
+          "deps": [
+            "j3_pick",
+            "j1_put"
+          ],
+          "navigation_steps": 23,
+          "grid_start": [
+            1.25,
+            -1.5
+          ],
+          "grid_end": [
+            1.75,
+            1.25
+          ],
+          "job": "j3",
+          "carried_object": "CellPhone|+00.70|+00.97|-01.82"
+        },
+        {
+          "id": "close_0",
+          "robot": 0,
+          "skill": "CloseObject",
+          "target": "Drawer|+00.41|+00.68|-01.63",
+          "objects": [
+            "Drawer|+00.41|+00.68|-01.63"
+          ],
+          "duration": 1.0,
+          "deps": [
+            "j0_put",
+            "j2_put"
+          ],
+          "navigation_steps": 0,
+          "grid_start": [
+            0.5,
+            -1.0
+          ],
+          "grid_end": [
+            0.5,
+            -1.0
+          ]
+        }
+      ],
+      "candidate": {
+        "robots": [
+          0,
+          1,
+          0,
+          2
+        ],
+        "order": [
+          "j0",
+          "j2",
+          "j1",
+          "j3"
+        ],
+        "opener": 0,
+        "closer": 0
+      },
+      "task_id": "t317_n4",
+      "robot_ids": [
+        0,
+        1,
+        2
+      ],
+      "cost_model": "static-grid-0.25m-plus-manipulation-v1"
+    },
+    {
+      "actions": [
+        {
+          "id": "open_0",
+          "robot": 0,
+          "skill": "OpenObject",
+          "target": "Drawer|+00.41|+00.68|-01.63",
+          "objects": [
+            "Drawer|+00.41|+00.68|-01.63"
+          ],
+          "duration": 7.0,
+          "deps": [],
+          "navigation_steps": 6,
+          "grid_start": [
+            -1.0,
+            -1.0
+          ],
+          "grid_end": [
+            0.5,
+            -1.0
+          ]
+        },
+        {
+          "id": "j1_pick",
+          "robot": 1,
+          "skill": "PickupObject",
+          "target": "Book|+00.07|+00.97|-01.74",
+          "objects": [
+            "Book|+00.07|+00.97|-01.74"
+          ],
+          "duration": 8.0,
+          "deps": [],
+          "navigation_steps": 7,
+          "grid_start": [
+            -1.25,
+            -0.5
+          ],
+          "grid_end": [
+            0.0,
+            -1.0
+          ],
+          "job": "j1"
+        },
+        {
+          "id": "j1_put",
+          "robot": 1,
+          "skill": "PutObject",
+          "target": "SideTable|+02.24|00.00|+01.33",
+          "objects": [
+            "SideTable|+02.24|00.00|+01.33",
+            "Book|+00.07|+00.97|-01.74"
+          ],
+          "duration": 17.0,
+          "deps": [
+            "j1_pick"
+          ],
+          "navigation_steps": 16,
+          "grid_start": [
+            0.0,
+            -1.0
+          ],
+          "grid_end": [
+            1.75,
+            1.25
+          ],
+          "job": "j1",
+          "carried_object": "Book|+00.07|+00.97|-01.74"
+        },
+        {
+          "id": "j0_pick",
+          "robot": 0,
+          "skill": "PickupObject",
+          "target": "AlarmClock|+02.19|+00.56|+01.23",
+          "objects": [
+            "AlarmClock|+02.19|+00.56|+01.23"
+          ],
+          "duration": 19.0,
+          "deps": [],
+          "navigation_steps": 18,
+          "grid_start": [
+            0.5,
+            -1.0
+          ],
+          "grid_end": [
+            1.75,
+            1.25
+          ],
+          "job": "j0"
+        },
+        {
+          "id": "j0_put",
+          "robot": 0,
+          "skill": "PutObject",
+          "target": "Drawer|+00.41|+00.68|-01.63",
+          "objects": [
+            "Drawer|+00.41|+00.68|-01.63",
+            "AlarmClock|+02.19|+00.56|+01.23"
+          ],
+          "duration": 19.0,
+          "deps": [
+            "j0_pick",
+            "open_0"
+          ],
+          "navigation_steps": 18,
+          "grid_start": [
+            1.75,
+            1.25
+          ],
+          "grid_end": [
+            0.5,
+            -1.0
+          ],
+          "job": "j0",
+          "carried_object": "AlarmClock|+02.19|+00.56|+01.23"
+        },
+        {
+          "id": "j2_pick",
+          "robot": 0,
+          "skill": "PickupObject",
+          "target": "CD|-00.20|+00.97|-01.87",
+          "objects": [
+            "CD|-00.20|+00.97|-01.87"
+          ],
+          "duration": 4.0,
+          "deps": [],
+          "navigation_steps": 3,
+          "grid_start": [
+            0.5,
+            -1.0
+          ],
+          "grid_end": [
+            -0.25,
+            -1.0
+          ],
+          "job": "j2"
+        },
+        {
+          "id": "j2_put",
+          "robot": 0,
+          "skill": "PutObject",
+          "target": "Drawer|+00.41|+00.68|-01.63",
+          "objects": [
+            "Drawer|+00.41|+00.68|-01.63",
+            "CD|-00.20|+00.97|-01.87"
+          ],
+          "duration": 4.0,
+          "deps": [
+            "j2_pick",
+            "open_0",
+            "j0_put"
+          ],
+          "navigation_steps": 3,
+          "grid_start": [
+            -0.25,
+            -1.0
+          ],
+          "grid_end": [
+            0.5,
+            -1.0
+          ],
+          "job": "j2",
+          "carried_object": "CD|-00.20|+00.97|-01.87"
+        },
+        {
+          "id": "j3_pick",
+          "robot": 2,
+          "skill": "PickupObject",
+          "target": "CellPhone|+00.70|+00.97|-01.82",
+          "objects": [
+            "CellPhone|+00.70|+00.97|-01.82"
+          ],
+          "duration": 21.0,
+          "deps": [],
+          "navigation_steps": 20,
+          "grid_start": [
+            -1.5,
+            0.75
+          ],
+          "grid_end": [
+            1.25,
+            -1.5
+          ],
+          "job": "j3"
+        },
+        {
+          "id": "j3_put",
+          "robot": 2,
+          "skill": "PutObject",
+          "target": "SideTable|+02.24|00.00|+01.33",
+          "objects": [
+            "SideTable|+02.24|00.00|+01.33",
+            "CellPhone|+00.70|+00.97|-01.82"
+          ],
+          "duration": 24.0,
+          "deps": [
+            "j3_pick",
+            "j1_put"
+          ],
+          "navigation_steps": 23,
+          "grid_start": [
+            1.25,
+            -1.5
+          ],
+          "grid_end": [
+            1.75,
+            1.25
+          ],
+          "job": "j3",
+          "carried_object": "CellPhone|+00.70|+00.97|-01.82"
+        },
+        {
+          "id": "close_0",
+          "robot": 0,
+          "skill": "CloseObject",
+          "target": "Drawer|+00.41|+00.68|-01.63",
+          "objects": [
+            "Drawer|+00.41|+00.68|-01.63"
+          ],
+          "duration": 1.0,
+          "deps": [
+            "j0_put",
+            "j2_put"
+          ],
+          "navigation_steps": 0,
+          "grid_start": [
+            0.5,
+            -1.0
+          ],
+          "grid_end": [
+            0.5,
+            -1.0
+          ]
+        }
+      ],
+      "candidate": {
+        "robots": [
+          0,
+          1,
+          0,
+          2
+        ],
+        "order": [
+          "j1",
+          "j0",
+          "j2",
+          "j3"
+        ],
+        "opener": 0,
+        "closer": 0
+      },
+      "task_id": "t317_n4",
+      "robot_ids": [
+        0,
+        1,
+        2
+      ],
+      "cost_model": "static-grid-0.25m-plus-manipulation-v1"
+    },
+    {
+      "actions": [
+        {
+          "id": "open_0",
+          "robot": 0,
+          "skill": "OpenObject",
+          "target": "Drawer|+00.41|+00.68|-01.63",
+          "objects": [
+            "Drawer|+00.41|+00.68|-01.63"
+          ],
+          "duration": 7.0,
+          "deps": [],
+          "navigation_steps": 6,
+          "grid_start": [
+            -1.0,
+            -1.0
+          ],
+          "grid_end": [
+            0.5,
+            -1.0
+          ]
+        },
+        {
+          "id": "j1_pick",
+          "robot": 1,
+          "skill": "PickupObject",
+          "target": "Book|+00.07|+00.97|-01.74",
+          "objects": [
+            "Book|+00.07|+00.97|-01.74"
+          ],
+          "duration": 8.0,
+          "deps": [],
+          "navigation_steps": 7,
+          "grid_start": [
+            -1.25,
+            -0.5
+          ],
+          "grid_end": [
+            0.0,
+            -1.0
+          ],
+          "job": "j1"
+        },
+        {
+          "id": "j1_put",
+          "robot": 1,
+          "skill": "PutObject",
+          "target": "SideTable|+02.24|00.00|+01.33",
+          "objects": [
+            "SideTable|+02.24|00.00|+01.33",
+            "Book|+00.07|+00.97|-01.74"
+          ],
+          "duration": 17.0,
+          "deps": [
+            "j1_pick"
+          ],
+          "navigation_steps": 16,
+          "grid_start": [
+            0.0,
+            -1.0
+          ],
+          "grid_end": [
+            1.75,
+            1.25
+          ],
+          "job": "j1",
+          "carried_object": "Book|+00.07|+00.97|-01.74"
+        },
+        {
+          "id": "j2_pick",
+          "robot": 0,
+          "skill": "PickupObject",
+          "target": "CD|-00.20|+00.97|-01.87",
+          "objects": [
+            "CD|-00.20|+00.97|-01.87"
+          ],
+          "duration": 4.0,
+          "deps": [],
+          "navigation_steps": 3,
+          "grid_start": [
+            0.5,
+            -1.0
+          ],
+          "grid_end": [
+            -0.25,
+            -1.0
+          ],
+          "job": "j2"
+        },
+        {
+          "id": "j2_put",
+          "robot": 0,
+          "skill": "PutObject",
+          "target": "Drawer|+00.41|+00.68|-01.63",
+          "objects": [
+            "Drawer|+00.41|+00.68|-01.63",
+            "CD|-00.20|+00.97|-01.87"
+          ],
+          "duration": 4.0,
+          "deps": [
+            "j2_pick",
+            "open_0"
+          ],
+          "navigation_steps": 3,
+          "grid_start": [
+            -0.25,
+            -1.0
+          ],
+          "grid_end": [
+            0.5,
+            -1.0
+          ],
+          "job": "j2",
+          "carried_object": "CD|-00.20|+00.97|-01.87"
+        },
+        {
+          "id": "j0_pick",
+          "robot": 0,
+          "skill": "PickupObject",
+          "target": "AlarmClock|+02.19|+00.56|+01.23",
+          "objects": [
+            "AlarmClock|+02.19|+00.56|+01.23"
+          ],
+          "duration": 19.0,
+          "deps": [],
+          "navigation_steps": 18,
+          "grid_start": [
+            0.5,
+            -1.0
+          ],
+          "grid_end": [
+            1.75,
+            1.25
+          ],
+          "job": "j0"
+        },
+        {
+          "id": "j0_put",
+          "robot": 0,
+          "skill": "PutObject",
+          "target": "Drawer|+00.41|+00.68|-01.63",
+          "objects": [
+            "Drawer|+00.41|+00.68|-01.63",
+            "AlarmClock|+02.19|+00.56|+01.23"
+          ],
+          "duration": 19.0,
+          "deps": [
+            "j0_pick",
+            "open_0",
+            "j2_put"
+          ],
+          "navigation_steps": 18,
+          "grid_start": [
+            1.75,
+            1.25
+          ],
+          "grid_end": [
+            0.5,
+            -1.0
+          ],
+          "job": "j0",
+          "carried_object": "AlarmClock|+02.19|+00.56|+01.23"
+        },
+        {
+          "id": "j3_pick",
+          "robot": 2,
+          "skill": "PickupObject",
+          "target": "CellPhone|+00.70|+00.97|-01.82",
+          "objects": [
+            "CellPhone|+00.70|+00.97|-01.82"
+          ],
+          "duration": 21.0,
+          "deps": [],
+          "navigation_steps": 20,
+          "grid_start": [
+            -1.5,
+            0.75
+          ],
+          "grid_end": [
+            1.25,
+            -1.5
+          ],
+          "job": "j3"
+        },
+        {
+          "id": "j3_put",
+          "robot": 2,
+          "skill": "PutObject",
+          "target": "SideTable|+02.24|00.00|+01.33",
+          "objects": [
+            "SideTable|+02.24|00.00|+01.33",
+            "CellPhone|+00.70|+00.97|-01.82"
+          ],
+          "duration": 24.0,
+          "deps": [
+            "j3_pick",
+            "j1_put"
+          ],
+          "navigation_steps": 23,
+          "grid_start": [
+            1.25,
+            -1.5
+          ],
+          "grid_end": [
+            1.75,
+            1.25
+          ],
+          "job": "j3",
+          "carried_object": "CellPhone|+00.70|+00.97|-01.82"
+        },
+        {
+          "id": "close_0",
+          "robot": 0,
+          "skill": "CloseObject",
+          "target": "Drawer|+00.41|+00.68|-01.63",
+          "objects": [
+            "Drawer|+00.41|+00.68|-01.63"
+          ],
+          "duration": 1.0,
+          "deps": [
+            "j2_put",
+            "j0_put"
+          ],
+          "navigation_steps": 0,
+          "grid_start": [
+            0.5,
+            -1.0
+          ],
+          "grid_end": [
+            0.5,
+            -1.0
+          ]
+        }
+      ],
+      "candidate": {
+        "robots": [
+          0,
+          1,
+          0,
+          2
+        ],
+        "order": [
+          "j1",
+          "j2",
+          "j0",
+          "j3"
+        ],
+        "opener": 0,
+        "closer": 0
+      },
+      "task_id": "t317_n4",
+      "robot_ids": [
+        0,
+        1,
+        2
+      ],
+      "cost_model": "static-grid-0.25m-plus-manipulation-v1"
+    },
+    {
+      "actions": [
+        {
+          "id": "open_0",
+          "robot": 0,
+          "skill": "OpenObject",
+          "target": "Drawer|+00.41|+00.68|-01.63",
+          "objects": [
+            "Drawer|+00.41|+00.68|-01.63"
+          ],
+          "duration": 7.0,
+          "deps": [],
+          "navigation_steps": 6,
+          "grid_start": [
+            -1.0,
+            -1.0
+          ],
+          "grid_end": [
+            0.5,
+            -1.0
+          ]
+        },
+        {
+          "id": "j2_pick",
+          "robot": 0,
+          "skill": "PickupObject",
+          "target": "CD|-00.20|+00.97|-01.87",
+          "objects": [
+            "CD|-00.20|+00.97|-01.87"
+          ],
+          "duration": 4.0,
+          "deps": [],
+          "navigation_steps": 3,
+          "grid_start": [
+            0.5,
+            -1.0
+          ],
+          "grid_end": [
+            -0.25,
+            -1.0
+          ],
+          "job": "j2"
+        },
+        {
+          "id": "j2_put",
+          "robot": 0,
+          "skill": "PutObject",
+          "target": "Drawer|+00.41|+00.68|-01.63",
+          "objects": [
+            "Drawer|+00.41|+00.68|-01.63",
+            "CD|-00.20|+00.97|-01.87"
+          ],
+          "duration": 4.0,
+          "deps": [
+            "j2_pick",
+            "open_0"
+          ],
+          "navigation_steps": 3,
+          "grid_start": [
+            -0.25,
+            -1.0
+          ],
+          "grid_end": [
+            0.5,
+            -1.0
+          ],
+          "job": "j2",
+          "carried_object": "CD|-00.20|+00.97|-01.87"
+        },
+        {
+          "id": "j0_pick",
+          "robot": 0,
+          "skill": "PickupObject",
+          "target": "AlarmClock|+02.19|+00.56|+01.23",
+          "objects": [
+            "AlarmClock|+02.19|+00.56|+01.23"
+          ],
+          "duration": 19.0,
+          "deps": [],
+          "navigation_steps": 18,
+          "grid_start": [
+            0.5,
+            -1.0
+          ],
+          "grid_end": [
+            1.75,
+            1.25
+          ],
+          "job": "j0"
+        },
+        {
+          "id": "j0_put",
+          "robot": 0,
+          "skill": "PutObject",
+          "target": "Drawer|+00.41|+00.68|-01.63",
+          "objects": [
+            "Drawer|+00.41|+00.68|-01.63",
+            "AlarmClock|+02.19|+00.56|+01.23"
+          ],
+          "duration": 19.0,
+          "deps": [
+            "j0_pick",
+            "open_0",
+            "j2_put"
+          ],
+          "navigation_steps": 18,
+          "grid_start": [
+            1.75,
+            1.25
+          ],
+          "grid_end": [
+            0.5,
+            -1.0
+          ],
+          "job": "j0",
+          "carried_object": "AlarmClock|+02.19|+00.56|+01.23"
+        },
+        {
+          "id": "j1_pick",
+          "robot": 1,
+          "skill": "PickupObject",
+          "target": "Book|+00.07|+00.97|-01.74",
+          "objects": [
+            "Book|+00.07|+00.97|-01.74"
+          ],
+          "duration": 8.0,
+          "deps": [],
+          "navigation_steps": 7,
+          "grid_start": [
+            -1.25,
+            -0.5
+          ],
+          "grid_end": [
+            0.0,
+            -1.0
+          ],
+          "job": "j1"
+        },
+        {
+          "id": "j1_put",
+          "robot": 1,
+          "skill": "PutObject",
+          "target": "SideTable|+02.24|00.00|+01.33",
+          "objects": [
+            "SideTable|+02.24|00.00|+01.33",
+            "Book|+00.07|+00.97|-01.74"
+          ],
+          "duration": 17.0,
+          "deps": [
+            "j1_pick"
+          ],
+          "navigation_steps": 16,
+          "grid_start": [
+            0.0,
+            -1.0
+          ],
+          "grid_end": [
+            1.75,
+            1.25
+          ],
+          "job": "j1",
+          "carried_object": "Book|+00.07|+00.97|-01.74"
+        },
+        {
+          "id": "j3_pick",
+          "robot": 2,
+          "skill": "PickupObject",
+          "target": "CellPhone|+00.70|+00.97|-01.82",
+          "objects": [
+            "CellPhone|+00.70|+00.97|-01.82"
+          ],
+          "duration": 21.0,
+          "deps": [],
+          "navigation_steps": 20,
+          "grid_start": [
+            -1.5,
+            0.75
+          ],
+          "grid_end": [
+            1.25,
+            -1.5
+          ],
+          "job": "j3"
+        },
+        {
+          "id": "j3_put",
+          "robot": 2,
+          "skill": "PutObject",
+          "target": "SideTable|+02.24|00.00|+01.33",
+          "objects": [
+            "SideTable|+02.24|00.00|+01.33",
+            "CellPhone|+00.70|+00.97|-01.82"
+          ],
+          "duration": 24.0,
+          "deps": [
+            "j3_pick",
+            "j1_put"
+          ],
+          "navigation_steps": 23,
+          "grid_start": [
+            1.25,
+            -1.5
+          ],
+          "grid_end": [
+            1.75,
+            1.25
+          ],
+          "job": "j3",
+          "carried_object": "CellPhone|+00.70|+00.97|-01.82"
+        },
+        {
+          "id": "close_0",
+          "robot": 0,
+          "skill": "CloseObject",
+          "target": "Drawer|+00.41|+00.68|-01.63",
+          "objects": [
+            "Drawer|+00.41|+00.68|-01.63"
+          ],
+          "duration": 1.0,
+          "deps": [
+            "j2_put",
+            "j0_put"
+          ],
+          "navigation_steps": 0,
+          "grid_start": [
+            0.5,
+            -1.0
+          ],
+          "grid_end": [
+            0.5,
+            -1.0
+          ]
+        }
+      ],
+      "candidate": {
+        "robots": [
+          0,
+          1,
+          0,
+          2
+        ],
+        "order": [
+          "j2",
+          "j0",
+          "j1",
+          "j3"
+        ],
+        "opener": 0,
+        "closer": 0
+      },
+      "task_id": "t317_n4",
+      "robot_ids": [
+        0,
+        1,
+        2
+      ],
+      "cost_model": "static-grid-0.25m-plus-manipulation-v1"
+    },
+    {
+      "actions": [
+        {
+          "id": "open_0",
+          "robot": 0,
+          "skill": "OpenObject",
+          "target": "Drawer|+00.41|+00.68|-01.63",
+          "objects": [
+            "Drawer|+00.41|+00.68|-01.63"
+          ],
+          "duration": 7.0,
+          "deps": [],
+          "navigation_steps": 6,
+          "grid_start": [
+            -1.0,
+            -1.0
+          ],
+          "grid_end": [
+            0.5,
+            -1.0
+          ]
+        },
+        {
+          "id": "j2_pick",
+          "robot": 0,
+          "skill": "PickupObject",
+          "target": "CD|-00.20|+00.97|-01.87",
+          "objects": [
+            "CD|-00.20|+00.97|-01.87"
+          ],
+          "duration": 4.0,
+          "deps": [],
+          "navigation_steps": 3,
+          "grid_start": [
+            0.5,
+            -1.0
+          ],
+          "grid_end": [
+            -0.25,
+            -1.0
+          ],
+          "job": "j2"
+        },
+        {
+          "id": "j2_put",
+          "robot": 0,
+          "skill": "PutObject",
+          "target": "Drawer|+00.41|+00.68|-01.63",
+          "objects": [
+            "Drawer|+00.41|+00.68|-01.63",
+            "CD|-00.20|+00.97|-01.87"
+          ],
+          "duration": 4.0,
+          "deps": [
+            "j2_pick",
+            "open_0"
+          ],
+          "navigation_steps": 3,
+          "grid_start": [
+            -0.25,
+            -1.0
+          ],
+          "grid_end": [
+            0.5,
+            -1.0
+          ],
+          "job": "j2",
+          "carried_object": "CD|-00.20|+00.97|-01.87"
+        },
+        {
+          "id": "j1_pick",
+          "robot": 1,
+          "skill": "PickupObject",
+          "target": "Book|+00.07|+00.97|-01.74",
+          "objects": [
+            "Book|+00.07|+00.97|-01.74"
+          ],
+          "duration": 8.0,
+          "deps": [],
+          "navigation_steps": 7,
+          "grid_start": [
+            -1.25,
+            -0.5
+          ],
+          "grid_end": [
+            0.0,
+            -1.0
+          ],
+          "job": "j1"
+        },
+        {
+          "id": "j1_put",
+          "robot": 1,
+          "skill": "PutObject",
+          "target": "SideTable|+02.24|00.00|+01.33",
+          "objects": [
+            "SideTable|+02.24|00.00|+01.33",
+            "Book|+00.07|+00.97|-01.74"
+          ],
+          "duration": 17.0,
+          "deps": [
+            "j1_pick"
+          ],
+          "navigation_steps": 16,
+          "grid_start": [
+            0.0,
+            -1.0
+          ],
+          "grid_end": [
+            1.75,
+            1.25
+          ],
+          "job": "j1",
+          "carried_object": "Book|+00.07|+00.97|-01.74"
+        },
+        {
+          "id": "j0_pick",
+          "robot": 0,
+          "skill": "PickupObject",
+          "target": "AlarmClock|+02.19|+00.56|+01.23",
+          "objects": [
+            "AlarmClock|+02.19|+00.56|+01.23"
+          ],
+          "duration": 19.0,
+          "deps": [],
+          "navigation_steps": 18,
+          "grid_start": [
+            0.5,
+            -1.0
+          ],
+          "grid_end": [
+            1.75,
+            1.25
+          ],
+          "job": "j0"
+        },
+        {
+          "id": "j0_put",
+          "robot": 0,
+          "skill": "PutObject",
+          "target": "Drawer|+00.41|+00.68|-01.63",
+          "objects": [
+            "Drawer|+00.41|+00.68|-01.63",
+            "AlarmClock|+02.19|+00.56|+01.23"
+          ],
+          "duration": 19.0,
+          "deps": [
+            "j0_pick",
+            "open_0",
+            "j2_put"
+          ],
+          "navigation_steps": 18,
+          "grid_start": [
+            1.75,
+            1.25
+          ],
+          "grid_end": [
+            0.5,
+            -1.0
+          ],
+          "job": "j0",
+          "carried_object": "AlarmClock|+02.19|+00.56|+01.23"
+        },
+        {
+          "id": "j3_pick",
+          "robot": 2,
+          "skill": "PickupObject",
+          "target": "CellPhone|+00.70|+00.97|-01.82",
+          "objects": [
+            "CellPhone|+00.70|+00.97|-01.82"
+          ],
+          "duration": 21.0,
+          "deps": [],
+          "navigation_steps": 20,
+          "grid_start": [
+            -1.5,
+            0.75
+          ],
+          "grid_end": [
+            1.25,
+            -1.5
+          ],
+          "job": "j3"
+        },
+        {
+          "id": "j3_put",
+          "robot": 2,
+          "skill": "PutObject",
+          "target": "SideTable|+02.24|00.00|+01.33",
+          "objects": [
+            "SideTable|+02.24|00.00|+01.33",
+            "CellPhone|+00.70|+00.97|-01.82"
+          ],
+          "duration": 24.0,
+          "deps": [
+            "j3_pick",
+            "j1_put"
+          ],
+          "navigation_steps": 23,
+          "grid_start": [
+            1.25,
+            -1.5
+          ],
+          "grid_end": [
+            1.75,
+            1.25
+          ],
+          "job": "j3",
+          "carried_object": "CellPhone|+00.70|+00.97|-01.82"
+        },
+        {
+          "id": "close_0",
+          "robot": 0,
+          "skill": "CloseObject",
+          "target": "Drawer|+00.41|+00.68|-01.63",
+          "objects": [
+            "Drawer|+00.41|+00.68|-01.63"
+          ],
+          "duration": 1.0,
+          "deps": [
+            "j2_put",
+            "j0_put"
+          ],
+          "navigation_steps": 0,
+          "grid_start": [
+            0.5,
+            -1.0
+          ],
+          "grid_end": [
+            0.5,
+            -1.0
+          ]
+        }
+      ],
+      "candidate": {
+        "robots": [
+          0,
+          1,
+          0,
+          2
+        ],
+        "order": [
+          "j2",
+          "j1",
+          "j0",
+          "j3"
+        ],
+        "opener": 0,
+        "closer": 0
+      },
+      "task_id": "t317_n4",
+      "robot_ids": [
+        0,
+        1,
+        2
+      ],
+      "cost_model": "static-grid-0.25m-plus-manipulation-v1"
+    },
+    {
+      "actions": [
+        {
+          "id": "open_0",
+          "robot": 0,
+          "skill": "OpenObject",
+          "target": "Drawer|+00.41|+00.68|-01.63",
+          "objects": [
+            "Drawer|+00.41|+00.68|-01.63"
+          ],
+          "duration": 7.0,
+          "deps": [],
+          "navigation_steps": 6,
+          "grid_start": [
+            -1.0,
+            -1.0
+          ],
+          "grid_end": [
+            0.5,
+            -1.0
+          ]
+        },
+        {
+          "id": "j0_pick",
+          "robot": 0,
+          "skill": "PickupObject",
+          "target": "AlarmClock|+02.19|+00.56|+01.23",
+          "objects": [
+            "AlarmClock|+02.19|+00.56|+01.23"
+          ],
+          "duration": 19.0,
+          "deps": [],
+          "navigation_steps": 18,
+          "grid_start": [
+            0.5,
+            -1.0
+          ],
+          "grid_end": [
+            1.75,
+            1.25
+          ],
+          "job": "j0"
+        },
+        {
+          "id": "j0_put",
+          "robot": 0,
+          "skill": "PutObject",
+          "target": "Drawer|+00.41|+00.68|-01.63",
+          "objects": [
+            "Drawer|+00.41|+00.68|-01.63",
+            "AlarmClock|+02.19|+00.56|+01.23"
+          ],
+          "duration": 19.0,
+          "deps": [
+            "j0_pick",
+            "open_0"
+          ],
+          "navigation_steps": 18,
+          "grid_start": [
+            1.75,
+            1.25
+          ],
+          "grid_end": [
+            0.5,
+            -1.0
+          ],
+          "job": "j0",
+          "carried_object": "AlarmClock|+02.19|+00.56|+01.23"
+        },
+        {
+          "id": "j1_pick",
+          "robot": 1,
+          "skill": "PickupObject",
+          "target": "Book|+00.07|+00.97|-01.74",
+          "objects": [
+            "Book|+00.07|+00.97|-01.74"
+          ],
+          "duration": 8.0,
+          "deps": [],
+          "navigation_steps": 7,
+          "grid_start": [
+            -1.25,
+            -0.5
+          ],
+          "grid_end": [
+            0.0,
+            -1.0
+          ],
+          "job": "j1"
+        },
+        {
+          "id": "j1_put",
+          "robot": 1,
+          "skill": "PutObject",
+          "target": "SideTable|+02.24|00.00|+01.33",
+          "objects": [
+            "SideTable|+02.24|00.00|+01.33",
+            "Book|+00.07|+00.97|-01.74"
+          ],
+          "duration": 17.0,
+          "deps": [
+            "j1_pick"
+          ],
+          "navigation_steps": 16,
+          "grid_start": [
+            0.0,
+            -1.0
+          ],
+          "grid_end": [
+            1.75,
+            1.25
+          ],
+          "job": "j1",
+          "carried_object": "Book|+00.07|+00.97|-01.74"
+        },
+        {
+          "id": "j2_pick",
+          "robot": 2,
+          "skill": "PickupObject",
+          "target": "CD|-00.20|+00.97|-01.87",
+          "objects": [
+            "CD|-00.20|+00.97|-01.87"
+          ],
+          "duration": 13.0,
+          "deps": [],
+          "navigation_steps": 12,
+          "grid_start": [
+            -1.5,
+            0.75
+          ],
+          "grid_end": [
+            -0.25,
+            -1.0
+          ],
+          "job": "j2"
+        },
+        {
+          "id": "j2_put",
+          "robot": 2,
+          "skill": "PutObject",
+          "target": "Drawer|+00.41|+00.68|-01.63",
+          "objects": [
+            "Drawer|+00.41|+00.68|-01.63",
+            "CD|-00.20|+00.97|-01.87"
+          ],
+          "duration": 4.0,
+          "deps": [
+            "j2_pick",
+            "open_0",
+            "j0_put"
+          ],
+          "navigation_steps": 3,
+          "grid_start": [
+            -0.25,
+            -1.0
+          ],
+          "grid_end": [
+            0.5,
+            -1.0
+          ],
+          "job": "j2",
+          "carried_object": "CD|-00.20|+00.97|-01.87"
+        },
+        {
+          "id": "j3_pick",
+          "robot": 0,
+          "skill": "PickupObject",
+          "target": "CellPhone|+00.70|+00.97|-01.82",
+          "objects": [
+            "CellPhone|+00.70|+00.97|-01.82"
+          ],
+          "duration": 6.0,
+          "deps": [],
+          "navigation_steps": 5,
+          "grid_start": [
+            0.5,
+            -1.0
+          ],
+          "grid_end": [
+            1.25,
+            -1.5
+          ],
+          "job": "j3"
+        },
+        {
+          "id": "j3_put",
+          "robot": 0,
+          "skill": "PutObject",
+          "target": "SideTable|+02.24|00.00|+01.33",
+          "objects": [
+            "SideTable|+02.24|00.00|+01.33",
+            "CellPhone|+00.70|+00.97|-01.82"
+          ],
+          "duration": 24.0,
+          "deps": [
+            "j3_pick",
+            "j1_put"
+          ],
+          "navigation_steps": 23,
+          "grid_start": [
+            1.25,
+            -1.5
+          ],
+          "grid_end": [
+            1.75,
+            1.25
+          ],
+          "job": "j3",
+          "carried_object": "CellPhone|+00.70|+00.97|-01.82"
+        },
+        {
+          "id": "close_0",
+          "robot": 2,
+          "skill": "CloseObject",
+          "target": "Drawer|+00.41|+00.68|-01.63",
+          "objects": [
+            "Drawer|+00.41|+00.68|-01.63"
+          ],
+          "duration": 1.0,
+          "deps": [
+            "j0_put",
+            "j2_put"
+          ],
+          "navigation_steps": 0,
+          "grid_start": [
+            0.5,
+            -1.0
+          ],
+          "grid_end": [
+            0.5,
+            -1.0
+          ]
+        }
+      ],
+      "candidate": {
+        "robots": [
+          0,
+          1,
+          2,
+          0
+        ],
+        "order": [
+          "j0",
+          "j1",
+          "j2",
+          "j3"
+        ],
+        "opener": 0,
+        "closer": 2
+      },
+      "task_id": "t317_n4",
+      "robot_ids": [
+        0,
+        1,
+        2
+      ],
+      "cost_model": "static-grid-0.25m-plus-manipulation-v1"
+    },
+    {
+      "actions": [
+        {
+          "id": "open_0",
+          "robot": 0,
+          "skill": "OpenObject",
+          "target": "Drawer|+00.41|+00.68|-01.63",
+          "objects": [
+            "Drawer|+00.41|+00.68|-01.63"
+          ],
+          "duration": 7.0,
+          "deps": [],
+          "navigation_steps": 6,
+          "grid_start": [
+            -1.0,
+            -1.0
+          ],
+          "grid_end": [
+            0.5,
+            -1.0
+          ]
+        },
+        {
+          "id": "j0_pick",
+          "robot": 0,
+          "skill": "PickupObject",
+          "target": "AlarmClock|+02.19|+00.56|+01.23",
+          "objects": [
+            "AlarmClock|+02.19|+00.56|+01.23"
+          ],
+          "duration": 19.0,
+          "deps": [],
+          "navigation_steps": 18,
+          "grid_start": [
+            0.5,
+            -1.0
+          ],
+          "grid_end": [
+            1.75,
+            1.25
+          ],
+          "job": "j0"
+        },
+        {
+          "id": "j0_put",
+          "robot": 0,
+          "skill": "PutObject",
+          "target": "Drawer|+00.41|+00.68|-01.63",
+          "objects": [
+            "Drawer|+00.41|+00.68|-01.63",
+            "AlarmClock|+02.19|+00.56|+01.23"
+          ],
+          "duration": 19.0,
+          "deps": [
+            "j0_pick",
+            "open_0"
+          ],
+          "navigation_steps": 18,
+          "grid_start": [
+            1.75,
+            1.25
+          ],
+          "grid_end": [
+            0.5,
+            -1.0
+          ],
+          "job": "j0",
+          "carried_object": "AlarmClock|+02.19|+00.56|+01.23"
+        },
+        {
+          "id": "j2_pick",
+          "robot": 2,
+          "skill": "PickupObject",
+          "target": "CD|-00.20|+00.97|-01.87",
+          "objects": [
+            "CD|-00.20|+00.97|-01.87"
+          ],
+          "duration": 13.0,
+          "deps": [],
+          "navigation_steps": 12,
+          "grid_start": [
+            -1.5,
+            0.75
+          ],
+          "grid_end": [
+            -0.25,
+            -1.0
+          ],
+          "job": "j2"
+        },
+        {
+          "id": "j2_put",
+          "robot": 2,
+          "skill": "PutObject",
+          "target": "Drawer|+00.41|+00.68|-01.63",
+          "objects": [
+            "Drawer|+00.41|+00.68|-01.63",
+            "CD|-00.20|+00.97|-01.87"
+          ],
+          "duration": 4.0,
+          "deps": [
+            "j2_pick",
+            "open_0",
+            "j0_put"
+          ],
+          "navigation_steps": 3,
+          "grid_start": [
+            -0.25,
+            -1.0
+          ],
+          "grid_end": [
+            0.5,
+            -1.0
+          ],
+          "job": "j2",
+          "carried_object": "CD|-00.20|+00.97|-01.87"
+        },
+        {
+          "id": "j1_pick",
+          "robot": 1,
+          "skill": "PickupObject",
+          "target": "Book|+00.07|+00.97|-01.74",
+          "objects": [
+            "Book|+00.07|+00.97|-01.74"
+          ],
+          "duration": 8.0,
+          "deps": [],
+          "navigation_steps": 7,
+          "grid_start": [
+            -1.25,
+            -0.5
+          ],
+          "grid_end": [
+            0.0,
+            -1.0
+          ],
+          "job": "j1"
+        },
+        {
+          "id": "j1_put",
+          "robot": 1,
+          "skill": "PutObject",
+          "target": "SideTable|+02.24|00.00|+01.33",
+          "objects": [
+            "SideTable|+02.24|00.00|+01.33",
+            "Book|+00.07|+00.97|-01.74"
+          ],
+          "duration": 17.0,
+          "deps": [
+            "j1_pick"
+          ],
+          "navigation_steps": 16,
+          "grid_start": [
+            0.0,
+            -1.0
+          ],
+          "grid_end": [
+            1.75,
+            1.25
+          ],
+          "job": "j1",
+          "carried_object": "Book|+00.07|+00.97|-01.74"
+        },
+        {
+          "id": "j3_pick",
+          "robot": 0,
+          "skill": "PickupObject",
+          "target": "CellPhone|+00.70|+00.97|-01.82",
+          "objects": [
+            "CellPhone|+00.70|+00.97|-01.82"
+          ],
+          "duration": 6.0,
+          "deps": [],
+          "navigation_steps": 5,
+          "grid_start": [
+            0.5,
+            -1.0
+          ],
+          "grid_end": [
+            1.25,
+            -1.5
+          ],
+          "job": "j3"
+        },
+        {
+          "id": "j3_put",
+          "robot": 0,
+          "skill": "PutObject",
+          "target": "SideTable|+02.24|00.00|+01.33",
+          "objects": [
+            "SideTable|+02.24|00.00|+01.33",
+            "CellPhone|+00.70|+00.97|-01.82"
+          ],
+          "duration": 24.0,
+          "deps": [
+            "j3_pick",
+            "j1_put"
+          ],
+          "navigation_steps": 23,
+          "grid_start": [
+            1.25,
+            -1.5
+          ],
+          "grid_end": [
+            1.75,
+            1.25
+          ],
+          "job": "j3",
+          "carried_object": "CellPhone|+00.70|+00.97|-01.82"
+        },
+        {
+          "id": "close_0",
+          "robot": 2,
+          "skill": "CloseObject",
+          "target": "Drawer|+00.41|+00.68|-01.63",
+          "objects": [
+            "Drawer|+00.41|+00.68|-01.63"
+          ],
+          "duration": 1.0,
+          "deps": [
+            "j0_put",
+            "j2_put"
+          ],
+          "navigation_steps": 0,
+          "grid_start": [
+            0.5,
+            -1.0
+          ],
+          "grid_end": [
+            0.5,
+            -1.0
+          ]
+        }
+      ],
+      "candidate": {
+        "robots": [
+          0,
+          1,
+          2,
+          0
+        ],
+        "order": [
+          "j0",
+          "j2",
+          "j1",
+          "j3"
+        ],
+        "opener": 0,
+        "closer": 2
+      },
+      "task_id": "t317_n4",
+      "robot_ids": [
+        0,
+        1,
+        2
+      ],
+      "cost_model": "static-grid-0.25m-plus-manipulation-v1"
+    },
+    {
+      "actions": [
+        {
+          "id": "open_0",
+          "robot": 0,
+          "skill": "OpenObject",
+          "target": "Drawer|+00.41|+00.68|-01.63",
+          "objects": [
+            "Drawer|+00.41|+00.68|-01.63"
+          ],
+          "duration": 7.0,
+          "deps": [],
+          "navigation_steps": 6,
+          "grid_start": [
+            -1.0,
+            -1.0
+          ],
+          "grid_end": [
+            0.5,
+            -1.0
+          ]
+        },
+        {
+          "id": "j1_pick",
+          "robot": 1,
+          "skill": "PickupObject",
+          "target": "Book|+00.07|+00.97|-01.74",
+          "objects": [
+            "Book|+00.07|+00.97|-01.74"
+          ],
+          "duration": 8.0,
+          "deps": [],
+          "navigation_steps": 7,
+          "grid_start": [
+            -1.25,
+            -0.5
+          ],
+          "grid_end": [
+            0.0,
+            -1.0
+          ],
+          "job": "j1"
+        },
+        {
+          "id": "j1_put",
+          "robot": 1,
+          "skill": "PutObject",
+          "target": "SideTable|+02.24|00.00|+01.33",
+          "objects": [
+            "SideTable|+02.24|00.00|+01.33",
+            "Book|+00.07|+00.97|-01.74"
+          ],
+          "duration": 17.0,
+          "deps": [
+            "j1_pick"
+          ],
+          "navigation_steps": 16,
+          "grid_start": [
+            0.0,
+            -1.0
+          ],
+          "grid_end": [
+            1.75,
+            1.25
+          ],
+          "job": "j1",
+          "carried_object": "Book|+00.07|+00.97|-01.74"
+        },
+        {
+          "id": "j0_pick",
+          "robot": 0,
+          "skill": "PickupObject",
+          "target": "AlarmClock|+02.19|+00.56|+01.23",
+          "objects": [
+            "AlarmClock|+02.19|+00.56|+01.23"
+          ],
+          "duration": 19.0,
+          "deps": [],
+          "navigation_steps": 18,
+          "grid_start": [
+            0.5,
+            -1.0
+          ],
+          "grid_end": [
+            1.75,
+            1.25
+          ],
+          "job": "j0"
+        },
+        {
+          "id": "j0_put",
+          "robot": 0,
+          "skill": "PutObject",
+          "target": "Drawer|+00.41|+00.68|-01.63",
+          "objects": [
+            "Drawer|+00.41|+00.68|-01.63",
+            "AlarmClock|+02.19|+00.56|+01.23"
+          ],
+          "duration": 19.0,
+          "deps": [
+            "j0_pick",
+            "open_0"
+          ],
+          "navigation_steps": 18,
+          "grid_start": [
+            1.75,
+            1.25
+          ],
+          "grid_end": [
+            0.5,
+            -1.0
+          ],
+          "job": "j0",
+          "carried_object": "AlarmClock|+02.19|+00.56|+01.23"
+        },
+        {
+          "id": "j2_pick",
+          "robot": 2,
+          "skill": "PickupObject",
+          "target": "CD|-00.20|+00.97|-01.87",
+          "objects": [
+            "CD|-00.20|+00.97|-01.87"
+          ],
+          "duration": 13.0,
+          "deps": [],
+          "navigation_steps": 12,
+          "grid_start": [
+            -1.5,
+            0.75
+          ],
+          "grid_end": [
+            -0.25,
+            -1.0
+          ],
+          "job": "j2"
+        },
+        {
+          "id": "j2_put",
+          "robot": 2,
+          "skill": "PutObject",
+          "target": "Drawer|+00.41|+00.68|-01.63",
+          "objects": [
+            "Drawer|+00.41|+00.68|-01.63",
+            "CD|-00.20|+00.97|-01.87"
+          ],
+          "duration": 4.0,
+          "deps": [
+            "j2_pick",
+            "open_0",
+            "j0_put"
+          ],
+          "navigation_steps": 3,
+          "grid_start": [
+            -0.25,
+            -1.0
+          ],
+          "grid_end": [
+            0.5,
+            -1.0
+          ],
+          "job": "j2",
+          "carried_object": "CD|-00.20|+00.97|-01.87"
+        },
+        {
+          "id": "j3_pick",
+          "robot": 0,
+          "skill": "PickupObject",
+          "target": "CellPhone|+00.70|+00.97|-01.82",
+          "objects": [
+            "CellPhone|+00.70|+00.97|-01.82"
+          ],
+          "duration": 6.0,
+          "deps": [],
+          "navigation_steps": 5,
+          "grid_start": [
+            0.5,
+            -1.0
+          ],
+          "grid_end": [
+            1.25,
+            -1.5
+          ],
+          "job": "j3"
+        },
+        {
+          "id": "j3_put",
+          "robot": 0,
+          "skill": "PutObject",
+          "target": "SideTable|+02.24|00.00|+01.33",
+          "objects": [
+            "SideTable|+02.24|00.00|+01.33",
+            "CellPhone|+00.70|+00.97|-01.82"
+          ],
+          "duration": 24.0,
+          "deps": [
+            "j3_pick",
+            "j1_put"
+          ],
+          "navigation_steps": 23,
+          "grid_start": [
+            1.25,
+            -1.5
+          ],
+          "grid_end": [
+            1.75,
+            1.25
+          ],
+          "job": "j3",
+          "carried_object": "CellPhone|+00.70|+00.97|-01.82"
+        },
+        {
+          "id": "close_0",
+          "robot": 2,
+          "skill": "CloseObject",
+          "target": "Drawer|+00.41|+00.68|-01.63",
+          "objects": [
+            "Drawer|+00.41|+00.68|-01.63"
+          ],
+          "duration": 1.0,
+          "deps": [
+            "j0_put",
+            "j2_put"
+          ],
+          "navigation_steps": 0,
+          "grid_start": [
+            0.5,
+            -1.0
+          ],
+          "grid_end": [
+            0.5,
+            -1.0
+          ]
+        }
+      ],
+      "candidate": {
+        "robots": [
+          0,
+          1,
+          2,
+          0
+        ],
+        "order": [
+          "j1",
+          "j0",
+          "j2",
+          "j3"
+        ],
+        "opener": 0,
+        "closer": 2
+      },
+      "task_id": "t317_n4",
+      "robot_ids": [
+        0,
+        1,
+        2
+      ],
+      "cost_model": "static-grid-0.25m-plus-manipulation-v1"
+    },
+    {
+      "actions": [
+        {
+          "id": "open_0",
+          "robot": 0,
+          "skill": "OpenObject",
+          "target": "Drawer|+00.41|+00.68|-01.63",
+          "objects": [
+            "Drawer|+00.41|+00.68|-01.63"
+          ],
+          "duration": 7.0,
+          "deps": [],
+          "navigation_steps": 6,
+          "grid_start": [
+            -1.0,
+            -1.0
+          ],
+          "grid_end": [
+            0.5,
+            -1.0
+          ]
+        },
+        {
+          "id": "j1_pick",
+          "robot": 1,
+          "skill": "PickupObject",
+          "target": "Book|+00.07|+00.97|-01.74",
+          "objects": [
+            "Book|+00.07|+00.97|-01.74"
+          ],
+          "duration": 8.0,
+          "deps": [],
+          "navigation_steps": 7,
+          "grid_start": [
+            -1.25,
+            -0.5
+          ],
+          "grid_end": [
+            0.0,
+            -1.0
+          ],
+          "job": "j1"
+        },
+        {
+          "id": "j1_put",
+          "robot": 1,
+          "skill": "PutObject",
+          "target": "SideTable|+02.24|00.00|+01.33",
+          "objects": [
+            "SideTable|+02.24|00.00|+01.33",
+            "Book|+00.07|+00.97|-01.74"
+          ],
+          "duration": 17.0,
+          "deps": [
+            "j1_pick"
+          ],
+          "navigation_steps": 16,
+          "grid_start": [
+            0.0,
+            -1.0
+          ],
+          "grid_end": [
+            1.75,
+            1.25
+          ],
+          "job": "j1",
+          "carried_object": "Book|+00.07|+00.97|-01.74"
+        },
+        {
+          "id": "j2_pick",
+          "robot": 2,
+          "skill": "PickupObject",
+          "target": "CD|-00.20|+00.97|-01.87",
+          "objects": [
+            "CD|-00.20|+00.97|-01.87"
+          ],
+          "duration": 13.0,
+          "deps": [],
+          "navigation_steps": 12,
+          "grid_start": [
+            -1.5,
+            0.75
+          ],
+          "grid_end": [
+            -0.25,
+            -1.0
+          ],
+          "job": "j2"
+        },
+        {
+          "id": "j2_put",
+          "robot": 2,
+          "skill": "PutObject",
+          "target": "Drawer|+00.41|+00.68|-01.63",
+          "objects": [
+            "Drawer|+00.41|+00.68|-01.63",
+            "CD|-00.20|+00.97|-01.87"
+          ],
+          "duration": 4.0,
+          "deps": [
+            "j2_pick",
+            "open_0"
+          ],
+          "navigation_steps": 3,
+          "grid_start": [
+            -0.25,
+            -1.0
+          ],
+          "grid_end": [
+            0.5,
+            -1.0
+          ],
+          "job": "j2",
+          "carried_object": "CD|-00.20|+00.97|-01.87"
+        },
+        {
+          "id": "j0_pick",
+          "robot": 0,
+          "skill": "PickupObject",
+          "target": "AlarmClock|+02.19|+00.56|+01.23",
+          "objects": [
+            "AlarmClock|+02.19|+00.56|+01.23"
+          ],
+          "duration": 19.0,
+          "deps": [],
+          "navigation_steps": 18,
+          "grid_start": [
+            0.5,
+            -1.0
+          ],
+          "grid_end": [
+            1.75,
+            1.25
+          ],
+          "job": "j0"
+        },
+        {
+          "id": "j0_put",
+          "robot": 0,
+          "skill": "PutObject",
+          "target": "Drawer|+00.41|+00.68|-01.63",
+          "objects": [
+            "Drawer|+00.41|+00.68|-01.63",
+            "AlarmClock|+02.19|+00.56|+01.23"
+          ],
+          "duration": 19.0,
+          "deps": [
+            "j0_pick",
+            "open_0",
+            "j2_put"
+          ],
+          "navigation_steps": 18,
+          "grid_start": [
+            1.75,
+            1.25
+          ],
+          "grid_end": [
+            0.5,
+            -1.0
+          ],
+          "job": "j0",
+          "carried_object": "AlarmClock|+02.19|+00.56|+01.23"
+        },
+        {
+          "id": "j3_pick",
+          "robot": 0,
+          "skill": "PickupObject",
+          "target": "CellPhone|+00.70|+00.97|-01.82",
+          "objects": [
+            "CellPhone|+00.70|+00.97|-01.82"
+          ],
+          "duration": 6.0,
+          "deps": [],
+          "navigation_steps": 5,
+          "grid_start": [
+            0.5,
+            -1.0
+          ],
+          "grid_end": [
+            1.25,
+            -1.5
+          ],
+          "job": "j3"
+        },
+        {
+          "id": "j3_put",
+          "robot": 0,
+          "skill": "PutObject",
+          "target": "SideTable|+02.24|00.00|+01.33",
+          "objects": [
+            "SideTable|+02.24|00.00|+01.33",
+            "CellPhone|+00.70|+00.97|-01.82"
+          ],
+          "duration": 24.0,
+          "deps": [
+            "j3_pick",
+            "j1_put"
+          ],
+          "navigation_steps": 23,
+          "grid_start": [
+            1.25,
+            -1.5
+          ],
+          "grid_end": [
+            1.75,
+            1.25
+          ],
+          "job": "j3",
+          "carried_object": "CellPhone|+00.70|+00.97|-01.82"
+        },
+        {
+          "id": "close_0",
+          "robot": 2,
+          "skill": "CloseObject",
+          "target": "Drawer|+00.41|+00.68|-01.63",
+          "objects": [
+            "Drawer|+00.41|+00.68|-01.63"
+          ],
+          "duration": 1.0,
+          "deps": [
+            "j2_put",
+            "j0_put"
+          ],
+          "navigation_steps": 0,
+          "grid_start": [
+            0.5,
+            -1.0
+          ],
+          "grid_end": [
+            0.5,
+            -1.0
+          ]
+        }
+      ],
+      "candidate": {
+        "robots": [
+          0,
+          1,
+          2,
+          0
+        ],
+        "order": [
+          "j1",
+          "j2",
+          "j0",
+          "j3"
+        ],
+        "opener": 0,
+        "closer": 2
+      },
+      "task_id": "t317_n4",
+      "robot_ids": [
+        0,
+        1,
+        2
+      ],
+      "cost_model": "static-grid-0.25m-plus-manipulation-v1"
+    },
+    {
+      "actions": [
+        {
+          "id": "open_0",
+          "robot": 0,
+          "skill": "OpenObject",
+          "target": "Drawer|+00.41|+00.68|-01.63",
+          "objects": [
+            "Drawer|+00.41|+00.68|-01.63"
+          ],
+          "duration": 7.0,
+          "deps": [],
+          "navigation_steps": 6,
+          "grid_start": [
+            -1.0,
+            -1.0
+          ],
+          "grid_end": [
+            0.5,
+            -1.0
+          ]
+        },
+        {
+          "id": "j2_pick",
+          "robot": 2,
+          "skill": "PickupObject",
+          "target": "CD|-00.20|+00.97|-01.87",
+          "objects": [
+            "CD|-00.20|+00.97|-01.87"
+          ],
+          "duration": 13.0,
+          "deps": [],
+          "navigation_steps": 12,
+          "grid_start": [
+            -1.5,
+            0.75
+          ],
+          "grid_end": [
+            -0.25,
+            -1.0
+          ],
+          "job": "j2"
+        },
+        {
+          "id": "j2_put",
+          "robot": 2,
+          "skill": "PutObject",
+          "target": "Drawer|+00.41|+00.68|-01.63",
+          "objects": [
+            "Drawer|+00.41|+00.68|-01.63",
+            "CD|-00.20|+00.97|-01.87"
+          ],
+          "duration": 4.0,
+          "deps": [
+            "j2_pick",
+            "open_0"
+          ],
+          "navigation_steps": 3,
+          "grid_start": [
+            -0.25,
+            -1.0
+          ],
+          "grid_end": [
+            0.5,
+            -1.0
+          ],
+          "job": "j2",
+          "carried_object": "CD|-00.20|+00.97|-01.87"
+        },
+        {
+          "id": "j0_pick",
+          "robot": 0,
+          "skill": "PickupObject",
+          "target": "AlarmClock|+02.19|+00.56|+01.23",
+          "objects": [
+            "AlarmClock|+02.19|+00.56|+01.23"
+          ],
+          "duration": 19.0,
+          "deps": [],
+          "navigation_steps": 18,
+          "grid_start": [
+            0.5,
+            -1.0
+          ],
+          "grid_end": [
+            1.75,
+            1.25
+          ],
+          "job": "j0"
+        },
+        {
+          "id": "j0_put",
+          "robot": 0,
+          "skill": "PutObject",
+          "target": "Drawer|+00.41|+00.68|-01.63",
+          "objects": [
+            "Drawer|+00.41|+00.68|-01.63",
+            "AlarmClock|+02.19|+00.56|+01.23"
+          ],
+          "duration": 19.0,
+          "deps": [
+            "j0_pick",
+            "open_0",
+            "j2_put"
+          ],
+          "navigation_steps": 18,
+          "grid_start": [
+            1.75,
+            1.25
+          ],
+          "grid_end": [
+            0.5,
+            -1.0
+          ],
+          "job": "j0",
+          "carried_object": "AlarmClock|+02.19|+00.56|+01.23"
+        },
+        {
+          "id": "j1_pick",
+          "robot": 1,
+          "skill": "PickupObject",
+          "target": "Book|+00.07|+00.97|-01.74",
+          "objects": [
+            "Book|+00.07|+00.97|-01.74"
+          ],
+          "duration": 8.0,
+          "deps": [],
+          "navigation_steps": 7,
+          "grid_start": [
+            -1.25,
+            -0.5
+          ],
+          "grid_end": [
+            0.0,
+            -1.0
+          ],
+          "job": "j1"
+        },
+        {
+          "id": "j1_put",
+          "robot": 1,
+          "skill": "PutObject",
+          "target": "SideTable|+02.24|00.00|+01.33",
+          "objects": [
+            "SideTable|+02.24|00.00|+01.33",
+            "Book|+00.07|+00.97|-01.74"
+          ],
+          "duration": 17.0,
+          "deps": [
+            "j1_pick"
+          ],
+          "navigation_steps": 16,
+          "grid_start": [
+            0.0,
+            -1.0
+          ],
+          "grid_end": [
+            1.75,
+            1.25
+          ],
+          "job": "j1",
+          "carried_object": "Book|+00.07|+00.97|-01.74"
+        },
+        {
+          "id": "j3_pick",
+          "robot": 0,
+          "skill": "PickupObject",
+          "target": "CellPhone|+00.70|+00.97|-01.82",
+          "objects": [
+            "CellPhone|+00.70|+00.97|-01.82"
+          ],
+          "duration": 6.0,
+          "deps": [],
+          "navigation_steps": 5,
+          "grid_start": [
+            0.5,
+            -1.0
+          ],
+          "grid_end": [
+            1.25,
+            -1.5
+          ],
+          "job": "j3"
+        },
+        {
+          "id": "j3_put",
+          "robot": 0,
+          "skill": "PutObject",
+          "target": "SideTable|+02.24|00.00|+01.33",
+          "objects": [
+            "SideTable|+02.24|00.00|+01.33",
+            "CellPhone|+00.70|+00.97|-01.82"
+          ],
+          "duration": 24.0,
+          "deps": [
+            "j3_pick",
+            "j1_put"
+          ],
+          "navigation_steps": 23,
+          "grid_start": [
+            1.25,
+            -1.5
+          ],
+          "grid_end": [
+            1.75,
+            1.25
+          ],
+          "job": "j3",
+          "carried_object": "CellPhone|+00.70|+00.97|-01.82"
+        },
+        {
+          "id": "close_0",
+          "robot": 2,
+          "skill": "CloseObject",
+          "target": "Drawer|+00.41|+00.68|-01.63",
+          "objects": [
+            "Drawer|+00.41|+00.68|-01.63"
+          ],
+          "duration": 1.0,
+          "deps": [
+            "j2_put",
+            "j0_put"
+          ],
+          "navigation_steps": 0,
+          "grid_start": [
+            0.5,
+            -1.0
+          ],
+          "grid_end": [
+            0.5,
+            -1.0
+          ]
+        }
+      ],
+      "candidate": {
+        "robots": [
+          0,
+          1,
+          2,
+          0
+        ],
+        "order": [
+          "j2",
+          "j0",
+          "j1",
+          "j3"
+        ],
+        "opener": 0,
+        "closer": 2
+      },
+      "task_id": "t317_n4",
+      "robot_ids": [
+        0,
+        1,
+        2
+      ],
+      "cost_model": "static-grid-0.25m-plus-manipulation-v1"
+    },
+    {
+      "actions": [
+        {
+          "id": "open_0",
+          "robot": 0,
+          "skill": "OpenObject",
+          "target": "Drawer|+00.41|+00.68|-01.63",
+          "objects": [
+            "Drawer|+00.41|+00.68|-01.63"
+          ],
+          "duration": 7.0,
+          "deps": [],
+          "navigation_steps": 6,
+          "grid_start": [
+            -1.0,
+            -1.0
+          ],
+          "grid_end": [
+            0.5,
+            -1.0
+          ]
+        },
+        {
+          "id": "j2_pick",
+          "robot": 2,
+          "skill": "PickupObject",
+          "target": "CD|-00.20|+00.97|-01.87",
+          "objects": [
+            "CD|-00.20|+00.97|-01.87"
+          ],
+          "duration": 13.0,
+          "deps": [],
+          "navigation_steps": 12,
+          "grid_start": [
+            -1.5,
+            0.75
+          ],
+          "grid_end": [
+            -0.25,
+            -1.0
+          ],
+          "job": "j2"
+        },
+        {
+          "id": "j2_put",
+          "robot": 2,
+          "skill": "PutObject",
+          "target": "Drawer|+00.41|+00.68|-01.63",
+          "objects": [
+            "Drawer|+00.41|+00.68|-01.63",
+            "CD|-00.20|+00.97|-01.87"
+          ],
+          "duration": 4.0,
+          "deps": [
+            "j2_pick",
+            "open_0"
+          ],
+          "navigation_steps": 3,
+          "grid_start": [
+            -0.25,
+            -1.0
+          ],
+          "grid_end": [
+            0.5,
+            -1.0
+          ],
+          "job": "j2",
+          "carried_object": "CD|-00.20|+00.97|-01.87"
+        },
+        {
+          "id": "j1_pick",
+          "robot": 1,
+          "skill": "PickupObject",
+          "target": "Book|+00.07|+00.97|-01.74",
+          "objects": [
+            "Book|+00.07|+00.97|-01.74"
+          ],
+          "duration": 8.0,
+          "deps": [],
+          "navigation_steps": 7,
+          "grid_start": [
+            -1.25,
+            -0.5
+          ],
+          "grid_end": [
+            0.0,
+            -1.0
+          ],
+          "job": "j1"
+        },
+        {
+          "id": "j1_put",
+          "robot": 1,
+          "skill": "PutObject",
+          "target": "SideTable|+02.24|00.00|+01.33",
+          "objects": [
+            "SideTable|+02.24|00.00|+01.33",
+            "Book|+00.07|+00.97|-01.74"
+          ],
+          "duration": 17.0,
+          "deps": [
+            "j1_pick"
+          ],
+          "navigation_steps": 16,
+          "grid_start": [
+            0.0,
+            -1.0
+          ],
+          "grid_end": [
+            1.75,
+            1.25
+          ],
+          "job": "j1",
+          "carried_object": "Book|+00.07|+00.97|-01.74"
+        },
+        {
+          "id": "j0_pick",
+          "robot": 0,
+          "skill": "PickupObject",
+          "target": "AlarmClock|+02.19|+00.56|+01.23",
+          "objects": [
+            "AlarmClock|+02.19|+00.56|+01.23"
+          ],
+          "duration": 19.0,
+          "deps": [],
+          "navigation_steps": 18,
+          "grid_start": [
+            0.5,
+            -1.0
+          ],
+          "grid_end": [
+            1.75,
+            1.25
+          ],
+          "job": "j0"
+        },
+        {
+          "id": "j0_put",
+          "robot": 0,
+          "skill": "PutObject",
+          "target": "Drawer|+00.41|+00.68|-01.63",
+          "objects": [
+            "Drawer|+00.41|+00.68|-01.63",
+            "AlarmClock|+02.19|+00.56|+01.23"
+          ],
+          "duration": 19.0,
+          "deps": [
+            "j0_pick",
+            "open_0",
+            "j2_put"
+          ],
+          "navigation_steps": 18,
+          "grid_start": [
+            1.75,
+            1.25
+          ],
+          "grid_end": [
+            0.5,
+            -1.0
+          ],
+          "job": "j0",
+          "carried_object": "AlarmClock|+02.19|+00.56|+01.23"
+        },
+        {
+          "id": "j3_pick",
+          "robot": 0,
+          "skill": "PickupObject",
+          "target": "CellPhone|+00.70|+00.97|-01.82",
+          "objects": [
+            "CellPhone|+00.70|+00.97|-01.82"
+          ],
+          "duration": 6.0,
+          "deps": [],
+          "navigation_steps": 5,
+          "grid_start": [
+            0.5,
+            -1.0
+          ],
+          "grid_end": [
+            1.25,
+            -1.5
+          ],
+          "job": "j3"
+        },
+        {
+          "id": "j3_put",
+          "robot": 0,
+          "skill": "PutObject",
+          "target": "SideTable|+02.24|00.00|+01.33",
+          "objects": [
+            "SideTable|+02.24|00.00|+01.33",
+            "CellPhone|+00.70|+00.97|-01.82"
+          ],
+          "duration": 24.0,
+          "deps": [
+            "j3_pick",
+            "j1_put"
+          ],
+          "navigation_steps": 23,
+          "grid_start": [
+            1.25,
+            -1.5
+          ],
+          "grid_end": [
+            1.75,
+            1.25
+          ],
+          "job": "j3",
+          "carried_object": "CellPhone|+00.70|+00.97|-01.82"
+        },
+        {
+          "id": "close_0",
+          "robot": 2,
+          "skill": "CloseObject",
+          "target": "Drawer|+00.41|+00.68|-01.63",
+          "objects": [
+            "Drawer|+00.41|+00.68|-01.63"
+          ],
+          "duration": 1.0,
+          "deps": [
+            "j2_put",
+            "j0_put"
+          ],
+          "navigation_steps": 0,
+          "grid_start": [
+            0.5,
+            -1.0
+          ],
+          "grid_end": [
+            0.5,
+            -1.0
+          ]
+        }
+      ],
+      "candidate": {
+        "robots": [
+          0,
+          1,
+          2,
+          0
+        ],
+        "order": [
+          "j2",
+          "j1",
+          "j0",
+          "j3"
+        ],
+        "opener": 0,
+        "closer": 2
+      },
+      "task_id": "t317_n4",
+      "robot_ids": [
+        0,
+        1,
+        2
+      ],
+      "cost_model": "static-grid-0.25m-plus-manipulation-v1"
+    }
+  ],
+  "invalid": [],
+  "service_attempts": [],
+  "raw_response": {
+    "id": "chatcmpl-pu3z4jhhrtrafk8t9tsc49",
+    "object": "chat.completion",
+    "created": 1790664117,
+    "model": "qwen3-vl-8b-instruct",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "{\n  \"plans\": [\n    {\n      \"robots\": [0, 1, 0, 2],\n      \"order\": [\"j0\", \"j1\", \"j2\", \"j3\"],\n      \"opener\": 0,\n      \"closer\": 0\n    },\n    {\n      \"robots\": [0, 1, 0, 2],\n      \"order\": [\"j0\", \"j2\", \"j1\", \"j3\"],\n      \"opener\": 0,\n      \"closer\": 0\n    },\n    {\n      \"robots\": [0, 1, 0, 2],\n      \"order\": [\"j1\", \"j0\", \"j2\", \"j3\"],\n      \"opener\": 0,\n      \"closer\": 0\n    },\n    {\n      \"robots\": [0, 1, 0, 2],\n      \"order\": [\"j1\", \"j2\", \"j0\", \"j3\"],\n      \"opener\": 0,\n      \"closer\": 0\n    },\n    {\n      \"robots\": [0, 1, 0, 2],\n      \"order\": [\"j2\", \"j0\", \"j1\", \"j3\"],\n      \"opener\": 0,\n      \"closer\": 0\n    },\n    {\n      \"robots\": [0, 1, 0, 2],\n      \"order\": [\"j2\", \"j1\", \"j0\", \"j3\"],\n      \"opener\": 0,\n      \"closer\": 0\n    },\n    {\n      \"robots\": [0, 1, 2, 0],\n      \"order\": [\"j0\", \"j1\", \"j2\", \"j3\"],\n      \"opener\": 0,\n      \"closer\": 2\n    },\n    {\n      \"robots\": [0, 1, 2, 0],\n      \"order\": [\"j0\", \"j2\", \"j1\", \"j3\"],\n      \"opener\": 0,\n      \"closer\": 2\n    },\n    {\n      \"robots\": [0, 1, 2, 0],\n      \"order\": [\"j1\", \"j0\", \"j2\", \"j3\"],\n      \"opener\": 0,\n      \"closer\": 2\n    },\n    {\n      \"robots\": [0, 1, 2, 0],\n      \"order\": [\"j1\", \"j2\", \"j0\", \"j3\"],\n      \"opener\": 0,\n      \"closer\": 2\n    },\n    {\n      \"robots\": [0, 1, 2, 0],\n      \"order\": [\"j2\", \"j0\", \"j1\", \"j3\"],\n      \"opener\": 0,\n      \"closer\": 2\n    },\n    {\n      \"robots\": [0, 1, 2, 0],\n      \"order\": [\"j2\", \"j1\", \"j0\", \"j3\"],\n      \"opener\": 0,\n      \"closer\": 2\n    }\n  ]\n}",
+          "reasoning_content": "",
+          "tool_calls": []
+        },
+        "logprobs": null,
+        "finish_reason": "stop"
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 231,
+      "completion_tokens": 682,
+      "total_tokens": 913,
+      "completion_tokens_details": {
+        "reasoning_tokens": 0
+      }
+    },
+    "stats": {},
+    "system_fingerprint": "qwen3-vl-8b-instruct"
+  },
+  "elapsed_s": 6.328085693530738
+}

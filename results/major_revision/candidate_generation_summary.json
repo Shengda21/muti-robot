@@ -1,0 +1,17 @@
+{
+  "expected_evaluation_tasks": 81,
+  "present_evaluation_tasks": 81,
+  "missing": [],
+  "development_ids": [
+    "t201_n4"
+  ],
+  "valid_candidates": 972,
+  "invalid_candidates": 0,
+  "service_failed": 0,
+  "service_retry_count": 0,
+  "parse_errors": 0,
+  "generation_seconds_sum": 578.6208119392395,
+  "generation_seconds_mean": 7.143466814064685,
+  "unique_seed_plans": 972,
+  "interpretation": "Input-generation coverage; no optimization or performance scores inspected."
+}
