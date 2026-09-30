@@ -11,8 +11,9 @@ src/        scheduling, expected-completion scoring and the bound, task/plan com
 tools/      experiment runners, analysis, audits, asset generation (see below)
 tests/      unit tests (41 tests)
 data/       scene inventories and task suites
-            transfer_*        30 held-out scenes, 81 tasks (main experiment)
-            confirm_*         24 further scenes, 66 tasks (confirmation study)
+            transfer_*        36 scenes, 108 task definitions: 6 development scenes and 30 held-out scenes
+                              (main experiment: 81 tasks after exclusions)
+            confirm_*         24 further scenes, 72 task definitions (confirmation study: 66 tasks after exclusions)
 results/    raw records and analyses (see "Results layout")
 docs/       pre-specified protocols and the software environment record
 requirements.txt
@@ -20,7 +21,7 @@ requirements.txt
 
 ## Environment
 
-Python 3.12. The search, scoring, audits and analysis use only the standard library; plotting needs Matplotlib. Stored records make a GPU, a simulator, or a language-model service unnecessary for the steps below. `requirements.txt` lists the versions used for the full pipeline (AI2-THOR 5.0.0 is only needed to regenerate scene inventories).
+Python 3.12. The search, scoring, audits and statistics use only the standard library. Matplotlib is needed for figures, `requests` for querying the language-model endpoint, and AI2-THOR 5.0.0 only for regenerating scene inventories (`requirements.txt`). The stored records make a GPU, a simulator, or a language-model service unnecessary for the steps below.
 
 ## Reproduce the reported results from the stored records
 
@@ -51,9 +52,9 @@ The analysis averages seeds within a task, then task sizes within a scene, and b
 # main experiment on the saved LLM candidates (defaults: data/transfer_tasks.json, results/major_revision/candidates)
 python tools/run_robust_search.py --output reproduced/search --workers 4
 
-# confirmation study (run on Linux for valid CPU timing); the settings used are in results/closure/confirm_*/config.json
+# confirmation study (the reported timings used a Linux server with four workers; compared methods run in randomized order); the settings used are in results/closure/confirm_*/config.json
 python tools/run_scaling_search.py --mode scaling --tasks data/confirm_tasks.json --output reproduced/confirm_scaling --workers 4
-python tools/run_scaling_search.py --mode cost    --tasks data/confirm_tasks.json --output reproduced/confirm_cost    --workers 1
+python tools/run_scaling_search.py --mode cost    --tasks data/confirm_tasks.json --output reproduced/confirm_cost    --workers 4
 ```
 
 Each search records every proposal, its score (or that it was skipped), the beam after every step, and, after timing stops, an exact re-evaluation of every skipped candidate. The runners assert that no skipped candidate could have entered the beam.
@@ -84,9 +85,9 @@ The reported model was Qwen3-VL-8B-Instruct (Q4_K_M, temperature 0.7, fixed task
 | `results/closure/analysis_confirm_*/` | analysis of the confirmation records | Section V-C |
 | `results/closure/scaling2/`, `cost2/`, `analysis_scaling2/`, `analysis_cost2/` | exploration on the 30 earlier scenes (with tie-break baseline) | design and exploratory statements |
 | `results/closure/sens_abs/`, `sens_rnd/`, `analysis_sens_*/` | exploratory sensitivity runs (fixed pause lengths; random start cells) | Section V-C |
-| `results/closure/scaling/`, `cost/`, `analysis_scaling/`, `analysis_cost/` | first exploration runs, superseded before the confirmation data existed (no tie-break baseline, earlier start rule) | kept for transparency |
+| `results/closure/scaling/`, `cost/`, `analysis_scaling/`, `analysis_cost/` | first exploration runs, superseded before the confirmation data existed (no tie-break baseline; the `pause_ref` and `start` options did not exist yet) | kept for transparency |
 
-`docs/closure_protocol.md` is the pre-specified protocol of the confirmation study together with its change log; `docs/major_revision_protocol.md` is the protocol of the main experiment.
+`docs/closure_protocol.md` is the pre-specified protocol of the confirmation study together with its change log, and `docs/major_revision_protocol.md` is the protocol of the main experiment. These are the original working documents: the first is written in Chinese, and both are kept unedited because they document what was fixed before the data were collected.
 
 ## Notes
 
