@@ -1,6 +1,6 @@
 # Code and data for "A Critical-Path Bound for Skipping Delay Evaluations in Multi-Robot Plan Search"
 
-This folder contains the code, task data, and raw experiment records behind the manuscript. Every number, table, and figure in the paper can be regenerated from the stored records with the commands below. The public repository URL will be added here and in the manuscript after upload.
+This folder contains the code, task data, and raw experiment records behind the manuscript. Every number, table, and figure in the paper can be regenerated from the stored records with the commands below. Repository: https://github.com/Shengda21/muti-robot.
 
 Authors: Shengda Liu (Institute of Automation, Chinese Academy of Sciences), Xu Liang (Beijing Jiaotong University, corresponding author).
 
