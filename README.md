@@ -93,4 +93,9 @@ The reported model was Qwen3-VL-8B-Instruct (Q4_K_M, temperature 0.7, fixed task
 - Tasks are named `t<scene>_n<objects>`. `data/transfer_tasks.json` lists 18 development tasks (FloorPlan201-203, 301-303) and 90 evaluation tasks; nine evaluation tasks are excluded by predefined rules (too few reachable objects or destinations), which leaves the 81 tasks of the paper. Search records exist only for these 81.
 - Durations are static reachable-grid moves plus one manipulation step, not seconds; turns and collisions are ignored.
 - No model weights, simulator assets, credentials, or server configuration are included.
-- A software and data license has not been chosen yet; add one before making the repository public.
+
+## License
+
+- Code (`src/`, `tools/`, `tests/`): MIT License, see `LICENSE`.
+- Data and records (`data/`, `results/`, `docs/`): Creative Commons Attribution 4.0 International (CC BY 4.0), see `LICENSE-DATA`. Please cite the manuscript when reusing them.
+- Scene and object descriptions in `data/` were extracted from AI2-THOR scenes; AI2-THOR itself is not redistributed here and remains under its own license.
